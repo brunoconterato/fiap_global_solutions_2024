@@ -83,7 +83,7 @@ void loopExternal() {
   controlLightingExternal(luminosityExternal, motionDetectedExternal);
   Serial.println();
 
-  delay(1000); // Intervalo curto para leitura contínua
+  delay(100); // Intervalo curto para leitura contínua
 }
 
 // Função de controle de iluminação específica para o ambiente externo
