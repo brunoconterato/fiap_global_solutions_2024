@@ -1,96 +1,106 @@
-// Pinos dos sensores e LED
-const int LDR_PIN = 12;      // Pino para leitura do LDR (A0)
-const int PIR_PIN = 34;      // Pino de entrada do sensor PIR (digital)
-const int LED_PIN = 25;      // Pino de saída para controle do LED
+// Pinos dos sensores e LED para o ambiente externo
+const int LDR_EXTERNAL_PIN = 12;      // Pino para leitura do LDR (A0)
+const int PIR_EXTERNAL_PIN = 34;      // Pino de entrada do sensor PIR (digital)
+const int LED_EXTERNAL_PIN = 25;      // Pino de saída para controle do LED externo
 
 // Limiar de luminosidade (lux) para definir dia ou noite
-const int LUMINOSITY_THRESHOLD = 10;  // 10 lux correspondem à iluminação do crepúsculo
+const int LUMINOSITY_EXTERNAL_THRESHOLD = 10;  // 10 lux correspondem à iluminação do crepúsculo
 
-const double rl10 = 50000.0; // LDR resistance at 10 lux
-const double ldrGamma = 0.7;
+const double rl10_external = 50000.0; // LDR resistance at 10 lux para o ambiente externo
+const double ldrGamma_external = 0.7;
 
-const unsigned long MOTION_DURATION = 30000; // Duração da iluminação máxima (30 segundos)
-long motionStartTime = -MOTION_DURATION;   // Momento em que o movimento foi detectado
+const unsigned long MOTION_EXTERNAL_DURATION = 30000; // Duração da iluminação máxima (30 segundos)
+long motionExternalStartTime = -MOTION_EXTERNAL_DURATION;   // Momento em que o movimento foi detectado no externo
 
 void setup() {
-  pinMode(PIR_PIN, INPUT);
-  pinMode(LED_PIN, OUTPUT);
+  setupExternal();
+}
+
+void loop() {
+  loopExternal();
+}
+
+// Função de inicialização para o ambiente externo
+void setupExternal() {
+  pinMode(PIR_EXTERNAL_PIN, INPUT);
+  pinMode(LED_EXTERNAL_PIN, OUTPUT);
 
   // Inicialização da serial para monitoramento
   Serial.begin(115200);
 }
 
-void loop() {
-  // Leitura da luminosidade e detecção de movimento
-  double luminosity = readLuminosity();
-  bool motionDetected = readMotion();
+// Função principal do loop para o ambiente externo
+void loopExternal() {
+  // Leitura da luminosidade e detecção de movimento no externo
+  double luminosityExternal = readLuminosityExternal();
+  bool motionDetectedExternal = readMotionExternal();
 
   // Log para monitoramento
-  Serial.print("Luminosity: ");
-  Serial.print(luminosity);
-  Serial.print(" | IsNight: ");
-  Serial.println(isNight(luminosity));
-  Serial.print("Motion Detected: ");
-  Serial.println(motionDetected);
+  Serial.print("Luminosity (External): ");
+  Serial.print(luminosityExternal);
+  Serial.print(" | Night status (External): ");
+  Serial.println(isNightExternal(luminosityExternal) ? "Night" : "Day");
+  Serial.print("Motion detected (External): ");
+  Serial.println(motionDetectedExternal ? "Yes" : "No");
 
-  // Controle da iluminação
-  controlLighting(luminosity, motionDetected);
+  // Controle da iluminação externa
+  controlLightingExternal(luminosityExternal, motionDetectedExternal);
   Serial.println();
 
   delay(1000); // Intervalo curto para leitura contínua
 }
 
-// Função para verificar se é noite com base na luminosidade
-bool isNight(double luminosity) {
-  return luminosity < LUMINOSITY_THRESHOLD;
+// Função para verificar se é noite com base na luminosidade do ambiente externo
+bool isNightExternal(double luminosity) {
+  return luminosity < LUMINOSITY_EXTERNAL_THRESHOLD;
 }
 
-// Função para calcular a resistência do LDR
-double calculate_resistance(int ldr_value) {
+// Função para calcular a resistência do LDR externo
+double calculateResistance(int ldr_value) {
   double voltage_ratio = ldr_value / (4095.0 - ldr_value);
   return 10000.0 * voltage_ratio;
 }
 
-// Função para calcular a luminosidade em lux
-double calculate_lux(double resistance) {
-  return 10.0 * pow(rl10 / resistance, 1.0 / ldrGamma);
+// Função para calcular a luminosidade em lux no ambiente externo
+double calculateLux(double resistance) {
+  return 10.0 * pow(rl10_external / resistance, 1.0 / ldrGamma_external);
 }
 
-// Função para ler a luminosidade do LDR
-double readLuminosity() {
-  int value = analogRead(LDR_PIN);
-  double resistance = calculate_resistance(value);
-  return calculate_lux(resistance);
+// Função para ler a luminosidade do LDR no ambiente externo
+double readLuminosityExternal() {
+  int value = analogRead(LDR_EXTERNAL_PIN);
+  double resistance = calculateResistance(value);
+  return calculateLux(resistance);
 }
 
-// Função para verificar movimento
-bool readMotion() {
-  return digitalRead(PIR_PIN) == HIGH;
+// Função para verificar movimento no ambiente externo
+bool readMotionExternal() {
+  return digitalRead(PIR_EXTERNAL_PIN) == HIGH;
 }
 
-// Função para controlar o LED
-void controlLighting(double luminosity, bool motionDetected) {
-  bool night = isNight(luminosity);
+// Função para controlar o LED externo
+void controlLightingExternal(double luminosity, bool motionDetected) {
+  bool night = isNightExternal(luminosity);
   unsigned long currentTime = millis();
 
   if (night) {
     if (motionDetected) {
-      // Movimento detectado: Acender o LED com intensidade máxima
-      analogWrite(LED_PIN, 255); // Máxima intensidade
-      motionStartTime = currentTime; // Reinicia o temporizador
-      Serial.println("Está de noite e há movimento detectado. Acionando luzes no máximo.");
-    } else if (currentTime - motionStartTime < MOTION_DURATION) {
+      // Movimento detectado: Acender o LED externo com intensidade máxima
+      analogWrite(LED_EXTERNAL_PIN, 255); // Máxima intensidade
+      motionExternalStartTime = currentTime; // Reinicia o temporizador
+      Serial.println("External: Nighttime, motion detected. Lights at maximum brightness.");
+    } else if (currentTime - motionExternalStartTime < MOTION_EXTERNAL_DURATION) {
       // Dentro do período de 30 segundos após o movimento
-      analogWrite(LED_PIN, 255);
-      Serial.println("Está de noite e houve movimento nos últimos 30s. Mantendo luzes no máximo.");
+      analogWrite(LED_EXTERNAL_PIN, 255);
+      Serial.println("External: Nighttime, recent motion detected. Keeping lights at maximum brightness.");
     } else {
       // Sem movimento: LED com intensidade mínima
-      analogWrite(LED_PIN, 50);
-      Serial.println("Está de noite e não há movimento. Luzes em intensidade mínima.");
+      analogWrite(LED_EXTERNAL_PIN, 50);
+      Serial.println("External: Nighttime, no motion. Lights at minimal brightness.");
     }
   } else {
-    // Durante o dia, desliga o LED
-    analogWrite(LED_PIN, 0);
-    Serial.println("Está de dia, luzes desligadas.");
+    // Durante o dia, desliga o LED externo
+    analogWrite(LED_EXTERNAL_PIN, 0);
+    Serial.println("External: Daytime, lights are off.");
   }
 }
