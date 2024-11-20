@@ -18,7 +18,7 @@
       "left": -208.98,
       "attrs": {}
     },
-    { "type": "wokwi-gnd", "id": "gnd1", "top": 240, "left": -39, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd1", "top": 297.6, "left": -29.4, "attrs": {} },
     { "type": "wokwi-gnd", "id": "gnd2", "top": 96, "left": -163.8, "attrs": {} },
     {
       "type": "wokwi-led",
