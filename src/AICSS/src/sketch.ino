@@ -12,11 +12,9 @@ const int LED_INTERNAL_PIN = 19;      // Pino de saída para controle do LED int
 const int LUMINOSITY_EXTERNAL_THRESHOLD = 10;  // Limiar para iluminação externa
 const int LUMINOSITY_INTERNAL_THRESHOLD = 50;  // Limiar para iluminação interna
 
-const double rl10_external = 50000.0; // LDR resistance at 10 lux para o ambiente externo
-const double rl10_internal = 50000.0; // LDR resistance at 10 lux para o ambiente interno
-const double ldrGamma_external = 0.7;
-const double ldrGamma_internal = 0.7;
-
+// LDR resistance at 10 lux e valor do Gamma (usados para ambos os ambientes)
+const double rl10 = 50000.0; // LDR resistance at 10 lux
+const double ldrGamma = 0.7;  // Gamma para o LDR
 
 const unsigned long MOTION_EXTERNAL_DURATION = 30000; // Duração da iluminação máxima (30 segundos)
 long motionExternalStartTime = -MOTION_EXTERNAL_DURATION;   // Momento em que o movimento foi detectado no externo
@@ -34,34 +32,7 @@ void loop() {
   loopInternal();
 }
 
-// ---------------------- Ambiente Externo ---------------------- //
-void setupExternal() {
-  pinMode(PIR_EXTERNAL_PIN, INPUT);
-  pinMode(LED_EXTERNAL_PIN, OUTPUT);
-
-  // Inicialização da serial para monitoramento
-  Serial.begin(115200);
-}
-
-void loopExternal() {
-  // Leitura da luminosidade e detecção de movimento no externo
-  double luminosityExternal = readLuminosity(LDR_EXTERNAL_PIN, rl10_external, ldrGamma_external);
-  bool motionDetectedExternal = readMotion(PIR_EXTERNAL_PIN);
-
-  // Log para monitoramento
-  Serial.print("Luminosity (External): ");
-  Serial.print(luminosityExternal);
-  Serial.print(" | Night status (External): ");
-  Serial.println(isNight(luminosityExternal, LUMINOSITY_EXTERNAL_THRESHOLD) ? "Night" : "Day");
-  Serial.print("Motion detected (External): ");
-  Serial.println(motionDetectedExternal ? "Yes" : "No");
-
-  // Controle da iluminação externa
-  controlLightingExternal(luminosityExternal, motionDetectedExternal);
-  Serial.println();
-
-  delay(1000); // Intervalo curto para leitura contínua
-}
+// ---------------------- Comum aos ambientes interno e externo ---------------------- //
 
 bool isNight(double luminosity, int threshold) {
   return luminosity < threshold;
@@ -86,11 +57,39 @@ bool readMotion(int pir_pin) {
   return digitalRead(pir_pin) == HIGH;
 }
 
+// ---------------------- Ambiente Externo ---------------------- //
+void setupExternal() {
+  pinMode(PIR_EXTERNAL_PIN, INPUT);
+  pinMode(LED_EXTERNAL_PIN, OUTPUT);
+
+  // Inicialização da serial para monitoramento
+  Serial.begin(115200);
+}
+
+void loopExternal() {
+  // Leitura da luminosidade e detecção de movimento no externo
+  double luminosityExternal = readLuminosity(LDR_EXTERNAL_PIN, rl10, ldrGamma);
+  bool motionDetectedExternal = readMotion(PIR_EXTERNAL_PIN);
+
+  // Log para monitoramento
+  Serial.print("Luminosity (External): ");
+  Serial.print(luminosityExternal);
+  Serial.print(" | Night status (External): ");
+  Serial.println(isNight(luminosityExternal, LUMINOSITY_EXTERNAL_THRESHOLD) ? "Night" : "Day");
+  Serial.print("Motion detected (External): ");
+  Serial.println(motionDetectedExternal ? "Yes" : "No");
+
+  // Controle da iluminação externa
+  controlLightingExternal(luminosityExternal, motionDetectedExternal);
+  Serial.println();
+
+  delay(1000); // Intervalo curto para leitura contínua
+}
+
+// Função de controle de iluminação específica para o ambiente externo
 void controlLightingExternal(double luminosity, bool motionDetected) {
   bool night = isNight(luminosity, LUMINOSITY_EXTERNAL_THRESHOLD);
   unsigned long currentTime = millis();
-
-  static long motionExternalStartTime = -MOTION_EXTERNAL_DURATION;
 
   if (night) {
     if (motionDetected) {
@@ -114,7 +113,7 @@ void setupInternal() {
 
 void loopInternal() {
   // Leitura da luminosidade e detecção de movimento no interno
-  double luminosityInternal = readLuminosity(LDR_INTERNAL_PIN, rl10_internal, ldrGamma_internal);
+  double luminosityInternal = readLuminosity(LDR_INTERNAL_PIN, rl10, ldrGamma);
   bool motionDetectedInternal = readMotion(PIR_INTERNAL_PIN);
 
   // Log para monitoramento
