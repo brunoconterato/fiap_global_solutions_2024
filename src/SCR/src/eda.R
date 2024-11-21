@@ -1,5 +1,23 @@
 ####################################################
-##### 1. Carregando as bibliotecas necessárias #####
+##### 1. Definindo Objetivos da Análise #####
+####################################################
+
+# Objetivos da análise exploratória de dados:
+
+# 1. Insights sobre estratégias eficazes: Identificar as tipologias de projetos de eficiência 
+#    energética que apresentaram maior retorno sobre o investimento (ROI) e maior redução 
+#    na demanda de energia.  Analisar a relação entre a metodologia utilizada e a eficácia 
+#    do projeto.
+
+# 2. Identificação de lacunas:  Detectar possíveis lacunas no programa de eficiência 
+#    energética, analisando a distribuição das tipologias de projetos, usos finais da energia 
+#    e regiões geográficas (embora essa última informação não esteja disponível diretamente 
+#    nesse dataset).  Identificar se há desequilíbrio na alocação de recursos para diferentes 
+#    tipos de projetos ou usos finais.
+
+
+####################################################
+##### 2. Carregando as bibliotecas necessárias #####
 ####################################################
 
 # Carregando as bibliotecas necessárias
@@ -91,9 +109,8 @@ str(dados)
 # Visualizando 5 elementos de cada coluna que não sejam NA
 lapply(dados, function(col) head(na.omit(col), 5))
 
-
 #####################################################
-##### 2. Limpeza e Pré-processamento dos Dados #####
+##### 3. Limpeza e Pré-processamento dos Dados #####
 #####################################################
 
 # Salvando uma cópia dos dados originais
@@ -157,8 +174,75 @@ colSums(is.na(dados_completos)) / nrow(dados_completos) * 100.0
 dados_completos <- dados_completos[, -c(which(colnames(dados_completos) == "VlrBeneficioEnergiaEconomizada"))]
 
 
+### Analisando variáveis categóricas
+### Objetivo: excluir variáveis categóricas com poucos dados da nossa análise
+
+
+# Tabela de frequências para variáveis categóricas
+table(dados_completos$DscTipologia)
+
+# Resultado:
+
+#    Aquecimento Solar            Baixa Renda             Co-geração 
+#                   35                   1599                      3 
+#  Comércio e Serviços Diagnóstico Energético            Educacional 
+#                 1937                      1                     13 
+#   Iluminação Pública             Industrial          Poder Público 
+#                 1007                    333                   2511 
+#          Prioritário         Projeto Piloto            Residencial 
+#                    4                     23                    658 
+#                Rural      Serviços Públicos 
+#                  102                    486
+
+# Vamos agrupar as seguintes Tipologias por baixa disponibilidade de dados para análise como sendo "Outros" 
+# (menos de 100 exemplares):
+#  - Aquecimento Solar
+#  - Co-geração
+#  - Diagnóstico Energético
+#  - Educacional
+#  - Prioritário
+#  - Projeto piloto
+
+
+
+### Analisando uso final
+
+table(dados_completos$DscUsoFinal)
+
+# Resultado:
+#       Aquecimento             Aquecimento de Água 
+#                15                             387 
+#     Ar Comprimido           Condicionamento de Ar 
+#                15                             923 
+#      Força Motriz Geração por Fontes Incentivadas 
+#               339                             635 
+# Gestão Energética                      Iluminação 
+#                 1                            4870 
+#            Outros                      Reciclagem 
+#               734                              26 
+#      Refrigeração 
+#               767 
+
+# Vamos transformar todas as categorias de Uso Final com menos de 30 exemplares em "Outros":
+#  - Aquecimento
+#  - Ar comprimido
+#  - Gestão energética
+#  - Reciclagem
+
+
+
+
+# Transformando tipologias com menos de 100 exemplares em "Outros"
+tipologias_outros <- c("Aquecimento Solar", "Co-geração", "Diagnóstico Energético", "Educacional", "Prioritário", "Projeto Piloto")
+dados_completos$DscTipologia <- ifelse(dados_completos$DscTipologia %in% tipologias_outros, "Outros", dados_completos$DscTipologia)
+
+# Transformando categorias de Uso Final com menos de 30 exemplares em "Outros"
+usos_finais_excluir <- c("Aquecimento", "Ar Comprimido", "Gestão Energética", "Reciclagem")
+dados_completos$DscUsoFinal <- ifelse(dados_completos$DscUsoFinal %in% usos_finais_excluir, "Outros", dados_completos$DscUsoFinal)
+
+
 #################################
-##### 3. Análise Descritiva #####
+##### 4. Análise Descritiva #####
 #################################
 
 # Sumário estatístico
@@ -175,7 +259,7 @@ Desc(dados_completos$DuracaoProjeto)
 
 
 ######################################
-##### 4. Visualização dos Dados: #####
+##### 5. Visualização dos Dados: #####
 ######################################
 
 # Histograma do retorno sobre o custo-benefício apenas valores diferentes de NA na coluna VlrRcb
@@ -249,6 +333,56 @@ ggplot(dados_completos, aes(x = VlrBeneficioEnergiaEconomizada, y = DuracaoProje
   geom_point() +
   labs(title = "Relação entre Benefício e Duração do Projeto", x = "Benefício (R$)", y = "Duração (dias)")
 
+# Gráficos para atender aos objetivos:
+
+
+# Gráfico 1.1.
+# Boxplot do retorno sobre o custo-benefício por tipologia (excluindo outliers) - Atende ao objetivo 1 e 3
+temp_data <- remove_outliers(dados_completos, "VlrRcb")
+ggplot(temp_data, aes(x = DscTipologia, y = VlrRcb)) +
+  geom_boxplot() +
+  labs(title = "Retorno sobre o Custo-Benefício por Tipologia", x = "Tipologia", y = "Retorno (R$)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_hline(yintercept = mean(temp_data$VlrRcb, na.rm = TRUE), linetype="dashed", color = "red")
+
+
+# Gráfico 1.2.
+# Boxplot da demanda reduzida no pico por tipologia (excluindo outliers) - Atende ao objetivo 1
+temp_data <- remove_outliers(dados_completos, "VlrDemandaReduzidaPonta")
+ggplot(temp_data, aes(x = DscTipologia, y = VlrDemandaReduzidaPonta)) +
+  geom_boxplot() +
+  labs(title = "Demanda Reduzida no Pico por Tipologia", x = "Tipologia", y = "Demanda (kW)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_hline(yintercept = mean(temp_data$VlrDemandaReduzidaPonta, na.rm = TRUE), linetype="dashed", color = "red")
+
+
+# Gráfico 2.1.
+# Gráfico de barras da tipologia do projeto - contribui para objetivo 2
+ggplot(dados_completos, aes(x = DscTipologia)) +
+  geom_bar(fill = "lightgreen", color = "black") +
+  labs(title = "Frequência das Tipologias de Projeto", x = "Tipologia", y = "Contagem") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_text(stat='count', aes(label=..count..), vjust=-0.5) # Adiciona contagem em cada barra
+
+# Gráfico 2.2.
+# Gráfico de barras para DscUsoFinal - contribui para objetivo 2
+ggplot(dados_completos, aes(x = DscUsoFinal)) +
+    geom_bar(fill = "skyblue", color = "black") +
+    labs(title = "Uso Final da Energia nos Projetos", x = "Uso Final", y = "Contagem") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    geom_text(stat='count', aes(label=..count..), vjust=-0.5) #Adiciona contagem em cada barra
+
+
+# Gráfico 3.1
+# Scatter plot para analisar a relação entre retorno e demanda reduzida (excluindo outliers) - Atende objetivo 3
+temp_data <- dados_completos %>%
+  filter(!is.na(VlrRcb) & !is.na(VlrDemandaReduzidaPonta)) %>%
+  remove_outliers("VlrRcb") %>%
+  remove_outliers("VlrDemandaReduzidaPonta")
+ggplot(temp_data, aes(x = VlrRcb, y = VlrDemandaReduzidaPonta)) +
+  geom_point() +
+  labs(title = "Relação entre Retorno e Demanda Reduzida", x = "Retorno (R$)", y = "Demanda Reduzida (kW)") +
+  geom_smooth(method = "lm", se = FALSE, color = "red") # Adiciona linha de regressão
 
 
 ####################################
@@ -265,5 +399,109 @@ ggcorr(data = dados_completos[, sapply(dados_completos, is.numeric)])
 
 
 ####################################
-##### 6. Conclusão e Relatório #####
+##### 6. Resultados da análise #####
 ####################################
+
+
+# Sobre as Tipologias
+
+# As tipologias de projetos que apresentam maior e menor retorno sobre o investimento (ROI)
+
+
+# Auxiliados pelo gráfico 1.1. e pelo seguinte cálculo:
+# Calculando o ROI médio por tipologia em ordem decrescente
+temp_data = remove_outliers(dados_completos, "VlrRcb")
+roi_por_tipologia <- temp_data %>%
+  group_by(DscTipologia) %>%
+  summarise(ROI_Medio = mean(VlrRcb, na.rm = TRUE)) %>%
+  arrange(desc(ROI_Medio))
+
+# Mostrando os ROIs médios por tipologia
+print(roi_por_tipologia)
+
+# As tipologias de projetos que apresentam maior retorno sobre o investimento (ROI)
+#  - Poder Público: média de 0.628
+#  - Serviços Públicos: 0.623
+#  - Outros (incluem as seguintes tipologias: Aquecimento Solar, Co-geração, Diagnóstico Energético, Educacional, Prioritário, Projeto piloto): média de 0.619
+#  - Comércio e Serviços: média de 0.614
+
+# As tipologias de projetos que apresentam menor retorno sobre o investimento (ROI)
+#  - Iluminação Pública: média de 0.321
+#  - Rural: média de 0.493
+
+
+
+# As tipologias de projetos que apresentam maior e menor redução na demanda
+
+# Auxiliados pelo gráfico 1.2. e pelo seguinte cálculo:
+# Calculando a redução média na demanda por tipologia em ordem decrescente
+temp_data = remove_outliers(dados_completos, "VlrDemandaReduzidaPonta")
+reducao_demanda_por_tipologia <- temp_data %>%
+  group_by(DscTipologia) %>%
+  summarise(RedDemanda_Media = mean(VlrDemandaReduzidaPonta, na.rm = TRUE)) %>%
+  arrange(desc(RedDemanda_Media))
+
+# Mostrando a redução média na demanda por tipologia
+print(reducao_demanda_por_tipologia)
+
+# As tipologias de projetos que apresentam maior redução na demanda
+#  - Iluminação Pública: média de 67.8 kW
+#  - Baixa Renda: média de 62.8 kW
+
+# As tipologias de projetos que apresentam menor redução na demanda
+#  - Comércio e Serviços: média de 25.9 kW
+#  - Poder Público: média de 31.1 kW
+
+
+# Sobre as Lacunas
+
+# Auxiliados pelo Gráfico 2.1. e pelo seguinte cálculo
+# Contagem de projetos por tipologia
+contagem_tipologia <- dados_completos %>%
+  group_by(DscTipologia) %>%
+  summarise(Contagem = n()) %>%
+  arrange(desc(Contagem))
+
+print(contagem_tipologia)
+
+# Tipologias com mais projetos
+#  - Poder Público: 2511 projetos
+#  - Comércio e Serviços: 1937 projetos
+#  - Baixa renda: 1599 projetos
+
+# Tipologias com menos projetos
+#  - Outros (incluem as seguintes tipologias: Aquecimento Solar, Co-geração, Diagnóstico Energético, Educacional, Prioritário, Projeto piloto): 79 projetos
+#  - Rural: 102 projetos
+
+
+# Auxiliados pelo Gráfico 2.2. e pelo seguinte cálculo
+# Contagem de projetos por uso final
+contagem_uso_final <- dados_completos %>%
+  group_by(DscUsoFinal) %>%
+  summarise(Contagem = n()) %>%
+  arrange(desc(Contagem))
+
+print(contagem_uso_final) 
+
+# Uso final com mais projetos
+#  - Iluminação: 4870 projetos
+#  - Condicionamento de Ar: 923 projetos
+
+# Uso final com menos projetos
+#  - Força Motriz: 339 projetos
+#  - Aquecimiento de Água: 387 projetos
+
+
+
+########################################
+##### 7. Conclusão e Recomendações #####
+########################################
+
+
+# Questionamentos respondidos nas seções anteriores:
+# 1. Quais tipologias de projetos apresentaram maior retorno sobre o investimento e maior redução na demanda?
+# 2. Quais são as lacunas observadas no programa de eficiência energética?  Existem tipologias de projeto ou usos finais sub-representados?
+
+
+# A conclusão deve apresentar uma síntese concisa dos principais achados da análise e suas implicações 
+# para o desenvolvimento de políticas públicas e estratégias de eficiência energética.
