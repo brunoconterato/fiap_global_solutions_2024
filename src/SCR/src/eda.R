@@ -33,6 +33,7 @@ library(GGally)
 dados <- read.csv("/home/bruno/Workspace/FIAP/2024/Fase_4/fiap_global_solutions_2024/src/SCR/data/e12d5430-f747-4fc7-b620-2460ed02cc17.csv", sep = ",", dec = ".", header = TRUE, na.strings = c("", "NA", " "))
 
 
+# Descrição do conjunto de dados:
 # Este conjunto de dados apresenta informações sobre projetos de eficiência energética promovidos
 # pelo Programa de Eficiência Energética, regulamentado pela Resolução Normativa ANEEL nº 300/2008.
 
@@ -48,7 +49,7 @@ dados <- read.csv("/home/bruno/Workspace/FIAP/2024/Fase_4/fiap_global_solutions_
 # Os dados podem ser acessados pelo Link:
 # https://dadosabertos.aneel.gov.br/dataset/projetos-de-eficiencia-energetica
 
-# Colunas:
+# Descrição das colunas:
 
 # DatGeracaoConjuntoDados: Data de processamento dos dados (ex.: "2023-03-30"). Indica quando
 # os dados foram atualizados e publicados no formato aberto. Unidade: Data (YYYY-MM-DD).
