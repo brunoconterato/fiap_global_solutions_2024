@@ -498,10 +498,58 @@ print(contagem_uso_final)
 ########################################
 
 
-# Questionamentos respondidos nas seções anteriores:
-# 1. Quais tipologias de projetos apresentaram maior retorno sobre o investimento e maior redução na demanda?
-# 2. Quais são as lacunas observadas no programa de eficiência energética?  Existem tipologias de projeto ou usos finais sub-representados?
+# Conclusões:
+
+# Análise de Retorno sobre Investimento (ROI) e Redução de Demanda: 
+# A análise revelou uma grande variação no ROI entre as diferentes tipologias de projetos de eficiência energética.  
+# Projetos do setor público ("Poder Público" e "Serviços Públicos") apresentaram, em média, os maiores retornos, 
+# sugerindo que investimentos nessas áreas podem ser particularmente eficazes.  
+# Por outro lado, projetos de "Iluminação Pública" mostraram um ROI significativamente menor, 
+# indicando a necessidade de uma revisão estratégica nesse setor.  
+
+# Em relação à redução da demanda, "Iluminação Pública" e "Baixa Renda" se destacaram,
+# enquanto "Comércio e Serviços" e "Poder Público" apresentaram reduções menores, 
+# sugerindo que as estratégias empregadas nestes últimos setores podem necessitar de aprimoramentos.
+# A discrepância entre o alto ROI do setor público e sua relativamente baixa redução de demanda
+# sugere que outros fatores além da redução de consumo direto contribuem para o retorno do investimento nesses projetos.
 
 
-# A conclusão deve apresentar uma síntese concisa dos principais achados da análise e suas implicações 
-# para o desenvolvimento de políticas públicas e estratégias de eficiência energética.
+# Identificação de Lacunas:  A análise de frequência das tipologias de projetos destaca um desequilíbrio na alocação de recursos.  
+# Há uma concentração significativa de projetos em "Poder Público", "Comércio e Serviços" e "Baixa Renda", 
+# enquanto outras categorias ("Outros", "Rural") recebem uma atenção consideravelmente menor. 
+# Essa concentração pode indicar a necessidade de expandir o escopo do programa para alcançar outros setores e contextos, 
+# promovendo uma maior equidade na distribuição dos benefícios da eficiência energética.
+# Da mesma forma, a análise do uso final da energia revela uma preponderância de projetos focados em iluminação,
+# enquanto outros usos finais, como força motriz e aquecimento de água, têm menor representatividade, 
+# indicando áreas potenciais para expansão e diversificação das ações de eficiência energética.
+
+
+# Recomendações:
+
+# 1. Investigação Adicional sobre Projetos de Iluminação Pública: O baixo retorno sobre o investimento em projetos de iluminação pública
+# justifica uma investigação detalhada sobre as causas dessa baixa performance.
+# Isso inclui a análise de custos, métodos de implementação, tecnologias empregadas e critérios de seleção de projetos.
+
+# 2. Diversificação de Investimentos:  
+# É recomendado ampliar o alcance do programa de eficiência energética, 
+# direcionando mais recursos para tipologias e usos finais atualmente sub-representados,
+# como projetos rurais e aqueles focados em setores além de iluminação e condicionamento de ar.
+# Isso promoverá uma maior equidade na distribuição dos benefícios e otimizará o impacto do programa.
+
+# 3. Análise de Dados Mais Granulares:
+# Para uma análise mais robusta, a coleta de dados mais detalhados, incluindo informações geográficas, 
+# custos específicos dos projetos e indicadores de desempenho mais abrangentes, 
+# é crucial para refinar as estratégias e otimizar a eficácia dos investimentos.
+
+# 4. Monitoramento e Avaliação Contínua:
+# A implementação de um sistema de monitoramento e avaliação contínuo do programa de eficiência energética 
+# é essencial para acompanhar o progresso, identificar potenciais problemas e ajustar as estratégias conforme necessário.
+# Isso permitirá o aprimoramento contínuo do programa e o alcance de resultados mais efetivos.
+
+
+# Considerações Finais:
+# Esta análise exploratória forneceu valiosas informações sobre os padrões e tendências nos projetos de eficiência energética.
+# No entanto, é importante considerar as limitações dos dados disponíveis, 
+# especialmente a falta de informações geográficas e a alta porcentagem de valores ausentes em algumas variáveis. 
+# Estudos futuros com dados mais completos e detalhados poderão fornecer uma compreensão ainda mais aprofundada do tema 
+# e subsidiar a formulação de políticas públicas mais eficazes.
