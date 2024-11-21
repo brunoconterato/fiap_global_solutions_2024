@@ -1,18 +1,18 @@
-####################################################
+#############################################
 ##### 1. Definindo Objetivos da Análise #####
-####################################################
+#############################################
 
 # Objetivos da análise exploratória de dados:
 
-# 1. Insights sobre estratégias eficazes: Identificar as tipologias de projetos de eficiência 
-#    energética que apresentaram maior retorno sobre o investimento (ROI) e maior redução 
-#    na demanda de energia.  Analisar a relação entre a metodologia utilizada e a eficácia 
+# 1. Insights sobre estratégias eficazes: Identificar as tipologias de projetos de eficiência
+#    energética que apresentaram maior retorno sobre o investimento (ROI) e maior redução
+#    na demanda de energia.  Analisar a relação entre a metodologia utilizada e a eficácia
 #    do projeto.
 
-# 2. Identificação de lacunas:  Detectar possíveis lacunas no programa de eficiência 
-#    energética, analisando a distribuição das tipologias de projetos, usos finais da energia 
-#    e regiões geográficas (embora essa última informação não esteja disponível diretamente 
-#    nesse dataset).  Identificar se há desequilíbrio na alocação de recursos para diferentes 
+# 2. Identificação de lacunas:  Detectar possíveis lacunas no programa de eficiência
+#    energética, analisando a distribuição das tipologias de projetos, usos finais da energia
+#    e regiões geográficas (embora essa última informação não esteja disponível diretamente
+#    nesse dataset).  Identificar se há desequilíbrio na alocação de recursos para diferentes
 #    tipos de projetos ou usos finais.
 
 
@@ -183,18 +183,18 @@ table(dados_completos$DscTipologia)
 
 # Resultado:
 
-#    Aquecimento Solar            Baixa Renda             Co-geração 
-#                   35                   1599                      3 
-#  Comércio e Serviços Diagnóstico Energético            Educacional 
-#                 1937                      1                     13 
-#   Iluminação Pública             Industrial          Poder Público 
-#                 1007                    333                   2511 
-#          Prioritário         Projeto Piloto            Residencial 
-#                    4                     23                    658 
-#                Rural      Serviços Públicos 
+#    Aquecimento Solar            Baixa Renda             Co-geração
+#                   35                   1599                      3
+#  Comércio e Serviços Diagnóstico Energético            Educacional
+#                 1937                      1                     13
+#   Iluminação Pública             Industrial          Poder Público
+#                 1007                    333                   2511
+#          Prioritário         Projeto Piloto            Residencial
+#                    4                     23                    658
+#                Rural      Serviços Públicos
 #                  102                    486
 
-# Vamos agrupar as seguintes Tipologias por baixa disponibilidade de dados para análise como sendo "Outros" 
+# Vamos agrupar as seguintes Tipologias por baixa disponibilidade de dados para análise como sendo "Outros"
 # (menos de 100 exemplares):
 #  - Aquecimento Solar
 #  - Co-geração
@@ -210,18 +210,18 @@ table(dados_completos$DscTipologia)
 table(dados_completos$DscUsoFinal)
 
 # Resultado:
-#       Aquecimento             Aquecimento de Água 
-#                15                             387 
-#     Ar Comprimido           Condicionamento de Ar 
-#                15                             923 
-#      Força Motriz Geração por Fontes Incentivadas 
-#               339                             635 
-# Gestão Energética                      Iluminação 
-#                 1                            4870 
-#            Outros                      Reciclagem 
-#               734                              26 
-#      Refrigeração 
-#               767 
+#       Aquecimento             Aquecimento de Água
+#                15                             387
+#     Ar Comprimido           Condicionamento de Ar
+#                15                             923
+#      Força Motriz Geração por Fontes Incentivadas
+#               339                             635
+# Gestão Energética                      Iluminação
+#                 1                            4870
+#            Outros                      Reciclagem
+#               734                              26
+#      Refrigeração
+#               767
 
 # Vamos transformar todas as categorias de Uso Final com menos de 30 exemplares em "Outros":
 #  - Aquecimento
@@ -343,7 +343,7 @@ ggplot(temp_data, aes(x = DscTipologia, y = VlrRcb)) +
   geom_boxplot() +
   labs(title = "Retorno sobre o Custo-Benefício por Tipologia", x = "Tipologia", y = "Retorno (R$)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  geom_hline(yintercept = mean(temp_data$VlrRcb, na.rm = TRUE), linetype="dashed", color = "red")
+  geom_hline(yintercept = mean(temp_data$VlrRcb, na.rm = TRUE), linetype = "dashed", color = "red")
 
 
 # Gráfico 1.2.
@@ -353,7 +353,7 @@ ggplot(temp_data, aes(x = DscTipologia, y = VlrDemandaReduzidaPonta)) +
   geom_boxplot() +
   labs(title = "Demanda Reduzida no Pico por Tipologia", x = "Tipologia", y = "Demanda (kW)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  geom_hline(yintercept = mean(temp_data$VlrDemandaReduzidaPonta, na.rm = TRUE), linetype="dashed", color = "red")
+  geom_hline(yintercept = mean(temp_data$VlrDemandaReduzidaPonta, na.rm = TRUE), linetype = "dashed", color = "red")
 
 
 # Gráfico 2.1.
@@ -362,15 +362,15 @@ ggplot(dados_completos, aes(x = DscTipologia)) +
   geom_bar(fill = "lightgreen", color = "black") +
   labs(title = "Frequência das Tipologias de Projeto", x = "Tipologia", y = "Contagem") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  geom_text(stat='count', aes(label=..count..), vjust=-0.5) # Adiciona contagem em cada barra
+  geom_text(stat = "count", aes(label = ..count..), vjust = -0.5) # Adiciona contagem em cada barra
 
 # Gráfico 2.2.
 # Gráfico de barras para DscUsoFinal - contribui para objetivo 2
 ggplot(dados_completos, aes(x = DscUsoFinal)) +
-    geom_bar(fill = "skyblue", color = "black") +
-    labs(title = "Uso Final da Energia nos Projetos", x = "Uso Final", y = "Contagem") +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-    geom_text(stat='count', aes(label=..count..), vjust=-0.5) #Adiciona contagem em cada barra
+  geom_bar(fill = "skyblue", color = "black") +
+  labs(title = "Uso Final da Energia nos Projetos", x = "Uso Final", y = "Contagem") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_text(stat = "count", aes(label = ..count..), vjust = -0.5) # Adiciona contagem em cada barra
 
 
 # Gráfico 3.1
@@ -410,7 +410,7 @@ ggcorr(data = dados_completos[, sapply(dados_completos, is.numeric)])
 
 # Auxiliados pelo gráfico 1.1. e pelo seguinte cálculo:
 # Calculando o ROI médio por tipologia em ordem decrescente
-temp_data = remove_outliers(dados_completos, "VlrRcb")
+temp_data <- remove_outliers(dados_completos, "VlrRcb")
 roi_por_tipologia <- temp_data %>%
   group_by(DscTipologia) %>%
   summarise(ROI_Medio = mean(VlrRcb, na.rm = TRUE)) %>%
@@ -435,7 +435,7 @@ print(roi_por_tipologia)
 
 # Auxiliados pelo gráfico 1.2. e pelo seguinte cálculo:
 # Calculando a redução média na demanda por tipologia em ordem decrescente
-temp_data = remove_outliers(dados_completos, "VlrDemandaReduzidaPonta")
+temp_data <- remove_outliers(dados_completos, "VlrDemandaReduzidaPonta")
 reducao_demanda_por_tipologia <- temp_data %>%
   group_by(DscTipologia) %>%
   summarise(RedDemanda_Media = mean(VlrDemandaReduzidaPonta, na.rm = TRUE)) %>%
@@ -481,7 +481,7 @@ contagem_uso_final <- dados_completos %>%
   summarise(Contagem = n()) %>%
   arrange(desc(Contagem))
 
-print(contagem_uso_final) 
+print(contagem_uso_final)
 
 # Uso final com mais projetos
 #  - Iluminação: 4870 projetos
@@ -500,27 +500,27 @@ print(contagem_uso_final)
 
 # Conclusões:
 
-# Análise de Retorno sobre Investimento (ROI) e Redução de Demanda: 
-# A análise revelou uma grande variação no ROI entre as diferentes tipologias de projetos de eficiência energética.  
-# Projetos do setor público ("Poder Público" e "Serviços Públicos") apresentaram, em média, os maiores retornos, 
-# sugerindo que investimentos nessas áreas podem ser particularmente eficazes.  
-# Por outro lado, projetos de "Iluminação Pública" mostraram um ROI significativamente menor, 
-# indicando a necessidade de uma revisão estratégica nesse setor.  
+# Análise de Retorno sobre Investimento (ROI) e Redução de Demanda:
+# A análise revelou uma grande variação no ROI entre as diferentes tipologias de projetos de eficiência energética.
+# Projetos do setor público ("Poder Público" e "Serviços Públicos") apresentaram, em média, os maiores retornos,
+# sugerindo que investimentos nessas áreas podem ser particularmente eficazes.
+# Por outro lado, projetos de "Iluminação Pública" mostraram um ROI significativamente menor,
+# indicando a necessidade de uma revisão estratégica nesse setor.
 
 # Em relação à redução da demanda, "Iluminação Pública" e "Baixa Renda" se destacaram,
-# enquanto "Comércio e Serviços" e "Poder Público" apresentaram reduções menores, 
+# enquanto "Comércio e Serviços" e "Poder Público" apresentaram reduções menores,
 # sugerindo que as estratégias empregadas nestes últimos setores podem necessitar de aprimoramentos.
 # A discrepância entre o alto ROI do setor público e sua relativamente baixa redução de demanda
 # sugere que outros fatores além da redução de consumo direto contribuem para o retorno do investimento nesses projetos.
 
 
-# Identificação de Lacunas:  A análise de frequência das tipologias de projetos destaca um desequilíbrio na alocação de recursos.  
-# Há uma concentração significativa de projetos em "Poder Público", "Comércio e Serviços" e "Baixa Renda", 
-# enquanto outras categorias ("Outros", "Rural") recebem uma atenção consideravelmente menor. 
-# Essa concentração pode indicar a necessidade de expandir o escopo do programa para alcançar outros setores e contextos, 
+# Identificação de Lacunas:  A análise de frequência das tipologias de projetos destaca um desequilíbrio na alocação de recursos.
+# Há uma concentração significativa de projetos em "Poder Público", "Comércio e Serviços" e "Baixa Renda",
+# enquanto outras categorias ("Outros", "Rural") recebem uma atenção consideravelmente menor.
+# Essa concentração pode indicar a necessidade de expandir o escopo do programa para alcançar outros setores e contextos,
 # promovendo uma maior equidade na distribuição dos benefícios da eficiência energética.
 # Da mesma forma, a análise do uso final da energia revela uma preponderância de projetos focados em iluminação,
-# enquanto outros usos finais, como força motriz e aquecimento de água, têm menor representatividade, 
+# enquanto outros usos finais, como força motriz e aquecimento de água, têm menor representatividade,
 # indicando áreas potenciais para expansão e diversificação das ações de eficiência energética.
 
 
@@ -530,26 +530,26 @@ print(contagem_uso_final)
 # justifica uma investigação detalhada sobre as causas dessa baixa performance.
 # Isso inclui a análise de custos, métodos de implementação, tecnologias empregadas e critérios de seleção de projetos.
 
-# 2. Diversificação de Investimentos:  
-# É recomendado ampliar o alcance do programa de eficiência energética, 
+# 2. Diversificação de Investimentos:
+# É recomendado ampliar o alcance do programa de eficiência energética,
 # direcionando mais recursos para tipologias e usos finais atualmente sub-representados,
 # como projetos rurais e aqueles focados em setores além de iluminação e condicionamento de ar.
 # Isso promoverá uma maior equidade na distribuição dos benefícios e otimizará o impacto do programa.
 
 # 3. Análise de Dados Mais Granulares:
-# Para uma análise mais robusta, a coleta de dados mais detalhados, incluindo informações geográficas, 
-# custos específicos dos projetos e indicadores de desempenho mais abrangentes, 
+# Para uma análise mais robusta, a coleta de dados mais detalhados, incluindo informações geográficas,
+# custos específicos dos projetos e indicadores de desempenho mais abrangentes,
 # é crucial para refinar as estratégias e otimizar a eficácia dos investimentos.
 
 # 4. Monitoramento e Avaliação Contínua:
-# A implementação de um sistema de monitoramento e avaliação contínuo do programa de eficiência energética 
+# A implementação de um sistema de monitoramento e avaliação contínuo do programa de eficiência energética
 # é essencial para acompanhar o progresso, identificar potenciais problemas e ajustar as estratégias conforme necessário.
 # Isso permitirá o aprimoramento contínuo do programa e o alcance de resultados mais efetivos.
 
 
 # Considerações Finais:
 # Esta análise exploratória forneceu valiosas informações sobre os padrões e tendências nos projetos de eficiência energética.
-# No entanto, é importante considerar as limitações dos dados disponíveis, 
-# especialmente a falta de informações geográficas e a alta porcentagem de valores ausentes em algumas variáveis. 
-# Estudos futuros com dados mais completos e detalhados poderão fornecer uma compreensão ainda mais aprofundada do tema 
+# No entanto, é importante considerar as limitações dos dados disponíveis,
+# especialmente a falta de informações geográficas e a alta porcentagem de valores ausentes em algumas variáveis.
+# Estudos futuros com dados mais completos e detalhados poderão fornecer uma compreensão ainda mais aprofundada do tema
 # e subsidiar a formulação de políticas públicas mais eficazes.
