@@ -19,10 +19,10 @@
 
 **II. Artificial Intelligence with Computer Systems and Sensors (AICSS) - 20%**
 
-[ ] Desenvolver circuito com ESP32 para otimizar iluminação interna e externa.
-[ ] Utilizar sensores (LDR, Ultrassom, ou alternativas descritas).
-    [ ] Considerar restrições de segurança para iluminação externa (mínimo de luminosidade).
-[ ] Simular solução no Wokwi.
+[x] Desenvolver circuito com ESP32 para otimizar iluminação interna e externa.
+[x] Utilizar sensores (LDR, Ultrassom, ou alternativas descritas).
+    [x] Considerar restrições de segurança para iluminação externa (mínimo de luminosidade).
+[x] Simular solução no Wokwi.
 [ ] Gravar vídeo demonstrativo (YouTube - modo "não listado").
 [ ] Escrever PDF com:
     [ ] Introdução
@@ -34,11 +34,11 @@
 
 **III. Statistical Computing with R (SCR) - 20%**
 
-[ ] Escolher um banco de dados relevante de <https://dadosabertos.aneel.gov.br/organization/>.
-[ ] Realizar análise exploratória de dados:
-    [ ] Técnicas de estatística descritiva (tabelas, gráficos).
-    [ ] Cálculo de medidas de tendência central, dispersão e separatrizes.
-[ ] Interpretar dados e propor insights práticos (inovação, justiça social, crescimento econômico, preservação ambiental).
+[x] Escolher um banco de dados relevante de <https://dadosabertos.aneel.gov.br/organization/>.
+[x] Realizar análise exploratória de dados:
+    [x] Técnicas de estatística descritiva (tabelas, gráficos).
+    [x] Cálculo de medidas de tendência central, dispersão e separatrizes.
+[x] Interpretar dados e propor insights práticos (inovação, justiça social, crescimento econômico, preservação ambiental).
 
 
 **IV. Cognitive Data Science (CDS) - 20%**
