@@ -1,0 +1,2071 @@
+New file: README.md
+# fiap_global_solutions_2024
+
+New file: checklist.md
+## Checklist Global Solutions 2024.2 - Energia
+
+**Tema:** Otimização do consumo de energia em ambientes residenciais, comerciais ou urbanos utilizando Data Science, IoT, Python e Banco de Dados.
+
+**Grupo:**  (Insira os nomes dos integrantes aqui)
+
+**Entregável:** Único PDF contendo todas as seções abaixo + vídeo opcional (para concorrer ao prêmio).
+
+**I. Artificial Intelligence Challenges (AIC) - 10%**
+
+[ ] Ler o artigo: <https://www.sciencedirect.com/science/article/pii/S2666546822000544>
+[ ] Desenvolver solução baseada em IA, IoT, Big Data para otimização de consumo de energia em residência (ou ambiente escolhido).
+[ ] Escrever PDF com:
+    [ ] Introdução (contextualização, objetivos, desafios, barreiras)
+    [ ] Desenvolvimento (justificativa das tecnologias, diagrama, etc.)
+    [ ] Resultados Esperados (estimativa de economia, impacto no conforto, uso do equipamento, vida útil)
+    [ ] Conclusão (reforço do desenvolvimento e resultados esperados)
+
+
+**II. Artificial Intelligence with Computer Systems and Sensors (AICSS) - 20%**
+
+[x] Desenvolver circuito com ESP32 para otimizar iluminação interna e externa.
+[x] Utilizar sensores (LDR, Ultrassom, ou alternativas descritas).
+    [x] Considerar restrições de segurança para iluminação externa (mínimo de luminosidade).
+[x] Simular solução no Wokwi.
+[ ] Gravar vídeo demonstrativo (YouTube - modo "não listado").
+[ ] Escrever PDF com:
+    [ ] Introdução
+    [ ] Descrição da solução
+    [ ] Código-fonte
+    [ ] Link do vídeo YouTube
+    [ ] Conclusão (impactos positivos e negativos)
+
+
+**III. Statistical Computing with R (SCR) - 20%**
+
+[x] Escolher um banco de dados relevante de <https://dadosabertos.aneel.gov.br/organization/>.
+[x] Realizar análise exploratória de dados:
+    [x] Técnicas de estatística descritiva (tabelas, gráficos).
+    [x] Cálculo de medidas de tendência central, dispersão e separatrizes.
+[x] Interpretar dados e propor insights práticos (inovação, justiça social, crescimento econômico, preservação ambiental).
+
+
+**IV. Cognitive Data Science (CDS) - 20%**
+
+[x] Armazenar consumo energético dos últimos anos (dados oficiais do Governo Federal).
+[x] Utilizar bases de dados relacionais.
+[-] Criar objetos de banco de dados para analisar tendências de consumo.
+[x] Criar pipeline para filtrar dados do Brasil (demanda de energia elétrica, consumo per capita, etc.).
+
+
+**V. Computational Thinking with Python (CTWP) - 20%**
+
+[ ] Desenvolver sistema automatizado em Python para gerenciamento e otimização do consumo energético.
+[ ] Interface de usuário com visualização de dados e relatórios de eficiência energética.
+[ ] Monitoramento em tempo real de tarifas e consumo interno.
+[ ] Seleção automática da fonte de energia mais econômica e sustentável.
+
+
+**VI. Ir Além - 10%**
+
+[ ] Integrar Python com o banco de dados do CDS.
+[ ] Ler e apresentar dados da solução AICSS (transferir dados do Wokwi manualmente, se necessário).
+[ ] Disparar análises em R.
+[ ] Gravar vídeo explicativo (YouTube - modo "não listado", até 6 minutos).
+[ ] Adicionar link do vídeo no PDF.
+
+
+**VII. Entregável Final**
+
+[ ] Criar logotipo do time (opcional).
+[ ] Incluir nomes dos integrantes na primeira página do PDF.
+[ ] Apresentar todas as soluções detalhadamente (arquiteturas, justificativas, circuitos, códigos).
+[ ] Organizar o PDF com seções claras (Introdução, Desenvolvimento, Resultados Esperados, Conclusões).
+[ ] Incluir link do vídeo (opcional, para concorrer ao prêmio).
+
+
+**Lembrete:**  A nota final considera todas as disciplinas do curso, mesmo que o peso do entregável seja distribuído conforme o checklist.  Boa sorte!
+
+
+New file: src/CDS/README.md
+# Análise de Consumo de Energia Elétrica - Projeto GS
+
+## 📊 Sobre o Projeto
+
+Este projeto faz parte da Global Solution, focando no desenvolvimento de uma solução baseada em Data Science, IoT e Python para otimizar o consumo de energia em diferentes ambientes (residenciais, comerciais e urbanos). O objetivo principal é melhorar a eficiência energética através da análise de dados históricos e integração com fontes renováveis.
+
+## 🎯 Objetivos
+
+- Analisar tendências históricas de consumo de energia elétrica
+- Criar pipeline de dados para filtrar informações específicas do Brasil
+- Avaliar demanda energética e consumo per capita
+- Identificar padrões de consumo para otimização
+- Integrar análise com sistemas IoT para tomada de decisão em tempo real
+
+## 📑 Dados Disponíveis
+
+### Estrutura dos Dados
+
+O conjunto de dados inclui as seguintes dimensões principais:
+
+1. **Dimensão Temporal**
+   - Data (AAAAMMDD)
+
+2. **Tipo de Consumidor**
+   - Cativo
+   - Livre
+
+3. **Localização**
+   - Sistema (Subsistema ou Sistemas Isolados)
+   - UF (Unidade da Federação)
+
+4. **Classificação de Consumo**
+   - Setor Econômico (3 níveis)
+   - Tensão de Fornecimento (3 níveis)
+   - Faixas de Consumo (2 níveis)
+
+5. **Métricas**
+   - Número de Consumidores
+   - Consumo em MWh
+
+### Detalhes Específicos
+
+- **Tensão de Fornecimento**:
+  - Alta Tensão: ≥ 69kV
+  - Baixa Tensão: ≤ 1kV
+
+- **Faixas de Consumo para Baixa Tensão**:
+  - Convencional: 0-30 kWh, 31-100 kWh, 101-200 kWh, 201-300 kWh, 301-400 kWh, 401-500 kWh, 501-1000 kWh, > 1000 kWh
+  - Baixa Renda: 0-30 kWh, 31-100 kWh, 101-200 kWh, > 200 kWh
+
+## 🔗 Fontes de Dados
+
+1. **Dados Processados**:
+   - [Consumo de Energia Elétrica - EPE](https://www.epe.gov.br/pt/publicacoes-dados-abertos/publicacoes/consumo-de-energia-eletrica)
+
+2. **Dados Brutos e Dicionário**:
+   - [Anuário Estatístico de Energia Elétrica - EPE](https://www.epe.gov.br/pt/publicacoes-dados-abertos/dados-abertos/dados-do-anuario-estatistico-de-energia-eletrica)
+
+## 🛠 Tecnologias Utilizadas
+
+- Python para processamento e análise de dados
+- Banco de dados relacional para armazenamento
+- Ferramentas de IoT para coleta de dados em tempo real
+- Bibliotecas de Data Science para análise preditiva
+
+## 📈 Análises Previstas
+
+1. Tendências de consumo ao longo do tempo
+2. Distribuição por setor econômico
+3. Análise comparativa entre regiões
+4. Impacto das faixas de tensão no consumo
+5. Relação entre número de consumidores e consumo total
+6. Padrões sazonais de consumo
+
+## 🎁 Entregáveis Esperados
+
+- Pipeline de dados automatizado
+- Análises estatísticas do consumo
+- Dashboards interativos
+- Modelos preditivos de consumo
+- Documentação técnica completa
+
+
+## 💾 Configuração do Banco de Dados
+
+### Pré-requisitos
+- PostgreSQL instalado
+- Privilégios de administrador no banco de dados
+- psql ou outro cliente SQL compatível com PostgreSQL
+
+### Scripts de Configuração
+
+O banco de dados é configurado em duas etapas, utilizando os seguintes scripts:
+
+1. `src/initialize_database.sql`: Cria a estrutura inicial do banco de dados
+2. `src/create_pipeline_views.sql`: Configura as views para análise dos dados
+
+#### Passo 1: Criar Estrutura do Banco de Dados
+
+Execute o script `src/initialize_database.sql`:
+
+```sql
+-- Criação das tabelas dimensionais
+CREATE TABLE DIM_TEMPO (
+    data DATE PRIMARY KEY,
+    ano INT,
+    mes INT,
+    trimestre INT,
+    mes_nome VARCHAR(20),
+    CONSTRAINT chk_mes CHECK (mes BETWEEN 1 AND 12),
+    CONSTRAINT chk_trimestre CHECK (trimestre BETWEEN 1 AND 4)
+);
+
+CREATE TABLE DIM_LOCALIZACAO (
+    id_localizacao SERIAL PRIMARY KEY,
+    uf VARCHAR(2),
+    sistema VARCHAR(50),
+    regiao VARCHAR(20),
+    populacao DECIMAL(12,2),
+    CONSTRAINT chk_uf CHECK (uf ~ '^[A-Z]{2}$')
+);
+
+CREATE TABLE DIM_CONSUMIDOR (
+    id_consumidor SERIAL PRIMARY KEY,
+    tipo_consumidor VARCHAR(10),
+    faixa_consumo_n1 VARCHAR(50),
+    faixa_consumo_n2 VARCHAR(50),
+    CONSTRAINT chk_tipo_consumidor CHECK (tipo_consumidor IN ('Cativo', 'Livre'))
+);
+
+CREATE TABLE DIM_TENSAO (
+    id_tensao SERIAL PRIMARY KEY,
+    tensao_n1 VARCHAR(50),
+    tensao_n2 VARCHAR(50),
+    tensao_n3 VARCHAR(50)
+);
+
+CREATE TABLE DIM_SETOR (
+    id_setor SERIAL PRIMARY KEY,
+    setor_n1 VARCHAR(50),
+    setor_n2 VARCHAR(50),
+    setor_n3 VARCHAR(50)
+);
+
+-- Criação da tabela fato
+CREATE TABLE FATO_CONSUMO (
+    id_consumo SERIAL PRIMARY KEY,
+    data DATE,
+    id_localizacao INT,
+    id_consumidor INT,
+    id_tensao INT,
+    id_setor INT,
+    consumo_mwh DECIMAL(12,2),
+    numero_consumidores INT,
+    FOREIGN KEY (data) REFERENCES DIM_TEMPO(data),
+    FOREIGN KEY (id_localizacao) REFERENCES DIM_LOCALIZACAO(id_localizacao),
+    FOREIGN KEY (id_consumidor) REFERENCES DIM_CONSUMIDOR(id_consumidor),
+    FOREIGN KEY (id_tensao) REFERENCES DIM_TENSAO(id_tensao),
+    FOREIGN KEY (id_setor) REFERENCES DIM_SETOR(id_setor)
+);
+
+-- Índices para otimização de consultas
+CREATE INDEX idx_fato_consumo_data ON FATO_CONSUMO(data);
+CREATE INDEX idx_fato_consumo_localizacao ON FATO_CONSUMO(id_localizacao);
+CREATE INDEX idx_fato_consumo_setor ON FATO_CONSUMO(id_setor);
+```
+
+#### Passo 2: Criar Views de Análise
+
+Execute o script `src/create_pipeline_views.sql`:
+
+```sql
+-- Criação de views para análises específicas
+
+-- View para análise de tendência de consumo mensal
+CREATE VIEW vw_tendencia_consumo_mensal AS
+SELECT 
+    dt.ano,
+    dt.mes,
+    dl.uf,
+    dl.sistema,
+    SUM(fc.consumo_mwh) as consumo_total,
+    SUM(fc.numero_consumidores) as total_consumidores
+FROM FATO_CONSUMO fc
+JOIN DIM_TEMPO dt ON fc.data = dt.data
+JOIN DIM_LOCALIZACAO dl ON fc.id_localizacao = dl.id_localizacao
+GROUP BY dt.ano, dt.mes, dl.uf, dl.sistema
+ORDER BY dt.ano, dt.mes;
+
+-- View para cálculo do consumo per capita por UF
+CREATE VIEW vw_consumo_per_capita AS
+SELECT 
+    dt.ano,
+    dl.uf,
+    SUM(fc.consumo_mwh) as consumo_total,
+    MAX(dl.populacao) as populacao,
+    ROUND(SUM(fc.consumo_mwh) / MAX(dl.populacao), 2) as consumo_per_capita
+FROM FATO_CONSUMO fc
+JOIN DIM_TEMPO dt ON fc.data = dt.data
+JOIN DIM_LOCALIZACAO dl ON fc.id_localizacao = dl.id_localizacao
+GROUP BY dt.ano, dl.uf
+ORDER BY dt.ano, dl.uf;
+
+-- View para análise de demanda por setor econômico
+CREATE VIEW vw_demanda_setor AS
+SELECT 
+    dt.ano,
+    ds.setor_n1,
+    ds.setor_n2,
+    dl.regiao,
+    SUM(fc.consumo_mwh) as consumo_total,
+    COUNT(DISTINCT fc.id_consumidor) as num_consumidores
+FROM FATO_CONSUMO fc
+JOIN DIM_TEMPO dt ON fc.data = dt.data
+JOIN DIM_SETOR ds ON fc.id_setor = ds.id_setor
+JOIN DIM_LOCALIZACAO dl ON fc.id_localizacao = dl.id_localizacao
+GROUP BY dt.ano, ds.setor_n1, ds.setor_n2, dl.regiao
+ORDER BY dt.ano, consumo_total DESC;
+```
+
+### Explicação das Views de Análise
+
+O script `create_pipeline_views.sql` cria três views principais para análise dos dados. Abaixo está a explicação detalhada de cada uma:
+
+#### 1. View `vw_tendencia_consumo_mensal`
+
+```sql
+CREATE VIEW vw_tendencia_consumo_mensal AS
+SELECT 
+    dt.ano,
+    dt.mes,
+    dl.uf,
+    dl.sistema,
+    SUM(fc.consumo_mwh) as consumo_total,
+    SUM(fc.numero_consumidores) as total_consumidores
+FROM FATO_CONSUMO fc
+JOIN DIM_TEMPO dt ON fc.data = dt.data
+JOIN DIM_LOCALIZACAO dl ON fc.id_localizacao = dl.id_localizacao
+GROUP BY dt.ano, dt.mes, dl.uf, dl.sistema
+ORDER BY dt.ano, dt.mes;
+```
+
+**Retorno:**
+| Coluna | Tipo | Descrição |
+|--------|------|-----------|
+| ano | INT | Ano de referência |
+| mes | INT | Mês de referência (1-12) |
+| uf | VARCHAR(2) | Sigla do estado |
+| sistema | VARCHAR(50) | Nome do subsistema ou sistema isolado |
+| consumo_total | DECIMAL | Soma total do consumo em MWh no período |
+| total_consumidores | INT | Número total de consumidores no período |
+
+**Uso:** Análise de tendências mensais de consumo por estado e sistema elétrico.
+
+#### 2. View `vw_consumo_per_capita`
+
+```sql
+CREATE VIEW vw_consumo_per_capita AS
+SELECT 
+    dt.ano,
+    dl.uf,
+    SUM(fc.consumo_mwh) as consumo_total,
+    MAX(dl.populacao) as populacao,
+    ROUND(SUM(fc.consumo_mwh) / MAX(dl.populacao), 2) as consumo_per_capita
+FROM FATO_CONSUMO fc
+JOIN DIM_TEMPO dt ON fc.data = dt.data
+JOIN DIM_LOCALIZACAO dl ON fc.id_localizacao = dl.id_localizacao
+GROUP BY dt.ano, dl.uf
+ORDER BY dt.ano, dl.uf;
+```
+
+**Retorno:**
+| Coluna | Tipo | Descrição |
+|--------|------|-----------|
+| ano | INT | Ano de referência |
+| uf | VARCHAR(2) | Sigla do estado |
+| consumo_total | DECIMAL | Consumo total em MWh |
+| populacao | DECIMAL | População do estado |
+| consumo_per_capita | DECIMAL | Consumo médio por habitante (MWh/habitante) |
+
+**Uso:** Análise comparativa do consumo de energia por habitante entre diferentes estados.
+
+#### 3. View `vw_demanda_setor`
+
+```sql
+CREATE VIEW vw_demanda_setor AS
+SELECT 
+    dt.ano,
+    ds.setor_n1,
+    ds.setor_n2,
+    dl.regiao,
+    SUM(fc.consumo_mwh) as consumo_total,
+    COUNT(DISTINCT fc.id_consumidor) as num_consumidores
+FROM FATO_CONSUMO fc
+JOIN DIM_TEMPO dt ON fc.data = dt.data
+JOIN DIM_SETOR ds ON fc.id_setor = ds.id_setor
+JOIN DIM_LOCALIZACAO dl ON fc.id_localizacao = dl.id_localizacao
+GROUP BY dt.ano, ds.setor_n1, ds.setor_n2, dl.regiao
+ORDER BY dt.ano, consumo_total DESC;
+```
+
+**Retorno:**
+| Coluna | Tipo | Descrição |
+|--------|------|-----------|
+| ano | INT | Ano de referência |
+| setor_n1 | VARCHAR(50) | Classificação primária do setor econômico |
+| setor_n2 | VARCHAR(50) | Classificação secundária do setor econômico |
+| regiao | VARCHAR(20) | Região geográfica |
+| consumo_total | DECIMAL | Consumo total em MWh do setor |
+| num_consumidores | INT | Número de consumidores únicos no setor |
+
+**Uso:** Análise setorial do consumo de energia, permitindo identificar os setores econômicos com maior demanda por região.
+
+### Exemplos de Consultas
+
+```sql
+-- Exemplo 1: Consumo mensal total em 2023 para São Paulo
+SELECT * FROM vw_tendencia_consumo_mensal 
+WHERE ano = 2023 AND uf = 'SP';
+
+-- Exemplo 2: Top 5 estados com maior consumo per capita em 2023
+SELECT * FROM vw_consumo_per_capita 
+WHERE ano = 2023 
+ORDER BY consumo_per_capita DESC 
+LIMIT 5;
+
+-- Exemplo 3: Consumo por setor industrial na região Sudeste
+SELECT * FROM vw_demanda_setor 
+WHERE setor_n1 = 'Industrial' 
+AND regiao = 'Sudeste' 
+ORDER BY consumo_total DESC;
+```
+
+### Como Executar os Scripts
+
+1. Abra o terminal ou prompt de comando
+2. Conecte-se ao PostgreSQL usando psql:
+```bash
+psql -U seu_usuario -d seu_banco
+```
+3. Execute os scripts na ordem correta:
+```bash
+\i caminho/para/initialize_database.sql
+\i caminho/para/create_pipeline_views.sql
+```
+
+### Verificação da Instalação
+
+Para verificar se tudo foi instalado corretamente, execute:
+
+```sql
+-- Verificar tabelas criadas
+\dt
+
+-- Verificar views criadas
+\dv
+
+-- Testar uma view
+SELECT * FROM vw_tendencia_consumo_mensal LIMIT 5;
+```
+
+### Notas Importantes
+
+- Certifique-se de ter backup dos dados antes de executar os scripts
+- Os scripts devem ser executados com privilégios de administrador
+- As constraints garantem a integridade dos dados
+- Os índices otimizam as consultas mais frequentes
+- As views facilitam a análise dos dados
+- Os scripts podem ser adaptados conforme necessidade
+
+## 🎯 Conclusão
+
+Este projeto de análise de consumo de energia elétrica foi desenvolvido como parte da Global Solution, com foco em criar uma solução baseada em Data Science para otimização do consumo energético. A estrutura implementada oferece:
+
+### 📊 Principais Funcionalidades
+- Análise granular do consumo de energia por região, setor e período
+- Acompanhamento de tendências de consumo ao longo do tempo
+- Cálculo de métricas per capita para comparações entre regiões
+- Base para integração com sistemas IoT e análise em tempo real
+
+### 💡 Benefícios
+1. **Tomada de Decisão:**
+   - Insights baseados em dados históricos
+   - Identificação de padrões de consumo
+   - Suporte a decisões de eficiência energética
+
+2. **Sustentabilidade:**
+   - Monitoramento do impacto de iniciativas de economia
+   - Base para integração com fontes renováveis
+   - Suporte a políticas de redução de consumo
+
+3. **Escalabilidade:**
+   - Estrutura modular e expansível
+   - Preparado para inclusão de novos dados
+   - Facilidade de integração com outras ferramentas
+
+### 🚀 Próximos Passos
+- Implementação de modelos preditivos
+- Integração com sistemas IoT em tempo real
+- Desenvolvimento de dashboards interativos
+- Expansão para análise de fontes renováveis
+- Inclusão de variáveis climáticas e sazonais
+
+### 📈 Impacto Esperado
+O sistema desenvolvido tem potencial para contribuir significativamente com:
+- Redução do consumo energético
+- Otimização de recursos
+- Promoção da sustentabilidade
+- Conscientização sobre uso de energia
+- Suporte a políticas públicas de eficiência energética
+
+Este projeto estabelece uma base sólida para o desenvolvimento de soluções mais avançadas em eficiência energética, combinando análise de dados históricos com potencial para integração com tecnologias modernas de IoT e automação.
+
+
+New file: src/CDS/src/create_pipeline_views.sql
+-- Criação de views para análises específicas
+
+-- View para análise de tendência de consumo mensal
+CREATE VIEW vw_tendencia_consumo_mensal AS
+SELECT 
+    dt.ano,
+    dt.mes,
+    dl.uf,
+    dl.sistema,
+    SUM(fc.consumo_mwh) as consumo_total,
+    SUM(fc.numero_consumidores) as total_consumidores
+FROM FATO_CONSUMO fc
+JOIN DIM_TEMPO dt ON fc.data = dt.data
+JOIN DIM_LOCALIZACAO dl ON fc.id_localizacao = dl.id_localizacao
+GROUP BY dt.ano, dt.mes, dl.uf, dl.sistema
+ORDER BY dt.ano, dt.mes;
+
+-- View para cálculo do consumo per capita por UF
+CREATE VIEW vw_consumo_per_capita AS
+SELECT 
+    dt.ano,
+    dl.uf,
+    SUM(fc.consumo_mwh) as consumo_total,
+    MAX(dl.populacao) as populacao,
+    ROUND(SUM(fc.consumo_mwh) / MAX(dl.populacao), 2) as consumo_per_capita
+FROM FATO_CONSUMO fc
+JOIN DIM_TEMPO dt ON fc.data = dt.data
+JOIN DIM_LOCALIZACAO dl ON fc.id_localizacao = dl.id_localizacao
+GROUP BY dt.ano, dl.uf
+ORDER BY dt.ano, dl.uf;
+
+-- View para análise de demanda por setor econômico
+CREATE VIEW vw_demanda_setor AS
+SELECT 
+    dt.ano,
+    ds.setor_n1,
+    ds.setor_n2,
+    dl.regiao,
+    SUM(fc.consumo_mwh) as consumo_total,
+    COUNT(DISTINCT fc.id_consumidor) as num_consumidores
+FROM FATO_CONSUMO fc
+JOIN DIM_TEMPO dt ON fc.data = dt.data
+JOIN DIM_SETOR ds ON fc.id_setor = ds.id_setor
+JOIN DIM_LOCALIZACAO dl ON fc.id_localizacao = dl.id_localizacao
+GROUP BY dt.ano, ds.setor_n1, ds.setor_n2, dl.regiao
+ORDER BY dt.ano, consumo_total DESC;
+
+New file: src/CDS/src/initialize_database.sql
+-- Criação das tabelas dimensionais
+CREATE TABLE DIM_TEMPO (
+    data DATE PRIMARY KEY,
+    ano INT,
+    mes INT,
+    trimestre INT,
+    mes_nome VARCHAR(20),
+    CONSTRAINT chk_mes CHECK (mes BETWEEN 1 AND 12),
+    CONSTRAINT chk_trimestre CHECK (trimestre BETWEEN 1 AND 4)
+);
+
+CREATE TABLE DIM_LOCALIZACAO (
+    id_localizacao SERIAL PRIMARY KEY,
+    uf VARCHAR(2),
+    sistema VARCHAR(50),
+    regiao VARCHAR(20),
+    populacao DECIMAL(12,2),
+    CONSTRAINT chk_uf CHECK (uf ~ '^[A-Z]{2}$')
+);
+
+CREATE TABLE DIM_CONSUMIDOR (
+    id_consumidor SERIAL PRIMARY KEY,
+    tipo_consumidor VARCHAR(10),
+    faixa_consumo_n1 VARCHAR(50),
+    faixa_consumo_n2 VARCHAR(50),
+    CONSTRAINT chk_tipo_consumidor CHECK (tipo_consumidor IN ('Cativo', 'Livre'))
+);
+
+CREATE TABLE DIM_TENSAO (
+    id_tensao SERIAL PRIMARY KEY,
+    tensao_n1 VARCHAR(50),
+    tensao_n2 VARCHAR(50),
+    tensao_n3 VARCHAR(50)
+);
+
+CREATE TABLE DIM_SETOR (
+    id_setor SERIAL PRIMARY KEY,
+    setor_n1 VARCHAR(50),
+    setor_n2 VARCHAR(50),
+    setor_n3 VARCHAR(50)
+);
+
+-- Criação da tabela fato
+CREATE TABLE FATO_CONSUMO (
+    id_consumo SERIAL PRIMARY KEY,
+    data DATE,
+    id_localizacao INT,
+    id_consumidor INT,
+    id_tensao INT,
+    id_setor INT,
+    consumo_mwh DECIMAL(12,2),
+    numero_consumidores INT,
+    FOREIGN KEY (data) REFERENCES DIM_TEMPO(data),
+    FOREIGN KEY (id_localizacao) REFERENCES DIM_LOCALIZACAO(id_localizacao),
+    FOREIGN KEY (id_consumidor) REFERENCES DIM_CONSUMIDOR(id_consumidor),
+    FOREIGN KEY (id_tensao) REFERENCES DIM_TENSAO(id_tensao),
+    FOREIGN KEY (id_setor) REFERENCES DIM_SETOR(id_setor)
+);
+
+-- Índices para otimização de consultas
+CREATE INDEX idx_fato_consumo_data ON FATO_CONSUMO(data);
+CREATE INDEX idx_fato_consumo_localizacao ON FATO_CONSUMO(id_localizacao);
+CREATE INDEX idx_fato_consumo_setor ON FATO_CONSUMO(id_setor);
+
+New file: src/AICSS/diagram.json
+{
+  "version": 1,
+  "author": "Bruno Conterato",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": 233.6,
+      "left": -248.8,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": -72.8,
+      "left": -208.98,
+      "attrs": {}
+    },
+    { "type": "wokwi-gnd", "id": "gnd1", "top": 297.6, "left": -29.4, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd2", "top": 96, "left": -163.8, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 63.6,
+      "left": -322.6,
+      "attrs": { "color": "white" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 147.95,
+      "left": -297.6,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-gnd",
+      "id": "gnd3",
+      "top": 135.8,
+      "left": -212.8,
+      "rotate": 270,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr2",
+      "top": 233.4,
+      "left": 209.2,
+      "rotate": 180,
+      "attrs": {}
+    },
+    { "type": "wokwi-pir-motion-sensor", "id": "pir2", "top": -72.8, "left": 223.02, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 157.55,
+      "left": 364.8,
+      "attrs": { "value": "1000" }
+    },
+    { "type": "wokwi-led", "id": "led2", "top": 82.8, "left": 426.2, "attrs": { "color": "red" } },
+    { "type": "wokwi-gnd", "id": "gnd4", "top": 96, "left": 287.4, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd5", "top": 316.8, "left": 162.6, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd6", "top": 145, "left": 317.6, "rotate": 90, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "ldr1:VCC", "esp:5V", "red", [ "h0" ] ],
+    [ "ldr1:GND", "gnd1:GND", "black", [ "h0" ] ],
+    [ "ldr1:AO", "esp:12", "green", [ "h0" ] ],
+    [ "pir1:GND", "gnd2:GND", "black", [ "v0" ] ],
+    [ "pir1:OUT", "esp:34", "green", [ "v0" ] ],
+    [ "pir1:VCC", "esp:5V", "red", [ "v0" ] ],
+    [ "led1:C", "r1:1", "green", [ "v0" ] ],
+    [ "led1:A", "esp:25", "green", [ "v0" ] ],
+    [ "r1:2", "gnd3:GND", "green", [ "v0" ] ],
+    [ "led2:C", "r2:2", "green", [ "v0" ] ],
+    [ "r2:1", "gnd6:GND", "green", [ "v0", "h-28.8" ] ],
+    [ "pir2:GND", "gnd4:GND", "black", [ "v0" ] ],
+    [ "ldr2:GND", "gnd5:GND", "black", [ "h0" ] ],
+    [ "ldr2:VCC", "esp:5V", "red", [ "h0" ] ],
+    [ "pir2:VCC", "esp:5V", "red", [ "v0" ] ],
+    [ "led2:A", "esp:19", "green", [ "v0" ] ],
+    [ "pir2:OUT", "esp:18", "green", [ "v0" ] ],
+    [ "ldr2:AO", "esp:35", "green", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
+
+New file: src/AICSS/wokwi-project.txt
+Downloaded from https://wokwi.com/projects/414960070191040513
+
+Simulate this project on https://wokwi.com
+
+
+New file: src/AICSS/platformio.ini
+; PlatformIO Project Configuration File
+;
+;   Build options: build flags, source filter
+;   Upload options: custom upload port, speed and extra flags
+;   Library options: dependencies, extra library storages
+;   Advanced options: extra scripting
+;
+; Please visit documentation for the other options and examples
+; https://docs.platformio.org/page/projectconf.html
+
+[env:esp32]
+platform = espressif32
+framework = arduino
+board = esp32dev
+
+New file: src/AICSS/wokwi.toml
+[wokwi]
+version = 1
+elf = ".pio/build/esp32/firmware.elf"
+firmware = ".pio/build/esp32/firmware.bin"
+
+# Forward http://localhost:8180 to port 80 on the simulated ESP32:
+[[net.forward]]
+from = "localhost:8180"
+to = "target:80"
+
+New file: src/AICSS/src/sketch.ino
+// Pinos dos sensores e LED para o ambiente externo
+const int LDR_EXTERNAL_PIN = 12;      // Pino para leitura do LDR (A0)
+const int PIR_EXTERNAL_PIN = 34;      // Pino de entrada do sensor PIR (digital)
+const int LED_EXTERNAL_PIN = 25;      // Pino de saída para controle do LED externo
+
+// Pinos dos sensores e LED para o ambiente interno
+const int LDR_INTERNAL_PIN = 35;      // Pino para leitura do LDR interno (A1)
+const int PIR_INTERNAL_PIN = 18;      // Pino de entrada do sensor de presença interno (digital)
+const int LED_INTERNAL_PIN = 19;      // Pino de saída para controle do LED interno
+
+// Limiar de luminosidade (lux) para definir dia ou noite
+const int LUMINOSITY_EXTERNAL_THRESHOLD = 10;  // Limiar para iluminação externa
+const int LUMINOSITY_INTERNAL_THRESHOLD = 50;  // Limiar para iluminação interna
+
+// LDR resistance at 10 lux e valor do Gamma (usados para ambos os ambientes)
+const double rl10 = 50000.0; // LDR resistance at 10 lux
+const double ldrGamma = 0.7;  // Gamma para o LDR
+
+const unsigned long MOTION_EXTERNAL_DURATION = 30000; // Duração da iluminação máxima (30 segundos)
+long motionExternalStartTime = -MOTION_EXTERNAL_DURATION;   // Momento em que o movimento foi detectado no externo
+
+// Parâmetros do LED interno
+const int LED_INTERNAL_BRIGHTNESS = 255; // Brilho máximo do LED interno
+
+void setup() {
+  setupExternal();
+  setupInternal();
+}
+
+void loop() {
+  loopExternal();
+  loopInternal();
+}
+
+// ---------------------- Comum aos ambientes interno e externo ---------------------- //
+
+bool isNight(double luminosity, int threshold) {
+  return luminosity < threshold;
+}
+
+double calculateResistance(int ldr_value) {
+  double voltage_ratio = ldr_value / (4095.0 - ldr_value);
+  return 10000.0 * voltage_ratio;
+}
+
+double calculateLux(double resistance, double rl10, double gamma) {
+  return 10.0 * pow(rl10 / resistance, 1.0 / gamma);
+}
+
+double readLuminosity(int ldr_pin, double rl10, double gamma) {
+  int value = analogRead(ldr_pin);
+  double resistance = calculateResistance(value);
+  return calculateLux(resistance, rl10, gamma);
+}
+
+bool readMotion(int pir_pin) {
+  return digitalRead(pir_pin) == HIGH;
+}
+
+// ---------------------- Ambiente Externo ---------------------- //
+void setupExternal() {
+  pinMode(PIR_EXTERNAL_PIN, INPUT);
+  pinMode(LED_EXTERNAL_PIN, OUTPUT);
+
+  // Inicialização da serial para monitoramento
+  Serial.begin(115200);
+}
+
+void loopExternal() {
+  // Leitura da luminosidade e detecção de movimento no externo
+  double luminosityExternal = readLuminosity(LDR_EXTERNAL_PIN, rl10, ldrGamma);
+  bool motionDetectedExternal = readMotion(PIR_EXTERNAL_PIN);
+
+  // Log para monitoramento
+  Serial.print("Luminosity (External): ");
+  Serial.print(luminosityExternal);
+  Serial.print(" | Night status (External): ");
+  Serial.println(isNight(luminosityExternal, LUMINOSITY_EXTERNAL_THRESHOLD) ? "Night" : "Day");
+  Serial.print("Motion detected (External): ");
+  Serial.println(motionDetectedExternal ? "Yes" : "No");
+
+  // Controle da iluminação externa
+  controlLightingExternal(luminosityExternal, motionDetectedExternal);
+  Serial.println();
+
+  delay(100); // Intervalo curto para leitura contínua
+}
+
+// Função de controle de iluminação específica para o ambiente externo
+void controlLightingExternal(double luminosity, bool motionDetected) {
+  bool night = isNight(luminosity, LUMINOSITY_EXTERNAL_THRESHOLD);
+  unsigned long currentTime = millis();
+
+  if (night) {
+    if (motionDetected) {
+      analogWrite(LED_EXTERNAL_PIN, 255);
+      motionExternalStartTime = currentTime;
+    } else if (currentTime - motionExternalStartTime < MOTION_EXTERNAL_DURATION) {
+      analogWrite(LED_EXTERNAL_PIN, 255);
+    } else {
+      analogWrite(LED_EXTERNAL_PIN, 50);
+    }
+  } else {
+    analogWrite(LED_EXTERNAL_PIN, 0);
+  }
+}
+
+// ---------------------- Ambiente Interno ---------------------- //
+void setupInternal() {
+  pinMode(PIR_INTERNAL_PIN, INPUT);
+  pinMode(LED_INTERNAL_PIN, OUTPUT);
+}
+
+void loopInternal() {
+  // Leitura da luminosidade e detecção de movimento no interno
+  double luminosityInternal = readLuminosity(LDR_INTERNAL_PIN, rl10, ldrGamma);
+  bool motionDetectedInternal = readMotion(PIR_INTERNAL_PIN);
+
+  // Log para monitoramento
+  Serial.print("Luminosity (Internal): ");
+  Serial.print(luminosityInternal);
+  Serial.print(" | Insufficient light: ");
+  Serial.println(isNight(luminosityInternal, LUMINOSITY_INTERNAL_THRESHOLD) ? "Yes" : "No");
+  Serial.print("Motion detected (Internal): ");
+  Serial.println(motionDetectedInternal ? "Yes" : "No");
+
+  // Controle da iluminação interna
+  controlLightingInternal(luminosityInternal, motionDetectedInternal);
+  Serial.println();
+
+  delay(5000); // Intervalo curto para leitura contínua
+}
+
+void controlLightingInternal(double luminosity, bool motionDetected) {
+  bool insufficientLight = isNight(luminosity, LUMINOSITY_INTERNAL_THRESHOLD);
+
+  if (insufficientLight && motionDetected) {
+    analogWrite(LED_INTERNAL_PIN, LED_INTERNAL_BRIGHTNESS);
+    Serial.println("Internal: Insufficient light, motion detected. Lights ON.");
+  } else {
+    analogWrite(LED_INTERNAL_PIN, 0);
+    Serial.println("Internal: Sufficient light or no motion. Lights OFF.");
+  }
+}
+
+
+New file: src/AICSS/docs/report_external_illumination_system.md
+## Relatório: Sistema de Iluminação Externa Inteligente
+
+**Objetivo:** Desenvolver um sistema de iluminação externa que otimize o consumo de energia, garantindo a segurança através de iluminação mínima à noite e acionando iluminação máxima apenas quando necessário, baseado na detecção de movimento.
+
+**Lógica de Funcionamento:**
+
+O sistema utiliza um sensor de luminosidade (LDR) e um sensor de movimento (simulado por um sensor genérico de presença no Wokwi, considerando as limitações do simulador) para controlar a intensidade da iluminação externa (simulada por um LED). A lógica de operação é a seguinte:
+    
+1. **Leitura da Luminosidade:** O ESP32 lê continuamente o valor fornecido pelo sensor LDR. Este valor representa a intensidade da luz ambiente.
+
+2. **Determinação do Período (Dia/Noite):** O sistema compara o valor da luminosidade com um limiar pré-definido.  Se o valor estiver acima do limiar, considera-se dia. Abaixo do limiar, considera-se noite.
+
+3. **Controle da Iluminação (Dia):** Durante o dia, independente da detecção de movimento, a iluminação externa permanece desligada (LED OFF).
+
+4. **Controle da Iluminação (Noite - Sem Movimento):** Durante a noite, na ausência de detecção de movimento pelo sensor, a iluminação externa permanece em nível mínimo (LED com brilho reduzido, ou simulação através de PWM com baixo ciclo de trabalho).
+
+5. **Controle da Iluminação (Noite - Com Movimento):**  Durante a noite, se o sensor de movimento detectar movimento, a iluminação externa é acionada em nível máximo (LED ON com brilho máximo, ou PWM com alto ciclo de trabalho) por um período de 30 segundos. Após os 30 segundos, o sistema retorna ao nível mínimo de iluminação noturna (item 4), a menos que um novo movimento seja detectado antes do término desse período.  Um temporizador é utilizado para controlar este período de 30 segundos.
+
+**Sensores Utilizados:**
+
+* **Sensor de Luminosidade (LDR):**  Um resistor dependente da luz (LDR) que varia sua resistência de acordo com a intensidade da luz incidente.  O ESP32 mede a resistência para determinar o nível de luminosidade.
+
+* **Sensor de Movimento (Simulado):** No Wokwi, um sensor digital genérico que simula a detecção de movimento.  Um sinal HIGH indica presença de movimento, enquanto um sinal LOW indica ausência.  Alternativamente, pode-se utilizar um botão como um simulador muito simplificado.
+
+
+**Componentes do Circuito (Wokwi):**
+
+* 1 x ESP32
+* 1 x LDR
+* 1 x Sensor Digital (simulando sensor de movimento) ou 1 x Botão (Simulação simplificada)
+* 1 x LED (Simulando a luz externa)
+* Resistores de pull-up/pull-down (conforme necessário para o sensor e o LED)
+
+
+**Considerações Adicionais:**
+
+* **Calibração do Limiar de Luminosidade:** O limiar para distinguir dia e noite precisa ser calibrado para o ambiente específico.
+* **Ajustes de Brilho do LED:**  A intensidade mínima e máxima do LED pode ser ajustada através de PWM (Pulse Width Modulation) para controlar o brilho.  No Wokwi, pode-se simular com diferentes níveis de luminosidade do LED.
+* **Tratamento de Ruído:**  É importante implementar mecanismos para filtrar ruídos ou falsas leituras dos sensores.  No caso do sensor de movimento, um período mínimo de tempo entre detecções pode ser definido para evitar acionamentos repetidos por pequenas vibrações.
+
+Este relatório descreve o funcionamento do sistema de iluminação externa. A implementação no Wokwi necessitará de um código adequado em linguagem C/C++ para o ESP32, que execute a lógica descrita acima.  A simulação no Wokwi permitirá validar a funcionalidade do sistema antes de uma implementação física.
+
+
+New file: src/AICSS/docs/report_internal_illunination_system.md
+## Relatório: Sistema de Iluminação Interna Inteligente
+
+**Objetivo:** Desenvolver um sistema de iluminação interna que otimize o consumo de energia, acionando a luz apenas quando necessário: em ambientes com luminosidade insuficiente e com detecção de presença.
+
+**Lógica de Funcionamento:**
+
+O sistema utiliza um sensor de luminosidade (LDR) e um sensor de presença (simulado por um sensor genérico de presença no Wokwi, ou por um botão como simplificação) para controlar a intensidade da iluminação interna (simulada por um LED). A lógica de operação é a seguinte:
+
+1. **Leitura da Luminosidade:** O ESP32 lê continuamente o valor fornecido pelo sensor LDR. Este valor representa a intensidade da luz ambiente.
+
+2. **Determinação do Nível de Luminosidade:** O sistema compara o valor da luminosidade com um limiar pré-definido.  Se o valor estiver acima do limiar, considera-se luminosidade suficiente. Abaixo do limiar, considera-se luminosidade insuficiente.
+
+3. **Detecção de Presença:** O ESP32 lê o estado do sensor de presença. Um sinal HIGH indica presença, enquanto um sinal LOW indica ausência.
+
+4. **Controle da Iluminação:**
+
+    * **Luminosidade Suficiente:** Independente do estado do sensor de presença, se a luminosidade for suficiente, a iluminação interna permanece desligada (LED OFF).
+
+    * **Luminosidade Insuficiente e Presença Detectado:** Se a luminosidade for insuficiente E o sensor de presença detectar presença, a iluminação interna é acionada (LED ON).
+
+    * **Luminosidade Insuficiente e Ausência de Presença:** Se a luminosidade for insuficiente, MAS o sensor de presença NÃO detectar presença, a iluminação interna permanece desligada (LED OFF).
+
+
+**Sensores Utilizados:**
+
+* **Sensor de Luminosidade (LDR):** Um resistor dependente da luz (LDR) que varia sua resistência de acordo com a intensidade da luz incidente. O ESP32 mede a resistência para determinar o nível de luminosidade.
+
+* **Sensor de Presença (Simulado):** No Wokwi, um sensor digital genérico que simula a detecção de presença. Um sinal HIGH indica presença, enquanto um sinal LOW indica ausência. Alternativamente, pode-se utilizar um botão como um simulador muito simplificado.
+
+
+**Componentes do Circuito (Wokwi):**
+
+* 1 x ESP32
+* 1 x LDR
+* 1 x Sensor Digital (simulando sensor de presença) ou 1 x Botão (Simulação simplificada)
+* 1 x LED (Simulando a luz interna)
+* Resistores de pull-up/pull-down (conforme necessário para o sensor e o LED)
+
+
+**Considerações Adicionais:**
+
+* **Calibração do Limiar de Luminosidade:** O limiar para distinguir luminosidade suficiente e insuficiente precisa ser calibrado para o ambiente específico.
+* **Tratamento de Ruído:** É importante implementar mecanismos para filtrar ruídos ou falsas leituras dos sensores, principalmente do sensor de presença.  Um período mínimo de tempo entre detecções ou uma contagem de múltiplas detecções podem ser considerados para evitar acionamentos falsos.
+* **Tipo de Lâmpada:**  A escolha do tipo de lâmpada (e sua potência) afetará diretamente o consumo de energia. Lâmpadas LED são mais eficientes em termos de energia do que as lâmpadas incandescentes ou fluorescentes.
+
+
+Este relatório descreve o funcionamento do sistema de iluminação interna. A implementação no Wokwi necessitará de um código adequado em linguagem C/C++ para o ESP32, que execute a lógica descrita acima. A simulação no Wokwi permitirá validar a funcionalidade do sistema antes de uma implementação física.
+
+
+New file: src/AICSS/docs/other/sensor_diagram.md
+### Diagrama de Circuito para Otimização de Iluminação Residencial
+
+O diagrama Wokwi descreve um circuito que simula a otimização da iluminação interna e externa de uma residência utilizando sensores LDR (Fotoresistor) e PIR (Sensor de Movimento) com o microcontrolador ESP32. A solução considera a luminosidade e o movimento para acionar os LEDs e garantir que a iluminação externa nunca fique totalmente apagada durante a noite, visando segurança.
+
+### Funções dos Componentes:
+
+#### Ambiente Externo
+- **LDR Externo (LDR1)**: Mede a luminosidade externa e determina se está noite ou dia, utilizando a resistência do LDR.
+- **Sensor PIR Externo (PIR1)**: Detecta movimentos externos e ativa a iluminação quando há movimento durante a noite.
+- **LED Externo (LED1)**: Representa a iluminação externa, que pode ser acesa durante a noite ou quando há movimento.
+
+#### Ambiente Interno
+- **LDR Interno (LDR2)**: Mede a luminosidade interna, ativando as luzes internas quando a luz ambiente for insuficiente.
+- **Sensor PIR Interno (PIR2)**: Detecta movimento interno e aciona a iluminação interna.
+- **LED Interno (LED2)**: Representa a iluminação interna, que é ajustada conforme a luminosidade e o movimento detectado.
+
+### Conexões dos Componentes:
+
+#### Ambiente Externo:
+1. **LDR Externo (LDR1)**:
+   - **VCC** → **5V** do ESP32
+   - **GND** → **GND** do ESP32
+   - **AO (Saída Analógica)** → **Pino 12** do ESP32
+
+2. **Sensor PIR Externo (PIR1)**:
+   - **VCC** → **5V** do ESP32
+   - **GND** → **GND** do ESP32
+   - **OUT** → **Pino 34** do ESP32
+
+3. **LED Externo (LED1)**:
+   - **A** → **Pino 25** do ESP32
+   - **C** → **Resistor de 1kΩ (R1)** → **GND**
+
+#### Ambiente Interno:
+1. **LDR Interno (LDR2)**:
+   - **VCC** → **5V** do ESP32
+   - **GND** → **GND** do ESP32
+   - **AO (Saída Analógica)** → **Pino 35** do ESP32
+
+2. **Sensor PIR Interno (PIR2)**:
+   - **VCC** → **5V** do ESP32
+   - **GND** → **GND** do ESP32
+   - **OUT** → **Pino 18** do ESP32
+
+3. **LED Interno (LED2)**:
+   - **A** → **Pino 19** do ESP32
+   - **C** → **Resistor de 1kΩ (R2)** → **GND**
+
+### Funcionamento:
+
+1. **Ambiente Externo**:
+   - O LDR externo detecta a luminosidade e, se estiver abaixo de um determinado limiar, o sistema considera que é noite.
+   - O sensor PIR externo detecta movimento. Se houver movimento e estiver à noite, o LED externo será acionado.
+   - Se não houver movimento, o LED externo permanece aceso por 30 segundos e depois diminui a intensidade para garantir segurança, mas sem consumir energia excessiva.
+
+2. **Ambiente Interno**:
+   - O LDR interno mede a luminosidade e, se a luz estiver abaixo de um limiar, o sistema acende as luzes internas.
+   - O sensor PIR interno detecta movimento. Se houver movimento e a luminosidade estiver baixa, o LED interno será aceso.
+   - Caso contrário, o LED interno é apagado para economizar energia.
+
+### Código de Controle:
+
+O código realiza a leitura da luminosidade e do movimento em ambos os ambientes e controla os LEDs de acordo com a detecção de luz e movimento. No ambiente externo, as luzes permanecem acesas por um período após o movimento ser detectado, enquanto no ambiente interno, as luzes são ajustadas conforme a necessidade de iluminação.
+
+
+Esse diagrama e descrição formam um sistema que não apenas otimiza a iluminação, mas também oferece segurança ao garantir que a iluminação externa não seja desligada completamente durante a noite.
+
+![Diagrama de Circuito](../../../assets/sensors_diagram.png)
+
+New file: src/AICSS/docs/other/cost_estimation_external_illunination_system.md
+## Estimativa de Economia de Energia com o Sistema de Iluminação Inteligente
+
+Esta estimativa considera uma única lâmpada externa e um mês com 30 dias.  Precisamos fazer algumas suposições razoáveis, pois dados precisos sobre o consumo e o tempo de funcionamento dependem de fatores específicos como o tipo de lâmpada, o seu consumo de potência e a frequência de detecção de movimento.
+
+**Suposições:**
+
+* **Lâmpada:**  Lâmpada LED de 10W.
+* **Iluminação Máxima (Sem Sistema):** A lâmpada permanece ligada durante toda a noite (consideremos 12 horas por noite).
+* **Iluminação Mínima (Com Sistema):**  A lâmpada opera a 1W (10% da potência máxima) durante a noite, na ausência de movimento.
+* **Iluminação Máxima (Com Sistema):**  A lâmpada opera a 10W por 30 segundos a cada 5 minutos em média (uma detecção de movimento a cada 5 minutos, o que é uma estimativa conservadora).
+* **Consumo ESP32:** O consumo do ESP32 é desprezível em comparação com o consumo da lâmpada, considerando-se que o consumo energético do ESP32 é menor que 1W. Por esta razão, o consumo do ESP32 não será incluído no cálculo.
+* **Custo da Energia:** R$ 0,74593/kWh.
+
+![Custo da Energia (acesso em 19/11/2024)](../../../assets/equatorial_cost_19_11_2024.png)
+Custo da Energia. Fonte: <https://go.equatorialenergia.com.br/valor-de-tarifas-e-servicos/#residencial-normal> (Equatorial em Goiás - cesso em 19/11/2024)
+
+**Cálculos:**
+
+**1. Sem o Sistema Proposto:**
+
+* **Consumo Diário:** 10W * 12h/dia = 120 Wh/dia
+* **Consumo Mensal:** 120 Wh/dia * 30 dias = 3600 Wh = 3.6 kWh
+* **Custo Mensal:** 3.6 kWh * R$ 0,74593/kWh = R$ 2.685348
+
+
+**2. Com o Sistema Proposto:**
+
+* **Consumo de Iluminação Mínima por Dia:** 1W * 12h/dia = 12 Wh/dia
+* **Consumo de Iluminação Máxima por Dia:** (10W * 30s/300s) * 12h/dia ≈ 12 Wh/dia  (considerando a ativação a cada 5 minutos, o que representa 12 ativações por hora)
+* **Consumo Total Diário (Com Sistema):** 12 Wh/dia + 12 Wh/dia = 24 Wh/dia
+* **Consumo Mensal (Com Sistema):** 24 Wh/dia * 30 dias = 720 Wh = 0.72 kWh
+* **Custo Mensal (Com Sistema):** 0.72 kWh * R$ 0,74593/kWh = R$ 0.5370816
+
+
+**Economia:**
+
+* **Economia Mensal:** R$ 2.685348 - R$ 0.5370816 = R$ 2.1482664
+
+**Conclusão:**
+
+Considerando as suposições feitas, a economia estimada por lâmpada com o sistema de iluminação inteligente ao longo de um mês é de aproximadamente **R$ 2,15**.  É importante ressaltar que esta é uma estimativa e o valor real pode variar dependendo dos fatores não considerados, como a frequência real de ativação da iluminação máxima, o tipo de lâmpada utilizada, e o tempo real de inatividade da mesma. Para obter uma estimativa mais precisa, seria necessário monitorar o consumo real do sistema em condições reais de operação durante um período representativo.
+
+
+
+
+New file: src/AICSS/docs/other/cost_estmation_internal_illumination_system.md
+## Estimativa de Economia de Energia com o Sistema de Iluminação Interna Inteligente
+
+Esta estimativa considera uma única lâmpada interna e um mês com 30 dias.  Novamente, precisaremos fazer algumas suposições razoáveis, pois dados precisos dependem de fatores específicos como o tipo de lâmpada, seu consumo de potência, a luminosidade ambiente e a frequência de ocupação do cômodo.
+
+**Suposições:**
+
+* **Lâmpada:** Lâmpada LED de 8W.
+* **Iluminação Máxima (Sem Sistema):** A lâmpada permanece ligada durante 8 horas por dia (cenário base: ocupação média do cômodo).
+* **Iluminação Máxima (Com Sistema):** A lâmpada opera a 8W apenas quando a luminosidade é insuficiente e há presença detectada.  Suponhamos que isto ocorra por 4 horas por dia, em média.
+* **Consumo ESP32:** O consumo do ESP32 é desprezível em comparação com o consumo da lâmpada e será ignorado.
+* **Custo da Energia:** R$ 0,74593/kWh.
+
+
+**Cálculos:**
+
+**1. Sem o Sistema Proposto:**
+
+* **Consumo Diário:** 8W * 8h/dia = 64 Wh/dia
+* **Consumo Mensal:** 64 Wh/dia * 30 dias = 1920 Wh = 1.92 kWh
+* **Custo Mensal:** 1.92 kWh * R$ 0,74593/kWh = R$ 1.4317056
+
+
+**2. Com o Sistema Proposto:**
+
+* **Consumo Diário (Com Sistema):** 8W * 4h/dia = 32 Wh/dia
+* **Consumo Mensal (Com Sistema):** 32 Wh/dia * 30 dias = 960 Wh = 0.96 kWh
+* **Custo Mensal (Com Sistema):** 0.96 kWh * R$ 0,74593/kWh = R$ 0.7160928
+
+
+**Economia:**
+
+* **Economia Mensal:** R$ 1.4317056 - R$ 0.7160928 = R$ 0.7156128
+
+**Conclusão:**
+
+Considerando as suposições feitas, a economia estimada por lâmpada com o sistema de iluminação interna inteligente ao longo de um mês é de aproximadamente **R$ 0,72**.  Novamente, esta é uma estimativa e o valor real pode variar significativamente dependendo de fatores como a frequência de uso do cômodo, a luminosidade ambiente e a sensibilidade do sensor de presença. Um monitoramento do consumo real em um ambiente real forneceria dados mais precisos.  Observe que esta estimativa considera uma ocupação do ambiente de 8 horas diárias sem o sistema, e de 4 horas com o sistema. Esta diferença deve-se à lógica do sistema que mantém a lâmpada desligada mesmo durante o período de ocupação caso a luminosidade seja suficiente.  Assim, o resultado da estimativa dependerá de forma significativa das condições de iluminação ambiente.
+
+
+New file: src/CTWP/README.md
+# Sistema de Monitoramento de Energia Residencial
+
+## Introdução
+
+Este projeto foi desenvolvido como parte da atividade **Global Solutions (GS) 2024.2**, cujo tema é **Energia**. A solução utiliza **Data Science**, **IoT**, **Python** e **Banco de Dados** para otimizar o consumo de energia em ambientes residenciais, com foco na eficiência energética, sustentabilidade e redução de custos.
+
+A aplicação apresentada oferece uma interface gráfica para monitoramento e gerenciamento do consumo energético, integrando dispositivos residenciais e simulando dados em tempo real. A ideia é proporcionar uma base funcional que pode ser expandida para incluir recursos avançados, como integração com fontes renováveis (solar, eólica) e análise preditiva.
+
+---
+
+## Objetivos
+
+- **Monitorar o consumo energético em tempo real:** Simular dispositivos e seu impacto no consumo total.
+- **Promover eficiência energética:** Apresentar dados que ajudam o usuário a identificar padrões e reduzir custos.
+- **Fornecer uma base escalável:** Preparar o sistema para integração com banco de dados e fontes renováveis.
+- **Estimar custos de energia:** Calcular o custo com base no consumo diário e na tarifa energética.
+
+---
+
+## Funcionalidades do Sistema
+
+### 1. Interface Gráfica
+- Desenvolvida com **Tkinter**, apresentando um painel principal dividido em:
+  - **Dispositivos:** Lista de dispositivos com status, potência e consumo.
+  - **Gráficos:** Exibição do consumo energético em tempo real.
+  - **Estatísticas:** Dados de consumo atual, diário e custo estimado.
+
+### 2. Monitoramento em Tempo Real
+- Atualizações automáticas a cada 10 segundos.
+- Consumo de dispositivos simulados com variações aleatórias para refletir condições reais.
+
+### 3. Gráficos Interativos
+- Exibição do histórico de consumo com timestamps.
+- Representação visual clara e intuitiva para análise do usuário.
+
+### 4. Estatísticas de Consumo e Custo
+- Consumo atual em watts (W).
+- Consumo diário estimado em kilowatt-hora (kWh).
+- Cálculo do custo com base na tarifa simulada (R$ 0,75/kWh).
+
+---
+
+## Detalhamento Técnico
+
+### Tecnologias Utilizadas
+- **Python 3.9+**
+- **Tkinter:** Criação da interface gráfica.
+- **Matplotlib:** Gráficos interativos de consumo.
+- **Pandas:** Manipulação e análise de dados (possível expansão futura).
+- **Random:** Simulação de dados para dispositivos.
+
+### Estrutura do Código
+1. **Classe Principal (`EnergyMonitorSystem`):**
+   - Gerencia dispositivos, consumo e atualização dos dados.
+   - Responsável pela interface gráfica e integração dos componentes.
+2. **Simulação de Consumo:**
+   - Estima o consumo de dispositivos com base no status atual (ligado/desligado) e uma variação aleatória.
+3. **Atualização Automática:**
+   - Usa `root.after()` para atualizar os dados e gráficos em intervalos regulares.
+
+---
+
+## Utilidade Prática
+
+- **Residências:** Monitoramento detalhado do consumo energético e identificação de dispositivos com alto consumo.
+- **Educação:** Demonstração de conceitos de IoT e otimização energética para estudantes e profissionais.
+- **Base para Projetos Avançados:** Escalável para integração com fontes renováveis, banco de dados e dispositivos reais.
+
+---
+
+## Possibilidades de Expansão
+
+### 1. Integração com Banco de Dados
+- Armazenar histórico de consumo para análises futuras.
+- Salvar configurações personalizadas de dispositivos.
+
+### 2. Fontes de Energia Renovável
+- Monitorar geração solar e eólica.
+- Selecionar automaticamente a fonte mais econômica e sustentável.
+
+### 3. Análise Preditiva
+- Usar algoritmos de machine learning para prever padrões de consumo.
+- Detectar anomalias e sugerir ações corretivas.
+
+### 4. Relatórios e Notificações
+- Gerar relatórios em PDF com estatísticas detalhadas.
+- Enviar notificações em tempo real (e-mail ou push).
+
+### 5. Controle Automático
+- Ativar/desativar dispositivos automaticamente com base em regras predefinidas (ex.: horários de pico).
+
+---
+
+## Como Usar
+
+1. **Pré-requisitos:**
+   - Python 3.9+ instalado.
+   - Bibliotecas necessárias: `tkinter`, `matplotlib`, `pandas`.
+
+2. **Execução:**
+   - Clone este repositório:
+     ```bash
+     git clone https://github.com/brunoconterato/fiap_global_solutions_2024
+     cd fiap_global_solutions_2024/src/CTWP
+     ```
+   - Execute o script principal:
+     ```bash
+     python src/main.py
+     ```
+
+3. **Interface:**
+   - Visualize os dispositivos e seu status.
+   - Acompanhe o consumo em tempo real no gráfico.
+   - Consulte as estatísticas de consumo e custo estimado.
+
+---
+
+## Conclusão
+
+Este projeto é um ponto de partida para o desenvolvimento de sistemas inteligentes de monitoramento energético. Ele combina conceitos de programação, ciência de dados e IoT, com foco na sustentabilidade e eficiência energética. A solução pode ser personalizada e expandida conforme as necessidades específicas de diferentes cenários residenciais, comerciais ou urbanos.
+
+## Apêndices
+
+### A. Imagem da Interface Gráfica
+
+![Interface Gráfica](./assets/interface.png)
+
+### B. Código-fonte
+
+```python
+import tkinter as tk
+from tkinter import ttk
+import random
+from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import pandas as pd
+
+class EnergyMonitorSystem:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Sistema de Monitoramento de Energia")
+        self.root.geometry("1200x800")
+        
+        # Dados simulados
+        self.devices = {
+            "Ar Condicionado": {"power": 1400, "status": "OFF"},
+            "Geladeira": {"power": 350, "status": "ON"},
+            "Chuveiro": {"power": 5500, "status": "OFF"},
+            "TV": {"power": 100, "status": "OFF"},
+            "Iluminação": {"power": 200, "status": "ON"}
+        }
+        
+        self.current_consumption = 0
+        self.consumption_history = []
+        self.timestamps = []
+        
+        self.setup_gui()
+        self.update_data()
+
+    def setup_gui(self):
+        # Frame principal
+        main_frame = ttk.Frame(self.root, padding="10")
+        main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+
+        # Título
+        title = ttk.Label(main_frame, text="Monitoramento de Energia Residencial", 
+                         font=('Helvetica', 16, 'bold'))
+        title.grid(row=0, column=0, columnspan=2, pady=10)
+
+        # Frame esquerdo - Dispositivos
+        devices_frame = ttk.LabelFrame(main_frame, text="Dispositivos", padding="10")
+        devices_frame.grid(row=1, column=0, padx=5, pady=5, sticky=(tk.W, tk.E, tk.N, tk.S))
+
+        # Lista de dispositivos
+        for i, (device, info) in enumerate(self.devices.items()):
+            ttk.Label(devices_frame, text=f"{device}:").grid(row=i, column=0, padx=5, pady=2)
+            ttk.Label(devices_frame, text=f"{info['power']}W").grid(row=i, column=1, padx=5, pady=2)
+            status_var = tk.StringVar(value=info['status'])
+            ttk.Label(devices_frame, textvariable=status_var).grid(row=i, column=2, padx=5, pady=2)
+
+        # Frame direito - Gráficos
+        graph_frame = ttk.LabelFrame(main_frame, text="Consumo em Tempo Real", padding="10")
+        graph_frame.grid(row=1, column=1, padx=5, pady=5, sticky=(tk.W, tk.E, tk.N, tk.S))
+
+        # Criar figura do matplotlib
+        self.fig, self.ax = plt.subplots(figsize=(8, 4))
+        self.canvas = FigureCanvasTkAgg(self.fig, master=graph_frame)
+        self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+
+        # Frame inferior - Estatísticas
+        stats_frame = ttk.LabelFrame(main_frame, text="Estatísticas", padding="10")
+        stats_frame.grid(row=2, column=0, columnspan=2, padx=5, pady=5, sticky=(tk.W, tk.E))
+
+        # Labels para estatísticas
+        self.current_power_var = tk.StringVar(value="Consumo Atual: 0W")
+        self.daily_consumption_var = tk.StringVar(value="Consumo Diário: 0 kWh")
+        self.cost_var = tk.StringVar(value="Custo Estimado: R$ 0,00")
+
+        ttk.Label(stats_frame, textvariable=self.current_power_var).grid(row=0, column=0, padx=5)
+        ttk.Label(stats_frame, textvariable=self.daily_consumption_var).grid(row=0, column=1, padx=5)
+        ttk.Label(stats_frame, textvariable=self.cost_var).grid(row=0, column=2, padx=5)
+
+    def simulate_consumption(self):
+        """Simula o consumo de energia dos dispositivos"""
+        total = 0
+        for device, info in self.devices.items():
+            if info['status'] == 'ON':
+                # Adiciona alguma variação aleatória
+                variation = random.uniform(0.8, 1.2)
+                total += info['power'] * variation
+        return total
+
+    def update_data(self):
+        """Atualiza os dados e gráficos"""
+        # Simular novo consumo
+        self.current_consumption = self.simulate_consumption()
+        self.consumption_history.append(self.current_consumption)
+        self.timestamps.append(datetime.now())
+
+        # Manter apenas os últimos 60 pontos (10 minutos)
+        if len(self.consumption_history) > 60:
+            self.consumption_history.pop(0)
+            self.timestamps.pop(0)
+
+        # Atualizar gráfico
+        self.ax.clear()
+        self.ax.plot(self.timestamps, self.consumption_history, 'b-')
+        self.ax.set_xlabel('Tempo')
+        self.ax.set_ylabel('Consumo (W)')
+        self.ax.tick_params(axis='x', rotation=45)
+        self.fig.tight_layout()
+        self.canvas.draw()
+
+        # Atualizar estatísticas
+        self.current_power_var.set(f"Consumo Atual: {self.current_consumption:.1f}W")
+        daily_kwh = sum(self.consumption_history) * 10 / (3600 * 1000)  # convertendo para kWh
+        self.daily_consumption_var.set(f"Consumo Diário: {daily_kwh:.2f} kWh")
+        cost = daily_kwh * 0.75  # Considerando tarifa de R$ 0,75 por kWh
+        self.cost_var.set(f"Custo Estimado: R$ {cost:.2f}")
+
+        # Simular mudança aleatória no status dos dispositivos
+        for device in self.devices:
+            if random.random() < 0.1:  # 10% de chance de mudar o status
+                self.devices[device]['status'] = 'ON' if random.random() < 0.5 else 'OFF'
+
+        # Agendar próxima atualização
+        self.root.after(10000, self.update_data)  # Atualiza a cada 10 segundos
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = EnergyMonitorSystem(root)
+    root.mainloop()
+```
+
+New file: src/CTWP/src/main.py
+import tkinter as tk
+from tkinter import ttk
+import random
+from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import pandas as pd
+
+class EnergyMonitorSystem:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Sistema de Monitoramento de Energia")
+        self.root.geometry("1200x800")
+        
+        # Dados simulados
+        self.devices = {
+            "Ar Condicionado": {"power": 1400, "status": "OFF"},
+            "Geladeira": {"power": 350, "status": "ON"},
+            "Chuveiro": {"power": 5500, "status": "OFF"},
+            "TV": {"power": 100, "status": "OFF"},
+            "Iluminação": {"power": 200, "status": "ON"}
+        }
+        
+        self.current_consumption = 0
+        self.consumption_history = []
+        self.timestamps = []
+        
+        self.setup_gui()
+        self.update_data()
+
+    def setup_gui(self):
+        # Frame principal
+        main_frame = ttk.Frame(self.root, padding="10")
+        main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+
+        # Título
+        title = ttk.Label(main_frame, text="Monitoramento de Energia Residencial", 
+                         font=('Helvetica', 16, 'bold'))
+        title.grid(row=0, column=0, columnspan=2, pady=10)
+
+        # Frame esquerdo - Dispositivos
+        devices_frame = ttk.LabelFrame(main_frame, text="Dispositivos", padding="10")
+        devices_frame.grid(row=1, column=0, padx=5, pady=5, sticky=(tk.W, tk.E, tk.N, tk.S))
+
+        # Lista de dispositivos
+        for i, (device, info) in enumerate(self.devices.items()):
+            ttk.Label(devices_frame, text=f"{device}:").grid(row=i, column=0, padx=5, pady=2)
+            ttk.Label(devices_frame, text=f"{info['power']}W").grid(row=i, column=1, padx=5, pady=2)
+            status_var = tk.StringVar(value=info['status'])
+            ttk.Label(devices_frame, textvariable=status_var).grid(row=i, column=2, padx=5, pady=2)
+
+        # Frame direito - Gráficos
+        graph_frame = ttk.LabelFrame(main_frame, text="Consumo em Tempo Real", padding="10")
+        graph_frame.grid(row=1, column=1, padx=5, pady=5, sticky=(tk.W, tk.E, tk.N, tk.S))
+
+        # Criar figura do matplotlib
+        self.fig, self.ax = plt.subplots(figsize=(8, 4))
+        self.canvas = FigureCanvasTkAgg(self.fig, master=graph_frame)
+        self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+
+        # Frame inferior - Estatísticas
+        stats_frame = ttk.LabelFrame(main_frame, text="Estatísticas", padding="10")
+        stats_frame.grid(row=2, column=0, columnspan=2, padx=5, pady=5, sticky=(tk.W, tk.E))
+
+        # Labels para estatísticas
+        self.current_power_var = tk.StringVar(value="Consumo Atual: 0W")
+        self.daily_consumption_var = tk.StringVar(value="Consumo Diário: 0 kWh")
+        self.cost_var = tk.StringVar(value="Custo Estimado: R$ 0,00")
+
+        ttk.Label(stats_frame, textvariable=self.current_power_var).grid(row=0, column=0, padx=5)
+        ttk.Label(stats_frame, textvariable=self.daily_consumption_var).grid(row=0, column=1, padx=5)
+        ttk.Label(stats_frame, textvariable=self.cost_var).grid(row=0, column=2, padx=5)
+
+    def simulate_consumption(self):
+        """Simula o consumo de energia dos dispositivos"""
+        total = 0
+        for device, info in self.devices.items():
+            if info['status'] == 'ON':
+                # Adiciona alguma variação aleatória
+                variation = random.uniform(0.8, 1.2)
+                total += info['power'] * variation
+        return total
+
+    def update_data(self):
+        """Atualiza os dados e gráficos"""
+        # Simular novo consumo
+        self.current_consumption = self.simulate_consumption()
+        self.consumption_history.append(self.current_consumption)
+        self.timestamps.append(datetime.now())
+
+        # Manter apenas os últimos 60 pontos (10 minutos)
+        if len(self.consumption_history) > 60:
+            self.consumption_history.pop(0)
+            self.timestamps.pop(0)
+
+        # Atualizar gráfico
+        self.ax.clear()
+        self.ax.plot(self.timestamps, self.consumption_history, 'b-')
+        self.ax.set_xlabel('Tempo')
+        self.ax.set_ylabel('Consumo (W)')
+        self.ax.tick_params(axis='x', rotation=45)
+        self.fig.tight_layout()
+        self.canvas.draw()
+
+        # Atualizar estatísticas
+        self.current_power_var.set(f"Consumo Atual: {self.current_consumption:.1f}W")
+        daily_kwh = sum(self.consumption_history) * 10 / (3600 * 1000)  # convertendo para kWh
+        self.daily_consumption_var.set(f"Consumo Diário: {daily_kwh:.2f} kWh")
+        cost = daily_kwh * 0.75  # Considerando tarifa de R$ 0,75 por kWh
+        self.cost_var.set(f"Custo Estimado: R$ {cost:.2f}")
+
+        # Simular mudança aleatória no status dos dispositivos
+        for device in self.devices:
+            if random.random() < 0.1:  # 10% de chance de mudar o status
+                self.devices[device]['status'] = 'ON' if random.random() < 0.5 else 'OFF'
+
+        # Agendar próxima atualização
+        self.root.after(10000, self.update_data)  # Atualiza a cada 10 segundos
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = EnergyMonitorSystem(root)
+    root.mainloop()
+
+New file: src/SCR/src/eda.R
+#############################################
+##### 1. Definindo Objetivos da Análise #####
+#############################################
+
+# Objetivos da análise exploratória de dados:
+
+# 1. Insights sobre estratégias eficazes: Identificar as tipologias de projetos de eficiência
+#    energética que apresentaram maior retorno sobre o investimento (ROI) e maior redução
+#    na demanda de energia.  Analisar a relação entre a metodologia utilizada e a eficácia
+#    do projeto.
+
+# 2. Identificação de lacunas:  Detectar possíveis lacunas no programa de eficiência
+#    energética, analisando a distribuição das tipologias de projetos, usos finais da energia
+#    e regiões geográficas (embora essa última informação não esteja disponível diretamente
+#    nesse dataset).  Identificar se há desequilíbrio na alocação de recursos para diferentes
+#    tipos de projetos ou usos finais.
+
+
+####################################################
+##### 2. Carregando as bibliotecas necessárias #####
+####################################################
+
+# Carregando as bibliotecas necessárias
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(DescTools)
+library(car)
+library(mice)
+library(GGally)
+
+# Importando os dados (substitua "seu_arquivo.csv" pelo nome do seu arquivo)
+dados <- read.csv("/home/bruno/Workspace/FIAP/2024/Fase_4/fiap_global_solutions_2024/src/SCR/data/e12d5430-f747-4fc7-b620-2460ed02cc17.csv", sep = ",", dec = ".", header = TRUE, na.strings = c("", "NA", " "))
+
+
+# Descrição do conjunto de dados:
+# Este conjunto de dados apresenta informações sobre projetos de eficiência energética promovidos
+# pelo Programa de Eficiência Energética, regulamentado pela Resolução Normativa ANEEL nº 300/2008.
+
+# Inclui dados por distribuidora, tipologia de projeto, demanda reduzida, energia economizada
+# (GWh/ano) e investimentos em usos finais da energia.
+
+# O objetivo é demonstrar a viabilidade e os benefícios econômicos de melhorias em eficiência energética,
+# promovendo a transformação do mercado e incentivando novas tecnologias e práticas racionais
+# no uso de energia elétrica.
+
+# Os dados são atualizados mensalmente e estão disponíveis em formatos como CSV.
+
+# Os dados podem ser acessados pelo Link:
+# https://dadosabertos.aneel.gov.br/dataset/projetos-de-eficiencia-energetica
+
+# Descrição das colunas:
+
+# DatGeracaoConjuntoDados: Data de processamento dos dados (ex.: "2023-03-30"). Indica quando
+# os dados foram atualizados e publicados no formato aberto. Unidade: Data (YYYY-MM-DD).
+
+# NomAgente: Nome da empresa responsável pelo projeto (ex.: "EletroDistribuidora S.A.").
+# Identifica juridicamente a organização que propôs ou executou o projeto. Unidade: Texto.
+
+# IdeEmpresaProponenteProjeto: Código numérico único da empresa (ex.: 12345). Utilizado para
+# identificar a proponente na base de dados. Unidade: Número.
+
+# DscTituloProjeto: Título do projeto (ex.: "Redução de Consumo em Iluminação Pública").
+# Resumo do objetivo principal do projeto. Unidade: Texto.
+
+# DscStatusProjeto: Status atual do projeto (ex.: "Concluído", "Em andamento"). Informa o
+# andamento do projeto em relação ao planejamento. Unidade: Texto.
+
+# DscTipologia: Tipo de projeto de eficiência energética (ex.: "Iluminação Pública"). Indica
+# a área de aplicação ou foco do projeto. Unidade: Texto.
+
+# DscUsoFinal: Uso final da energia impactado pelo projeto (ex.: "Aquecimento", "Refrigeração").
+# Representa onde a economia de energia foi aplicada. Unidade: Texto.
+
+# VlrBeneficioEnergiaEconomizada: Energia economizada anualmente (ex.: 12.34). Indica o total de
+# energia reduzido com o projeto. Unidade: GWh/ano.
+
+# VlrRcb: Valor do retorno sobre o custo-benefício do projeto (ex.: 1.75). Mede a relação entre
+# os benefícios obtidos e os custos investidos. Unidade: Valor monetário.
+
+# VlrDemandaReduzidaPonta: Redução da demanda de energia no pico (ex.: 1000.50). Mostra o impacto
+# na diminuição do consumo em horários de maior demanda. Unidade: kW.
+
+# DscObjetivo: Detalhamento dos objetivos do projeto (ex.: "Reduzir 20% do consumo em iluminação
+# de vias públicas"). Explica as metas pretendidas. Unidade: Texto.
+
+# DscJustificativa: Racional e importância do projeto (ex.: "Necessidade de modernizar sistemas
+# de iluminação para redução de custos"). Unidade: Texto.
+
+# DatInicioProjeto: Data de início oficial do projeto (ex.: "2022-01-01"). Mostra quando o
+# projeto foi iniciado. Unidade: Data (YYYY-MM-DD).
+
+# DatConclusaoProjeto: Data oficial de término do projeto (ex.: "2022-12-31"). Indica a
+# conclusão das atividades planejadas. Unidade: Data (YYYY-MM-DD).
+
+# DscMetodologiaMv: Metodologia utilizada para medir e verificar os resultados do projeto
+# (ex.: "Análise baseada em medições em campo"). Garante confiabilidade dos dados reportados.
+# Unidade: Texto.
+
+
+# Visualizando as primeiras linhas dos dados
+head(dados)
+
+# Visualizando as colunas dos dados
+colnames(dados)
+
+# Visualizando a estrutura dos dados
+str(dados)
+
+# Visualizando 5 elementos de cada coluna que não sejam NA
+lapply(dados, function(col) head(na.omit(col), 5))
+
+#####################################################
+##### 3. Limpeza e Pré-processamento dos Dados #####
+#####################################################
+
+# Salvando uma cópia dos dados originais
+dados_completos <- dados
+
+# 2. Conversão de colunas numéricas (char para numérico)
+# Identificando as colunas que deveriam ser numéricas mas estão como character
+colunas_numericas <- c("IdeEmpresaProponenteProjeto", "VlrBeneficioEnergiaEconomizada", "VlrRcb", "VlrDemandaReduzidaPonta")
+
+# Convertendo as colunas para numéricas, tratando os pontos e vírgulas
+dados_completos[, colunas_numericas] <- lapply(dados_completos[, colunas_numericas], function(x) as.numeric(gsub(",", ".", gsub("\\.", "", x))))
+
+# Converter variáveis para os tipos corretos
+dados_completos$DatGeracaoConjuntoDados <- as.Date(dados_completos$DatGeracaoConjuntoDados, format = "%Y-%m-%d")
+dados_completos$DatInicioProjeto <- as.Date(dados_completos$DatInicioProjeto, format = "%Y-%m-%d")
+dados_completos$DatConclusaoProjeto <- as.Date(dados_completos$DatConclusaoProjeto, format = "%Y-%m-%d")
+
+# Visualizando novamente a estrutura dos dados
+str(dados_completos)
+
+# Tratamento de valores NA - Imputação com MICE
+
+# Selecionando apenas algumas para imputação
+# colunas_pmm <- c("VlrBeneficioEnergiaEconomizada", "VlrRcb", "VlrDemandaReduzidaPonta")
+# dados_pmm <- dados_completos[, colunas_pmm]
+
+# head(dados_pmm)
+
+# # Imputação múltipla para lidar com valores ausentes
+# imputed_data <- mice(dados_pmm, method = "pmm", seed = 500)
+# dados_completos[, colunas_pmm] <- complete(imputed_data, 1)
+
+
+# Criar coluna de duração do projeto (em dias)
+dados_completos <- dados_completos %>%
+  mutate(DuracaoProjeto = as.numeric(DatConclusaoProjeto - DatInicioProjeto))
+
+# Visualizando novamente a estrutura dos dados
+str(dados_completos)
+
+# Resumo estatístico dos dados tratados
+summary(dados_completos)
+
+# 1. Contagem de valores nulos por coluna
+colSums(is.na(dados_completos))
+
+# 2. Porcentagem de valores nulos por coluna
+colSums(is.na(dados_completos)) / nrow(dados_completos) * 100.0
+
+
+### Analisando as colunas numéricas representativas de eficiência energética
+### Percebemos os seguintes níveis de dados ausentes (NA):
+
+### VlrBeneficioEnergiaEconomizada: 67.2%
+### VlrRcb: 18.1%
+### VlrDemandaReduzidaPonta: 0.5%
+
+### Devido à extensa quantidade de dados ausentes na variável VlrBeneficioEnergiaEconomizada,
+### optamos por não trabalhar com essa variável, de tal forma que vamos removê-la do conjunto dados_completos.
+
+dados_completos <- dados_completos[, -c(which(colnames(dados_completos) == "VlrBeneficioEnergiaEconomizada"))]
+
+
+### Analisando variáveis categóricas
+### Objetivo: excluir variáveis categóricas com poucos dados da nossa análise
+
+
+# Tabela de frequências para variáveis categóricas
+table(dados_completos$DscTipologia)
+
+# Resultado:
+
+#    Aquecimento Solar            Baixa Renda             Co-geração
+#                   35                   1599                      3
+#  Comércio e Serviços Diagnóstico Energético            Educacional
+#                 1937                      1                     13
+#   Iluminação Pública             Industrial          Poder Público
+#                 1007                    333                   2511
+#          Prioritário         Projeto Piloto            Residencial
+#                    4                     23                    658
+#                Rural      Serviços Públicos
+#                  102                    486
+
+# Vamos agrupar as seguintes Tipologias por baixa disponibilidade de dados para análise como sendo "Outros"
+# (menos de 100 exemplares):
+#  - Aquecimento Solar
+#  - Co-geração
+#  - Diagnóstico Energético
+#  - Educacional
+#  - Prioritário
+#  - Projeto piloto
+
+
+
+### Analisando uso final
+
+table(dados_completos$DscUsoFinal)
+
+# Resultado:
+#       Aquecimento             Aquecimento de Água
+#                15                             387
+#     Ar Comprimido           Condicionamento de Ar
+#                15                             923
+#      Força Motriz Geração por Fontes Incentivadas
+#               339                             635
+# Gestão Energética                      Iluminação
+#                 1                            4870
+#            Outros                      Reciclagem
+#               734                              26
+#      Refrigeração
+#               767
+
+# Vamos transformar todas as categorias de Uso Final com menos de 30 exemplares em "Outros":
+#  - Aquecimento
+#  - Ar comprimido
+#  - Gestão energética
+#  - Reciclagem
+
+
+
+
+# Transformando tipologias com menos de 100 exemplares em "Outros"
+tipologias_outros <- c("Aquecimento Solar", "Co-geração", "Diagnóstico Energético", "Educacional", "Prioritário", "Projeto Piloto")
+dados_completos$DscTipologia <- ifelse(dados_completos$DscTipologia %in% tipologias_outros, "Outros", dados_completos$DscTipologia)
+
+# Transformando categorias de Uso Final com menos de 30 exemplares em "Outros"
+usos_finais_excluir <- c("Aquecimento", "Ar Comprimido", "Gestão Energética", "Reciclagem")
+dados_completos$DscUsoFinal <- ifelse(dados_completos$DscUsoFinal %in% usos_finais_excluir, "Outros", dados_completos$DscUsoFinal)
+
+
+#################################
+##### 4. Análise Descritiva #####
+#################################
+
+# Sumário estatístico
+summary(dados_completos[, sapply(dados_completos, is.numeric)])
+
+# Tabela de frequências para variáveis categóricas
+table(dados_completos$DscTipologia)
+table(dados_completos$DscUsoFinal)
+
+# Medidas de dispersão e assimetria
+Desc(dados_completos$VlrRcb)
+Desc(dados_completos$VlrDemandaReduzidaPonta)
+Desc(dados_completos$DuracaoProjeto)
+
+
+######################################
+##### 5. Visualização dos Dados: #####
+######################################
+
+# Histograma do retorno sobre o custo-benefício apenas valores diferentes de NA na coluna VlrRcb
+# temp_data = dados_completos[!is.na(dados_completos$VlrRcb) & dados_completos$VlrRcb != 0, ]
+
+# Função para remover outliers
+# Essa função será utilizada para melhorar as visualizações dos dados
+# Uma vez que outliers expandem a escala dos gráficos, dificultando a visualização
+# Método utilizado: IQR (Interquartile Range)
+remove_outliers <- function(data, column, multiplier = 1.5) {
+  Q1 <- quantile(data[[column]], 0.25, na.rm = TRUE)
+  Q3 <- quantile(data[[column]], 0.75, na.rm = TRUE)
+  IQR <- Q3 - Q1
+
+  # Definindo limites para detecção de outliers
+  lower_bound <- Q1 - multiplier * IQR
+  upper_bound <- Q3 + multiplier * IQR
+
+  # Filtrando os dados para remover outliers
+  data <- data %>%
+    filter(data[[column]] >= lower_bound & data[[column]] <= upper_bound)
+
+  return(data)
+}
+
+# Histograma do retorno sobre o custo-benefício (excluindo outliers)
+temp_data <- remove_outliers(dados_completos, "VlrRcb")
+ggplot(temp_data, aes(x = VlrRcb)) +
+  geom_histogram(bins = 30, fill = "lightgreen", color = "black") +
+  labs(title = "Histograma do Retorno sobre o Custo-Benefício", x = "Retorno (R$)", y = "Frequência")
+
+# Histograma da demanda reduzida no pico (excluindo outliers)
+temp_data <- remove_outliers(dados_completos, "VlrDemandaReduzidaPonta")
+ggplot(temp_data, aes(x = VlrDemandaReduzidaPonta)) +
+  geom_histogram(bins = 30, fill = "lightgreen", color = "black") +
+  labs(title = "Histograma da Demanda Reduzida no Pico", x = "Demanda (kW)", y = "Frequência")
+
+# Boxplot da duração do projeto por tipologia
+temp_data <- remove_outliers(dados_completos, "DuracaoProjeto")
+ggplot(temp_data, aes(x = DscTipologia, y = DuracaoProjeto)) +
+  geom_boxplot() +
+  labs(title = "Duração do Projeto por Tipologia", x = "Tipologia", y = "Duração (dias)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+# Boxplot do retorno sobre o custo-benefício por tipologia (excluindo outliers)
+temp_data <- remove_outliers(dados_completos, "VlrRcb")
+ggplot(temp_data, aes(x = DscTipologia, y = VlrRcb)) +
+  geom_boxplot() +
+  labs(title = "Retorno sobre o Custo-Benefício por Tipologia", x = "Tipologia", y = "Retorno (R$)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+# Boxplot da demanda reduzida no pico por tipologia (excluindo outliers)
+temp_data <- remove_outliers(dados_completos, "VlrDemandaReduzidaPonta")
+ggplot(temp_data, aes(x = DscTipologia, y = VlrDemandaReduzidaPonta)) +
+  geom_boxplot() +
+  labs(title = "Demanda Reduzida no Pico por Tipologia", x = "Tipologia", y = "Demanda (kW)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+# Gráfico de barras da tipologia do projeto
+ggplot(dados_completos, aes(x = DscTipologia)) +
+  geom_bar(fill = "lightgreen", color = "black") +
+  labs(title = "Tipologias dos Projetos", x = "Tipologia", y = "Contagem") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+# Scatter plot (exemplo)
+ggplot(dados_completos, aes(x = VlrBeneficioEnergiaEconomizada, y = DuracaoProjeto)) +
+  geom_point() +
+  labs(title = "Relação entre Benefício e Duração do Projeto", x = "Benefício (R$)", y = "Duração (dias)")
+
+# Gráficos para atender aos objetivos:
+
+
+# Gráfico 1.1.
+# Boxplot do retorno sobre o custo-benefício por tipologia (excluindo outliers) - Atende ao objetivo 1 e 3
+temp_data <- remove_outliers(dados_completos, "VlrRcb")
+ggplot(temp_data, aes(x = DscTipologia, y = VlrRcb)) +
+  geom_boxplot() +
+  labs(title = "Retorno sobre o Custo-Benefício por Tipologia", x = "Tipologia", y = "Retorno (R$)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_hline(yintercept = mean(temp_data$VlrRcb, na.rm = TRUE), linetype = "dashed", color = "red")
+
+
+# Gráfico 1.2.
+# Boxplot da demanda reduzida no pico por tipologia (excluindo outliers) - Atende ao objetivo 1
+temp_data <- remove_outliers(dados_completos, "VlrDemandaReduzidaPonta")
+ggplot(temp_data, aes(x = DscTipologia, y = VlrDemandaReduzidaPonta)) +
+  geom_boxplot() +
+  labs(title = "Demanda Reduzida no Pico por Tipologia", x = "Tipologia", y = "Demanda (kW)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_hline(yintercept = mean(temp_data$VlrDemandaReduzidaPonta, na.rm = TRUE), linetype = "dashed", color = "red")
+
+
+# Gráfico 2.1.
+# Gráfico de barras da tipologia do projeto - contribui para objetivo 2
+ggplot(dados_completos, aes(x = DscTipologia)) +
+  geom_bar(fill = "lightgreen", color = "black") +
+  labs(title = "Frequência das Tipologias de Projeto", x = "Tipologia", y = "Contagem") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_text(stat = "count", aes(label = ..count..), vjust = -0.5) # Adiciona contagem em cada barra
+
+# Gráfico 2.2.
+# Gráfico de barras para DscUsoFinal - contribui para objetivo 2
+ggplot(dados_completos, aes(x = DscUsoFinal)) +
+  geom_bar(fill = "skyblue", color = "black") +
+  labs(title = "Uso Final da Energia nos Projetos", x = "Uso Final", y = "Contagem") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_text(stat = "count", aes(label = ..count..), vjust = -0.5) # Adiciona contagem em cada barra
+
+
+# Gráfico 3.1
+# Scatter plot para analisar a relação entre retorno e demanda reduzida (excluindo outliers) - Atende objetivo 3
+temp_data <- dados_completos %>%
+  filter(!is.na(VlrRcb) & !is.na(VlrDemandaReduzidaPonta)) %>%
+  remove_outliers("VlrRcb") %>%
+  remove_outliers("VlrDemandaReduzidaPonta")
+ggplot(temp_data, aes(x = VlrRcb, y = VlrDemandaReduzidaPonta)) +
+  geom_point() +
+  labs(title = "Relação entre Retorno e Demanda Reduzida", x = "Retorno (R$)", y = "Demanda Reduzida (kW)") +
+  geom_smooth(method = "lm", se = FALSE, color = "red") # Adiciona linha de regressão
+
+
+####################################
+##### 5. Análise de Correlação #####
+####################################
+
+# Matriz de correlação para variáveis numéricas
+cor(dados_completos[, sapply(dados_completos, is.numeric)], use = "pairwise.complete.obs")
+
+# Visualizacão da matriz de correlação em mapa de calor
+ggcorr(data = dados_completos[, sapply(dados_completos, is.numeric)])
+
+# Concluímos que os dados apresentados não mostram grande correlação entre as variáveis numéricas.
+
+
+####################################
+##### 6. Resultados da análise #####
+####################################
+
+
+# Sobre as Tipologias
+
+# As tipologias de projetos que apresentam maior e menor retorno sobre o investimento (ROI)
+
+
+# Auxiliados pelo gráfico 1.1. e pelo seguinte cálculo:
+# Calculando o ROI médio por tipologia em ordem decrescente
+temp_data <- remove_outliers(dados_completos, "VlrRcb")
+roi_por_tipologia <- temp_data %>%
+  group_by(DscTipologia) %>%
+  summarise(ROI_Medio = mean(VlrRcb, na.rm = TRUE)) %>%
+  arrange(desc(ROI_Medio))
+
+# Mostrando os ROIs médios por tipologia
+print(roi_por_tipologia)
+
+# As tipologias de projetos que apresentam maior retorno sobre o investimento (ROI)
+#  - Poder Público: média de 0.628
+#  - Serviços Públicos: 0.623
+#  - Outros (incluem as seguintes tipologias: Aquecimento Solar, Co-geração, Diagnóstico Energético, Educacional, Prioritário, Projeto piloto): média de 0.619
+#  - Comércio e Serviços: média de 0.614
+
+# As tipologias de projetos que apresentam menor retorno sobre o investimento (ROI)
+#  - Iluminação Pública: média de 0.321
+#  - Rural: média de 0.493
+
+
+
+# As tipologias de projetos que apresentam maior e menor redução na demanda
+
+# Auxiliados pelo gráfico 1.2. e pelo seguinte cálculo:
+# Calculando a redução média na demanda por tipologia em ordem decrescente
+temp_data <- remove_outliers(dados_completos, "VlrDemandaReduzidaPonta")
+reducao_demanda_por_tipologia <- temp_data %>%
+  group_by(DscTipologia) %>%
+  summarise(RedDemanda_Media = mean(VlrDemandaReduzidaPonta, na.rm = TRUE)) %>%
+  arrange(desc(RedDemanda_Media))
+
+# Mostrando a redução média na demanda por tipologia
+print(reducao_demanda_por_tipologia)
+
+# As tipologias de projetos que apresentam maior redução na demanda
+#  - Iluminação Pública: média de 67.8 kW
+#  - Baixa Renda: média de 62.8 kW
+
+# As tipologias de projetos que apresentam menor redução na demanda
+#  - Comércio e Serviços: média de 25.9 kW
+#  - Poder Público: média de 31.1 kW
+
+
+# Sobre as Lacunas
+
+# Auxiliados pelo Gráfico 2.1. e pelo seguinte cálculo
+# Contagem de projetos por tipologia
+contagem_tipologia <- dados_completos %>%
+  group_by(DscTipologia) %>%
+  summarise(Contagem = n()) %>%
+  arrange(desc(Contagem))
+
+print(contagem_tipologia)
+
+# Tipologias com mais projetos
+#  - Poder Público: 2511 projetos
+#  - Comércio e Serviços: 1937 projetos
+#  - Baixa renda: 1599 projetos
+
+# Tipologias com menos projetos
+#  - Outros (incluem as seguintes tipologias: Aquecimento Solar, Co-geração, Diagnóstico Energético, Educacional, Prioritário, Projeto piloto): 79 projetos
+#  - Rural: 102 projetos
+
+
+# Auxiliados pelo Gráfico 2.2. e pelo seguinte cálculo
+# Contagem de projetos por uso final
+contagem_uso_final <- dados_completos %>%
+  group_by(DscUsoFinal) %>%
+  summarise(Contagem = n()) %>%
+  arrange(desc(Contagem))
+
+print(contagem_uso_final)
+
+# Uso final com mais projetos
+#  - Iluminação: 4870 projetos
+#  - Condicionamento de Ar: 923 projetos
+
+# Uso final com menos projetos
+#  - Força Motriz: 339 projetos
+#  - Aquecimiento de Água: 387 projetos
+
+
+
+########################################
+##### 7. Conclusão e Recomendações #####
+########################################
+
+
+# Conclusões:
+
+# Análise de Retorno sobre Investimento (ROI) e Redução de Demanda:
+# A análise revelou uma grande variação no ROI entre as diferentes tipologias de projetos de eficiência energética.
+# Projetos do setor público ("Poder Público" e "Serviços Públicos") apresentaram, em média, os maiores retornos,
+# sugerindo que investimentos nessas áreas podem ser particularmente eficazes.
+# Por outro lado, projetos de "Iluminação Pública" mostraram um ROI significativamente menor,
+# indicando a necessidade de uma revisão estratégica nesse setor.
+
+# Em relação à redução da demanda, "Iluminação Pública" e "Baixa Renda" se destacaram,
+# enquanto "Comércio e Serviços" e "Poder Público" apresentaram reduções menores,
+# sugerindo que as estratégias empregadas nestes últimos setores podem necessitar de aprimoramentos.
+# A discrepância entre o alto ROI do setor público e sua relativamente baixa redução de demanda
+# sugere que outros fatores além da redução de consumo direto contribuem para o retorno do investimento nesses projetos.
+
+
+# Identificação de Lacunas:  A análise de frequência das tipologias de projetos destaca um desequilíbrio na alocação de recursos.
+# Há uma concentração significativa de projetos em "Poder Público", "Comércio e Serviços" e "Baixa Renda",
+# enquanto outras categorias ("Outros", "Rural") recebem uma atenção consideravelmente menor.
+# Essa concentração pode indicar a necessidade de expandir o escopo do programa para alcançar outros setores e contextos,
+# promovendo uma maior equidade na distribuição dos benefícios da eficiência energética.
+# Da mesma forma, a análise do uso final da energia revela uma preponderância de projetos focados em iluminação,
+# enquanto outros usos finais, como força motriz e aquecimento de água, têm menor representatividade,
+# indicando áreas potenciais para expansão e diversificação das ações de eficiência energética.
+
+
+# Recomendações:
+
+# 1. Investigação Adicional sobre Projetos de Iluminação Pública: O baixo retorno sobre o investimento em projetos de iluminação pública
+# justifica uma investigação detalhada sobre as causas dessa baixa performance.
+# Isso inclui a análise de custos, métodos de implementação, tecnologias empregadas e critérios de seleção de projetos.
+
+# 2. Diversificação de Investimentos:
+# É recomendado ampliar o alcance do programa de eficiência energética,
+# direcionando mais recursos para tipologias e usos finais atualmente sub-representados,
+# como projetos rurais e aqueles focados em setores além de iluminação e condicionamento de ar.
+# Isso promoverá uma maior equidade na distribuição dos benefícios e otimizará o impacto do programa.
+
+# 3. Análise de Dados Mais Granulares:
+# Para uma análise mais robusta, a coleta de dados mais detalhados, incluindo informações geográficas,
+# custos específicos dos projetos e indicadores de desempenho mais abrangentes,
+# é crucial para refinar as estratégias e otimizar a eficácia dos investimentos.
+
+# 4. Monitoramento e Avaliação Contínua:
+# A implementação de um sistema de monitoramento e avaliação contínuo do programa de eficiência energética
+# é essencial para acompanhar o progresso, identificar potenciais problemas e ajustar as estratégias conforme necessário.
+# Isso permitirá o aprimoramento contínuo do programa e o alcance de resultados mais efetivos.
+
+
+# Considerações Finais:
+# Esta análise exploratória forneceu valiosas informações sobre os padrões e tendências nos projetos de eficiência energética.
+# No entanto, é importante considerar as limitações dos dados disponíveis,
+# especialmente a falta de informações geográficas e a alta porcentagem de valores ausentes em algumas variáveis.
+# Estudos futuros com dados mais completos e detalhados poderão fornecer uma compreensão ainda mais aprofundada do tema
+# e subsidiar a formulação de políticas públicas mais eficazes.
+

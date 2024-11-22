@@ -11,7 +11,12 @@ Esta estimativa considera uma única lâmpada externa e um mês com 30 dias.  Pr
 * **Consumo ESP32:** O consumo do ESP32 é desprezível em comparação com o consumo da lâmpada, considerando-se que o consumo energético do ESP32 é menor que 1W. Por esta razão, o consumo do ESP32 não será incluído no cálculo.
 * **Custo da Energia:** R$ 0,74593/kWh.
 
-![Custo da Energia (acesso em 19/11/2024)](../../../assets/equatorial_cost_19_11_2024.png)
+
+**Print do Custo da Energia**
+
+A seguir, apresentamos um print que ilustra o custo da energia utilizado nos cálculos acima:
+
+![Custo da Energia (acesso em 19/11/2024)](../../assets/equatorial_cost_19_11_2024.png)
 Custo da Energia. Fonte: <https://go.equatorialenergia.com.br/valor-de-tarifas-e-servicos/#residencial-normal> (Equatorial em Goiás - cesso em 19/11/2024)
 
 **Cálculos:**

@@ -65,4 +65,4 @@ O código realiza a leitura da luminosidade e do movimento em ambos os ambientes
 
 Esse diagrama e descrição formam um sistema que não apenas otimiza a iluminação, mas também oferece segurança ao garantir que a iluminação externa não seja desligada completamente durante a noite.
 
-![Diagrama de Circuito](../../../assets/sensors_diagram.png)
+![Diagrama de Circuito](../../assets/sensors_diagram.png)
