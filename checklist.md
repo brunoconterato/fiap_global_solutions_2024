@@ -43,10 +43,10 @@
 
 **IV. Cognitive Data Science (CDS) - 20%**
 
-[ ] Armazenar consumo energético dos últimos anos (dados oficiais do Governo Federal).
-[ ] Utilizar bases de dados relacionais.
-[ ] Criar objetos de banco de dados para analisar tendências de consumo.
-[ ] Criar pipeline para filtrar dados do Brasil (demanda de energia elétrica, consumo per capita, etc.).
+[x] Armazenar consumo energético dos últimos anos (dados oficiais do Governo Federal).
+[x] Utilizar bases de dados relacionais.
+[-] Criar objetos de banco de dados para analisar tendências de consumo.
+[x] Criar pipeline para filtrar dados do Brasil (demanda de energia elétrica, consumo per capita, etc.).
 
 
 **V. Computational Thinking with Python (CTWP) - 20%**
