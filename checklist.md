@@ -10,7 +10,7 @@
 
 [x] Ler o artigo: <https://www.sciencedirect.com/science/article/pii/S2666546822000544>
 [ ] Desenvolver solução baseada em IA, IoT, Big Data para otimização de consumo de energia em residência (ou ambiente escolhido).
-[ ] Escrever PDF com:
+[x] Escrever PDF com:
     [ ] Introdução (contextualização, objetivos, desafios, barreiras)
     [ ] Desenvolvimento (justificativa das tecnologias, diagrama, etc.)
     [ ] Resultados Esperados (estimativa de economia, impacto no conforto, uso do equipamento, vida útil)
@@ -25,11 +25,11 @@
 [x] Simular solução no Wokwi.
 [ ] Gravar vídeo demonstrativo (YouTube - modo "não listado").
 [ ] Escrever PDF com:
-    [ ] Introdução
-    [ ] Descrição da solução
+    [x] Introdução
+    [x] Descrição da solução
     [ ] Código-fonte
     [ ] Link do vídeo YouTube
-    [ ] Conclusão (impactos positivos e negativos)
+    [x] Conclusão (impactos positivos e negativos)
 
 
 **III. Statistical Computing with R (SCR) - 20%**
@@ -68,7 +68,7 @@
 
 **VII. Entregável Final**
 
-[ ] Criar logotipo do time (opcional).
+[x] Criar logotipo do time (opcional).
 [ ] Incluir nomes dos integrantes na primeira página do PDF.
 [ ] Apresentar todas as soluções detalhadamente (arquiteturas, justificativas, circuitos, códigos).
 [ ] Organizar o PDF com seções claras (Introdução, Desenvolvimento, Resultados Esperados, Conclusões).
