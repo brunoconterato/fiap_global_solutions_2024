@@ -2,25 +2,25 @@
 
 ## 1. Introdução
 
-**1.1 Contextualização:** O crescente consumo de energia e a necessidade de mitigar os impactos ambientais impulsionam a busca por soluções inovadoras em eficiência energética.  Este projeto visa otimizar o consumo energético residencial utilizando uma abordagem integrada de Inteligência Artificial (IA), Internet das Coisas (IoT), Big Data e banco de dados relacionais.
+**1.1 Contextualização:** O crescente consumo de energia e a necessidade de mitigar os impactos ambientais impulsionam a busca por soluções inovadoras em eficiência energética.  Este projeto visa otimizar o consumo energético residencial utilizando uma abordagem integrada de Inteligência Artificial (IA), Internet das Coisas (IoT), Big Data e banco de dados relacionais.  O aumento da população e a urbanização contribuem para o crescimento da demanda energética, tornando crucial a implementação de estratégias que promovam a sustentabilidade e a redução de custos.
 
-**1.2 Objetivo Principal:** Desenvolver um sistema inteligente que monitora, prevê e otimiza o consumo de energia em uma residência, integrando dados históricos e em tempo real para reduzir custos e promover a sustentabilidade.
+**1.2 Objetivo Principal:** Desenvolver um sistema inteligente que monitora, prevê e otimiza o consumo de energia em uma residência, integrando dados históricos e em tempo real para reduzir custos e promover a sustentabilidade.  O sistema deve ser capaz de fornecer insights acionáveis para o usuário e, futuramente, integrar-se a fontes de energia renováveis para otimizar o consumo e a geração de energia.
 
 **1.3 Objetivos Específicos:**
 
-* Implementar um sistema IoT para coleta de dados de consumo e condições ambientais em tempo real. (AICSS)
-* Criar um pipeline de dados para processamento e análise estatística do consumo energético. (CDS e SCR)
-* Desenvolver um modelo de IA para previsão de consumo e otimização do uso de energia. (AIC)
-* Construir uma interface amigável em Python para visualização de dados, geração de relatórios e interação com o usuário. (CTWP)
-* Integrar todas as componentes para a operação eficiente do sistema. ("Ir Além")
-
+* Implementar um sistema IoT para coleta de dados de consumo e condições ambientais em tempo real. (AICSS)  Este sistema utiliza sensores LDR e PIR para monitorar luminosidade e movimento, controlando a iluminação interna e externa de forma inteligente.  A documentação detalhada no relatório `src/AICSS/docs/report_external_illumination_system.md` e `src/AICSS/docs/report_internal_illunination_system.md` descreve a lógica de funcionamento do sistema.
+* Criar um pipeline de dados para processamento e análise estatística do consumo energético. (CDS e SCR)  Dados do consumo energético são coletados (simulação neste caso) e armazenados em um banco de dados relacional (PostgreSQL). A análise exploratória de dados, realizada com R (eda.R), identifica padrões e insights que contribuem para a previsão de consumo e estratégias de otimização.
+* Desenvolver um modelo de IA para previsão de consumo e otimização do uso de energia. (AIC)  Um modelo de previsão (a ser implementado) utilizará os dados processados para prever o consumo futuro de energia, otimizando o uso dos eletrodomésticos.  O artigo [link do artigo] serviu como base para a compreensão dos desafios e oportunidades nesse contexto.
+* Construir uma interface amigável em Python para visualização de dados, geração de relatórios e interação com o usuário. (CTWP) Uma interface gráfica em Python (main.py) proporciona ao usuário uma visão clara do consumo de energia em tempo real, histórico e previsões futuras, permitindo uma gestão eficiente do consumo.
+* Integrar todas as componentes para a operação eficiente do sistema. ("Ir Além")  O código Python se conecta ao banco de dados (CDS), processa os dados da simulação do sistema de iluminação (AICSS), e executa análises estatísticas com R (SCR) para fornecer previsões e relatórios integrados.
 
 **1.4 Desafios e Barreiras:**
 
 * **Integração de Sistemas:** A complexidade de integrar diferentes tecnologias (IA, IoT, banco de dados, Python, R) representa um desafio significativo.
-* **Qualidade dos Dados:** A precisão das previsões da IA depende diretamente da qualidade dos dados coletados pelo sistema IoT.  Ruídos e inconsistências nos dados podem afetar o desempenho do sistema.
+* **Qualidade dos Dados:** A precisão das previsões da IA depende diretamente da qualidade dos dados coletados pelo sistema IoT.  Ruídos e inconsistências nos dados podem afetar o desempenho do sistema.  A calibração dos sensores e a implementação de mecanismos para tratamento de outliers são cruciais.
 * **Escalabilidade:** O sistema precisa ser projetado para expansão futura, permitindo a inclusão de mais dispositivos, sensores e fontes de energia renováveis.
-* **Custo e Complexidade:** A implementação de um sistema completo de otimização de energia pode apresentar custos iniciais elevados.
+* **Custo e Complexidade:** A implementação de um sistema completo de otimização de energia pode apresentar custos iniciais elevados.  A escolha de componentes de baixo custo e a modularidade do sistema contribuem para mitigar esses custos.
+* **Simulação vs Realidade:** A atual implementação utiliza dados simulados para o consumo de energia.  A integração com sensores e medidores reais é crucial para um sistema mais preciso e eficiente.
 
 
 ## 2. Desenvolvimento - Arquitetura do Sistema
@@ -62,7 +62,7 @@ Esta arquitetura modular facilita a manutenção, atualização e expansão do s
 
 **3.1 Estimativa de Economia de Energia:**
 
-Considerando os resultados do sistema de iluminação inteligente (AICSS), estimamos uma economia mensal de aproximadamente R$ 2,15 na iluminação externa e R$ 0,72 na iluminação interna (baseado em uma única lâmpada em cada ambiente). Esta economia é extrapolada da simulação no Wokwi e dos cálculos apresentados na documentação.  A economia real dependerá dos padrões de uso e das condições ambientais da residência. A interface em Python (CTWP) permitirá monitorar e quantificar a economia obtida em tempo real, considerando todos os dispositivos simulados.
+Considerando os resultados da simulação do sistema de iluminação inteligente (AICSS) e os cálculos apresentados em `src/AICSS/docs/other/cost_estimation_external_illunination_system.md` e `src/AICSS/docs/other/cost_estmation_internal_illumination_system.md`, estimamos uma economia mensal de aproximadamente R$ 2,15 na iluminação externa e R$ 0,72 na iluminação interna (baseado em uma única lâmpada em cada ambiente).  Esta economia é uma estimativa conservadora, e a economia real dependerá dos padrões de uso e das condições ambientais da residência.  A interface em Python (CTWP) permitirá monitorar e quantificar a economia obtida em tempo real, considerando todos os dispositivos.  A análise dos dados históricos (SCR) poderá fornecer insights adicionais sobre o potencial de economia em longo prazo.
 
 **3.2 Impacto no Conforto:**
 
@@ -79,9 +79,8 @@ A redução do consumo e o uso mais eficiente dos equipamentos, resultantes da o
 
 ## 4. Conclusão
 
-Este projeto demonstra a viabilidade de um sistema integrado de otimização de consumo energético residencial utilizando IA, IoT e Big Data. A integração das diferentes tecnologias permite uma abordagem abrangente, oferecendo monitoramento em tempo real, previsão de consumo e otimização do uso de energia, com o objetivo final de reduzir custos e promover a sustentabilidade.  A combinação de análise histórica (SCR), predição de consumo (AIC), coleta de dados em tempo real (AICSS) e a interface de usuário (CTWP) cria um sistema eficiente e informativo. Os resultados esperados indicam uma economia significativa no consumo energético, além de melhorias no conforto e na vida útil dos equipamentos.  O sistema, com seu código aberto e documentação completa, pode servir de base para trabalhos futuros, incluindo a integração com fontes de energia renováveis e a implementação de modelos de IA mais sofisticados. A capacidade de expandir o projeto demonstra sua flexibilidade e potencial para aplicação em diferentes cenários.  A abordagem modular e bem documentada, demonstrada no código e nos relatórios, facilita a integração e a manutenção do sistema, destacando a robustez da solução.
+Este projeto demonstra a viabilidade de um sistema integrado de otimização de consumo energético residencial utilizando IA, IoT e Big Data. A integração das diferentes tecnologias permite uma abordagem abrangente, oferecendo monitoramento em tempo real, previsão de consumo e otimização do uso de energia, com o objetivo final de reduzir custos e promover a sustentabilidade.  A combinação de análise histórica (SCR), predição de consumo (AIC), coleta de dados em tempo real (AICSS) e a interface de usuário (CTWP) cria um sistema eficiente e informativo. Os resultados esperados indicam uma economia significativa no consumo energético, além de melhorias no conforto e na vida útil dos equipamentos.  O sistema, com seu código aberto e documentação completa, pode servir de base para trabalhos futuros, incluindo a integração com fontes de energia renováveis e a implementação de modelos de IA mais sofisticados. A capacidade de expandir o projeto demonstra sua flexibilidade e potencial para aplicação em diferentes cenários.  A abordagem modular e bem documentada, demonstrada no código e nos relatórios, facilita a integração e a manutenção do sistema, destacando a robustez da solução. Os resultados esperados indicam uma economia significativa no consumo energético, além de melhorias no conforto e na vida útil dos equipamentos.  A próxima fase do projeto deve incluir testes em um ambiente real para validar os resultados da simulação e refinar o modelo de previsão.
 
 ## 5. "Ir Além"
 
 A integração completa do sistema, incluindo a leitura dos dados do sistema AICSS (dados simulados por enquanto), a leitura dos dados do banco de dados PostgreSQL (CDS) através do Python (CTWP) e a execução de análises estatísticas em R (SCR) para gerar relatórios de consumo e previsões de uso, demonstra a sinergia entre as tecnologias e reforça a capacidade do grupo de desenvolver soluções completas e integradas.  Um vídeo demonstrando a integração completa dessas etapas será submetido.
-
