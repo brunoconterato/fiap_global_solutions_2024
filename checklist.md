@@ -8,7 +8,7 @@
 
 **I. Artificial Intelligence Challenges (AIC) - 10%**
 
-[ ] Ler o artigo: <https://www.sciencedirect.com/science/article/pii/S2666546822000544>
+[x] Ler o artigo: <https://www.sciencedirect.com/science/article/pii/S2666546822000544>
 [ ] Desenvolver solução baseada em IA, IoT, Big Data para otimização de consumo de energia em residência (ou ambiente escolhido).
 [ ] Escrever PDF com:
     [ ] Introdução (contextualização, objetivos, desafios, barreiras)
@@ -51,10 +51,10 @@
 
 **V. Computational Thinking with Python (CTWP) - 20%**
 
-[ ] Desenvolver sistema automatizado em Python para gerenciamento e otimização do consumo energético.
-[ ] Interface de usuário com visualização de dados e relatórios de eficiência energética.
-[ ] Monitoramento em tempo real de tarifas e consumo interno.
-[ ] Seleção automática da fonte de energia mais econômica e sustentável.
+[x] Desenvolver sistema automatizado em Python para gerenciamento e otimização do consumo energético.
+[x] Interface de usuário com visualização de dados e relatórios de eficiência energética.
+[x] Monitoramento em tempo real de tarifas e consumo interno.
+[-] Seleção automática da fonte de energia mais econômica e sustentável.
 
 
 **VI. Ir Além - 10%**
