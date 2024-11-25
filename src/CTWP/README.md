@@ -4,7 +4,7 @@
 
 Este projeto foi desenvolvido como parte da atividade **Global Solutions (GS) 2024.2**, cujo tema é **Energia**. A solução utiliza **Data Science**, **IoT**, **Python** e **Banco de Dados** para otimizar o consumo de energia em ambientes residenciais, com foco na eficiência energética, sustentabilidade e redução de custos.
 
-A aplicação apresentada oferece uma interface gráfica para monitoramento e gerenciamento do consumo energético, integrando dispositivos residenciais e simulando dados em tempo real. A ideia é proporcionar uma base funcional que pode ser expandida para incluir recursos avançados, como integração com fontes renováveis (solar, eólica) e análise preditiva.
+A aplicação apresentada oferece uma interface gráfica para monitoramento e gerenciamento do consumo energético, integrando dispositivos residenciais e simulando dados em tempo real.  **Os dados de consumo simulados são gravados em um banco de dados PostgreSQL.  Esses dados serão utilizados na integração completa do sistema na seção "Ir Além", conectando o sistema de monitoramento com outras partes do projeto (AICSS, CDS, SCR).** A ideia é proporcionar uma base funcional que pode ser expandida para incluir recursos avançados, como integração com fontes renováveis (solar, eólica) e análise preditiva.
 
 ---
 
@@ -14,6 +14,7 @@ A aplicação apresentada oferece uma interface gráfica para monitoramento e ge
 - **Promover eficiência energética:** Apresentar dados que ajudam o usuário a identificar padrões e reduzir custos.
 - **Fornecer uma base escalável:** Preparar o sistema para integração com banco de dados e fontes renováveis.
 - **Estimar custos de energia:** Calcular o custo com base no consumo diário e na tarifa energética.
+- **Gravar dados em banco de dados:** Armazenar os dados de consumo para posterior análise e integração com outros módulos do projeto.
 
 ---
 
@@ -38,6 +39,9 @@ A aplicação apresentada oferece uma interface gráfica para monitoramento e ge
 - Consumo diário estimado em kilowatt-hora (kWh).
 - Cálculo do custo com base na tarifa simulada (R$ 0,75/kWh).
 
+### 5. (Opcional) Integração com Banco de Dados PostgreSQL
+- Os dados de consumo de cada dispositivo, incluindo timestamp, potência (kW), frequência de atualização (em segundos), nome do dispositivo e status (ligado/desligado) são gravados no banco de dados.
+
 ---
 
 ## Detalhamento Técnico
@@ -48,15 +52,20 @@ A aplicação apresentada oferece uma interface gráfica para monitoramento e ge
 - **Matplotlib:** Gráficos interativos de consumo.
 - **Pandas:** Manipulação e análise de dados (possível expansão futura).
 - **Random:** Simulação de dados para dispositivos.
+- **psycopg2:** Conexão com o banco de dados PostgreSQL.
 
 ### Estrutura do Código
 1. **Classe Principal (`EnergyMonitorSystem`):**
    - Gerencia dispositivos, consumo e atualização dos dados.
    - Responsável pela interface gráfica e integração dos componentes.
+   - Inclui métodos para conectar ao banco de dados, salvar e recuperar dados.
 2. **Simulação de Consumo:**
    - Estima o consumo de dispositivos com base no status atual (ligado/desligado) e uma variação aleatória.
 3. **Atualização Automática:**
    - Usa `root.after()` para atualizar os dados e gráficos em intervalos regulares.
+4. **(Opcional) Conexão e Gravação de Dados:**
+    - Usa a biblioteca `psycopg2` para conectar a um banco de dados PostgreSQL e gravar os dados de consumo.  A função `save_consumption_data()` realiza a gravação, utilizando transações para garantir a integridade dos dados.
+
 
 ---
 
@@ -70,7 +79,7 @@ A aplicação apresentada oferece uma interface gráfica para monitoramento e ge
 
 ## Possibilidades de Expansão
 
-### 1. Integração com Banco de Dados
+### 1. Integração com Banco de Dados (Já implementada)
 - Armazenar histórico de consumo para análises futuras.
 - Salvar configurações personalizadas de dispositivos.
 
@@ -95,9 +104,24 @@ A aplicação apresentada oferece uma interface gráfica para monitoramento e ge
 
 1. **Pré-requisitos:**
    - Python 3.9+ instalado.
-   - Bibliotecas necessárias: `tkinter`, `matplotlib`, `pandas`.
+   - Bibliotecas necessárias: `tkinter`, `matplotlib`, `pandas`, `psycopg2-binary`.  Instale com: `pip install tkinter matplotlib pandas psycopg2-binary`
+   - PostgreSQL instalado e configurado.  Um usuário e banco de dados devem ser criados (`fiap_gs` e `gs_energia_residencial`, respectivamente), com as permissões descritas na seção "Configuração do Banco de Dados".
+   - Execute os comandos SQL para criação de tabela e concessão de permissões descritos na seção "Configuração do Banco de Dados".
 
-2. **Execução:**
+2. **(Opcional) Configuração do Banco de Dados:**
+    - O script SQL necessário para a criaçao de usuário, banco de dados e tabela está presente no diretório `src/CTWP/script/initialize_db.sql`.
+    - Crie um usuário e um banco de dados no PostgreSQL:
+       ```sql
+       CREATE USER fiap_gs WITH PASSWORD 'fiap_gs';
+       CREATE DATABASE gs_energia_residencial OWNER fiap_gs;
+       \c gs_energia_residencial fiap_gs
+       GRANT ALL PRIVILEGES ON DATABASE gs_energia_residencial TO fiap_gs;
+       GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO fiap_gs;
+       GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public TO fiap_gs;
+       ```
+    - Execute o código SQL acima para criar usuário, a database `gs_energia_residencial`, a tabela `CONSUMO_RESIDENCIAL` e todos os privilégios necessários.
+
+3. **Execução:**
    - Clone este repositório:
      ```bash
      git clone https://github.com/brunoconterato/fiap_global_solutions_2024
@@ -105,10 +129,11 @@ A aplicação apresentada oferece uma interface gráfica para monitoramento e ge
      ```
    - Execute o script principal:
      ```bash
-     python src/main.py
+     python main.py
      ```
+   - (Opcional) Substitua os valores das credenciais de conexão com o banco de dados PostgreSQL.
 
-3. **Interface:**
+4. **Interface:**
    - Visualize os dispositivos e seu status.
    - Acompanhe o consumo em tempo real no gráfico.
    - Consulte as estatísticas de consumo e custo estimado.
@@ -135,9 +160,12 @@ from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
+import psycopg2
 
 class EnergyMonitorSystem:
-    def __init__(self, root):
+    def __init__(self, root, db_host, db_port, db_name, db_user, db_password):
+        self.initialize_db(db_host, db_port, db_name, db_user, db_password)
+        
         self.root = root
         self.root.title("Sistema de Monitoramento de Energia")
         self.root.geometry("1200x800")
@@ -222,6 +250,8 @@ class EnergyMonitorSystem:
         if len(self.consumption_history) > 60:
             self.consumption_history.pop(0)
             self.timestamps.pop(0)
+            
+        self.save_consumption_data() #Salva os dados no banco de dados.
 
         # Atualizar gráfico
         self.ax.clear()
@@ -246,9 +276,67 @@ class EnergyMonitorSystem:
 
         # Agendar próxima atualização
         self.root.after(10000, self.update_data)  # Atualiza a cada 10 segundos
+        
+    def initialize_db(self, db_host, db_port, db_name, db_user, db_password):
+        self.db_host = db_host
+        self.db_port = db_port
+        self.db_name = db_name
+        self.db_user = db_user
+        self.db_password = db_password
+        self.conn = None
+        self.cur = None
+        self.connect_to_db()
+        
+    def connect_to_db(self):
+        try:
+            self.conn = psycopg2.connect(host=self.db_host, database=self.db_name, user=self.db_user, password=self.db_password, port=self.db_port)
+            self.cur = self.conn.cursor()
+            print("Conectado ao banco de dados PostgreSQL")
+        except psycopg2.Error as e:
+            print(f"Erro ao conectar ao banco de dados: {e}")
+            
+    def close_db_connection(self):
+        if self.conn:
+            self.cur.close()
+            self.conn.close()
+            print("Conexão com o banco de dados fechada")
+    
+    def save_consumption_data(self):
+        try:
+            self.cur.execute("BEGIN;") # inicia uma transação
+            for device, info in self.devices.items():
+                consumo_kw = info['power'] / 1000 if info['status'] == 'ON' else 0
+                try:
+                    self.cur.execute("""
+                        INSERT INTO CONSUMO_RESIDENCIAL (timestamp, consumo_potencia_kw, frequencia_atualizacao_s, dispositivo, status)
+                        VALUES (%s, %s, %s, %s, %s)
+                    """, (datetime.now(), consumo_kw, 10, device, info['status']))
+                except psycopg2.IntegrityError as e:  #captura erro de chave única
+                    if 'unique constraint' in str(e).lower():
+                        print(f"Aviso: Tentativa de inserção duplicada ignorada para {device}.")
+                    else:
+                        raise e #relança outras exceções
+
+            self.conn.commit() #commit da transação inteira, caso tudo tenha dado certo
+            print("Dados de consumo salvos no banco de dados.")
+
+        except psycopg2.Error as e:
+            print(f"Erro ao salvar dados no banco de dados: {e}")
+            self.conn.rollback() #Rollback caso ocorra algum erro, mantendo a consistência
+        except Exception as e:
+            self.conn.rollback()
+            print(f"Erro genérico: {e}")
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = EnergyMonitorSystem(root)
+    
+    #Credenciais do seu banco de dados
+    db_host = "localhost" #ou seu IP
+    db_port = "5432"
+    db_name = "gs_energia_residencial"
+    db_user = "fiap_gs"
+    db_password = "fiap_gs"
+    
+    app = EnergyMonitorSystem(root, db_host, db_port, db_name, db_user, db_password)
     root.mainloop()
 ```

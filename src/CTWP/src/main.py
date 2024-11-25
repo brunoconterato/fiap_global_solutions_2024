@@ -5,9 +5,12 @@ from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
+import psycopg2
 
 class EnergyMonitorSystem:
-    def __init__(self, root):
+    def __init__(self, root, db_host, db_port, db_name, db_user, db_password):
+        self.initialize_db(db_host, db_port, db_name, db_user, db_password)
+        
         self.root = root
         self.root.title("Sistema de Monitoramento de Energia")
         self.root.geometry("1200x800")
@@ -92,6 +95,8 @@ class EnergyMonitorSystem:
         if len(self.consumption_history) > 60:
             self.consumption_history.pop(0)
             self.timestamps.pop(0)
+            
+        self.save_consumption_data() #Salva os dados no banco de dados.
 
         # Atualizar gráfico
         self.ax.clear()
@@ -116,8 +121,66 @@ class EnergyMonitorSystem:
 
         # Agendar próxima atualização
         self.root.after(10000, self.update_data)  # Atualiza a cada 10 segundos
+        
+    def initialize_db(self, db_host, db_port, db_name, db_user, db_password):
+        self.db_host = db_host
+        self.db_port = db_port
+        self.db_name = db_name
+        self.db_user = db_user
+        self.db_password = db_password
+        self.conn = None
+        self.cur = None
+        self.connect_to_db()
+        
+    def connect_to_db(self):
+        try:
+            self.conn = psycopg2.connect(host=self.db_host, database=self.db_name, user=self.db_user, password=self.db_password, port=self.db_port)
+            self.cur = self.conn.cursor()
+            print("Conectado ao banco de dados PostgreSQL")
+        except psycopg2.Error as e:
+            print(f"Erro ao conectar ao banco de dados: {e}")
+            
+    def close_db_connection(self):
+        if self.conn:
+            self.cur.close()
+            self.conn.close()
+            print("Conexão com o banco de dados fechada")
+    
+    def save_consumption_data(self):
+        try:
+            self.cur.execute("BEGIN;") # inicia uma transação
+            for device, info in self.devices.items():
+                consumo_kw = info['power'] / 1000 if info['status'] == 'ON' else 0
+                try:
+                    self.cur.execute("""
+                        INSERT INTO CONSUMO_RESIDENCIAL (timestamp, consumo_potencia_kw, frequencia_atualizacao_s, dispositivo, status)
+                        VALUES (%s, %s, %s, %s, %s)
+                    """, (datetime.now(), consumo_kw, 10, device, info['status']))
+                except psycopg2.IntegrityError as e:  #captura erro de chave única
+                    if 'unique constraint' in str(e).lower():
+                        print(f"Aviso: Tentativa de inserção duplicada ignorada para {device}.")
+                    else:
+                        raise e #relança outras exceções
+
+            self.conn.commit() #commit da transação inteira, caso tudo tenha dado certo
+            print("Dados de consumo salvos no banco de dados.")
+
+        except psycopg2.Error as e:
+            print(f"Erro ao salvar dados no banco de dados: {e}")
+            self.conn.rollback() #Rollback caso ocorra algum erro, mantendo a consistência
+        except Exception as e:
+            self.conn.rollback()
+            print(f"Erro genérico: {e}")
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = EnergyMonitorSystem(root)
+    
+    #Credenciais do seu banco de dados
+    db_host = "localhost" #ou seu IP
+    db_port = "5432"
+    db_name = "gs_energia_residencial"
+    db_user = "fiap_gs"
+    db_password = "fiap_gs"
+    
+    app = EnergyMonitorSystem(root, db_host, db_port, db_name, db_user, db_password)
     root.mainloop()
