@@ -23,12 +23,13 @@ Para executar a aplicação localmente, você precisará ter o PostgreSQL instal
 
 **1. Crie o Usuário e Banco de Dados:**
 
+Esse script está localizado no diretório `src/CTWP/script/initialize_db.sql`.
+
 Abra o console psql (com privilégios de administrador) e execute os seguintes comandos:
 
 ```sql
 CREATE USER fiap_gs WITH PASSWORD 'fiap_gs';
 CREATE DATABASE gs_energia_residencial OWNER fiap_gs;
-GRANT ALL PRIVILEGES ON DATABASE gs_energia_residencial TO fiap_gs;
 ```
 
 **2. Crie a Tabela CONSUMO_RESIDENCIAL:**
@@ -38,6 +39,12 @@ Conecte-se ao banco de dados `gs_energia_residencial` como o usuário `fiap_gs` 
 
 ```sql
 \c gs_energia_residencial fiap_gs
+
+-- Grant all privileges on the database to the user
+GRANT ALL PRIVILEGES ON DATABASE gs_energia_residencial TO fiap_gs;
+
+
+-- Create the table to store the simulated residential energy consumption data
 CREATE TABLE CONSUMO_RESIDENCIAL (
     id_consumo SERIAL PRIMARY KEY,
     timestamp TIMESTAMP WITH TIME ZONE,
@@ -46,7 +53,13 @@ CREATE TABLE CONSUMO_RESIDENCIAL (
     dispositivo VARCHAR(50),
     status VARCHAR(10)
 );
-CREATE INDEX idx_consumo_residencial_timestamp ON CONSUMO_RESIDENCIAL(timestamp);
+-- CREATE INDEX idx_consumo_residencial_timestamp ON CONSUMO_RESIDENCIAL(timestamp);
+
+-- Grant all privileges on the table to the user
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO fiap_gs;
+
+-- Grant usage on the sequence (this is the crucial part)
+GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public TO fiap_gs;
 ```
 
 **3. Configure o Arquivo de Conexão do Python:**
