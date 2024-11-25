@@ -26,5 +26,5 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO fiap_gs;
 -- Alternatively, grant specific privileges (more secure):
 --GRANT SELECT, INSERT, UPDATE, DELETE ON CONSUMO_RESIDENCIAL TO fiap_gs;
 
--- Reset database
-TRUNCATE TABLE CONSUMO_RESIDENCIAL;
+    -- Reset database
+    TRUNCATE TABLE CONSUMO_RESIDENCIAL;
