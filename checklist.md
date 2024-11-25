@@ -11,10 +11,10 @@
 [x] Ler o artigo: <https://www.sciencedirect.com/science/article/pii/S2666546822000544>
 [ ] Desenvolver solução baseada em IA, IoT, Big Data para otimização de consumo de energia em residência (ou ambiente escolhido).
 [x] Escrever PDF com:
-    [ ] Introdução (contextualização, objetivos, desafios, barreiras)
-    [ ] Desenvolvimento (justificativa das tecnologias, diagrama, etc.)
-    [ ] Resultados Esperados (estimativa de economia, impacto no conforto, uso do equipamento, vida útil)
-    [ ] Conclusão (reforço do desenvolvimento e resultados esperados)
+    [x] Introdução (contextualização, objetivos, desafios, barreiras)
+    [x] Desenvolvimento (justificativa das tecnologias, diagrama, etc.)
+    [x] Resultados Esperados (estimativa de economia, impacto no conforto, uso do equipamento, vida útil)
+    [x] Conclusão (reforço do desenvolvimento e resultados esperados)
 
 
 **II. Artificial Intelligence with Computer Systems and Sensors (AICSS) - 20%**
@@ -23,7 +23,7 @@
 [x] Utilizar sensores (LDR, Ultrassom, ou alternativas descritas).
     [x] Considerar restrições de segurança para iluminação externa (mínimo de luminosidade).
 [x] Simular solução no Wokwi.
-[ ] Gravar vídeo demonstrativo (YouTube - modo "não listado").
+[x] Gravar vídeo demonstrativo (YouTube - modo "não listado").
 [ ] Escrever PDF com:
     [x] Introdução
     [x] Descrição da solução
@@ -59,11 +59,11 @@
 
 **VI. Ir Além - 10%**
 
-[ ] Integrar Python com o banco de dados do CDS.
-[ ] Ler e apresentar dados da solução AICSS (transferir dados do Wokwi manualmente, se necessário).
-[ ] Disparar análises em R.
-[ ] Gravar vídeo explicativo (YouTube - modo "não listado", até 6 minutos).
-[ ] Adicionar link do vídeo no PDF.
+[x] Integrar Python com o banco de dados do CDS.
+[x] Ler e apresentar dados da solução AICSS (transferir dados do Wokwi manualmente, se necessário).
+[x] Disparar análises em R.
+[x] Gravar vídeo explicativo (YouTube - modo "não listado", até 6 minutos).
+[x] Adicionar link do vídeo no PDF.
 
 
 **VII. Entregável Final**
