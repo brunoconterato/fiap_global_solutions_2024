@@ -22,14 +22,29 @@ long motionExternalStartTime = -MOTION_EXTERNAL_DURATION;   // Momento em que o 
 // Parâmetros do LED interno
 const int LED_INTERNAL_BRIGHTNESS = 255; // Brilho máximo do LED interno
 
+// Parâmetros do LED externo
+const int LED_EXTERNAL_MAX_BRIGHTNESS = 255; // Brilho máximo do LED externo
+const int LED_EXTERNAL_MIN_BRIGHTNESS = 50;  // Brilho mínimo do LED externo
+
+// Variável global para frequência de atualização (em segundos)
+const int FREQUENCIA_ATUALIZACAO_S = 5;
+
+// Variável global para armazenar logs CSV
+String csvLog = "timestamp,consumo_potencia_kw,frequencia_atualizacao_s,dispositivo,status\n";
+int loopCount = 0;
+
 void setup() {
   setupExternal();
   setupInternal();
 }
 
 void loop() {
+  Serial.println("-\n\n-------------------------------\n");
+  Serial.println("Realizando nova leitura dos sensores. Leitura: " + String(loopCount + 1) + "\n");
   loopExternal();
   loopInternal();
+  loopLog();
+  delay(FREQUENCIA_ATUALIZACAO_S * 1000); // Intervalo curto para leitura contínua dos sensores
 }
 
 // ---------------------- Comum aos ambientes interno e externo ---------------------- //
@@ -80,29 +95,42 @@ void loopExternal() {
   Serial.println(motionDetectedExternal ? "Yes" : "No");
 
   // Controle da iluminação externa
-  controlLightingExternal(luminosityExternal, motionDetectedExternal);
-  Serial.println();
+  int externalPwm = controlLightingExternal(luminosityExternal, motionDetectedExternal);
 
-  delay(100); // Intervalo curto para leitura contínua
+  if (externalPwm > 0) {
+    // Calculo de potência consumida
+    double power = computeLedPowerInKw(externalPwm);
+
+    // Log para monitoramento
+    logData(power, FREQUENCIA_ATUALIZACAO_S, "led_externo_1", externalPwm > 100 ? "ligado_maximo" : "ligado_minimo");
+  }
+
+  Serial.println();
 }
 
-// Função de controle de iluminação específica para o ambiente externo
-void controlLightingExternal(double luminosity, bool motionDetected) {
+int controlLightingExternal(double luminosity, bool motionDetected) {
   bool night = isNight(luminosity, LUMINOSITY_EXTERNAL_THRESHOLD);
   unsigned long currentTime = millis();
+  int pwmValue = 0;
 
   if (night) {
     if (motionDetected) {
-      analogWrite(LED_EXTERNAL_PIN, 255);
+      pwmValue = LED_EXTERNAL_MAX_BRIGHTNESS;
       motionExternalStartTime = currentTime;
+      Serial.println("External: Night, motion detected. Lights ON (high).");
     } else if (currentTime - motionExternalStartTime < MOTION_EXTERNAL_DURATION) {
-      analogWrite(LED_EXTERNAL_PIN, 255);
+      pwmValue = LED_EXTERNAL_MAX_BRIGHTNESS;
+      Serial.println("External: Night, motion detected recently. Lights ON (high).");
     } else {
-      analogWrite(LED_EXTERNAL_PIN, 50);
+      pwmValue = LED_EXTERNAL_MIN_BRIGHTNESS;
+      Serial.println("External: Night, no motion. Lights ON (low).");
     }
   } else {
-    analogWrite(LED_EXTERNAL_PIN, 0);
+    Serial.println("External: Day. Lights OFF.");
   }
+  
+  analogWrite(LED_EXTERNAL_PIN, pwmValue);
+  return pwmValue;
 }
 
 // ---------------------- Ambiente Interno ---------------------- //
@@ -125,20 +153,61 @@ void loopInternal() {
   Serial.println(motionDetectedInternal ? "Yes" : "No");
 
   // Controle da iluminação interna
-  controlLightingInternal(luminosityInternal, motionDetectedInternal);
-  Serial.println();
+  int internalPwm = controlLightingInternal(luminosityInternal, motionDetectedInternal);
 
-  delay(5000); // Intervalo curto para leitura contínua
+  if (internalPwm > 0) {
+    // Calculo de potência consumida
+    double powerKW = computeLedPowerInKw(internalPwm);
+
+    // Log para monitoramento
+    logData(powerKW, FREQUENCIA_ATUALIZACAO_S, "led_interno_1", motionDetectedInternal ? "ligado" : "desligado");
+  }
+
+  Serial.println();
 }
 
-void controlLightingInternal(double luminosity, bool motionDetected) {
+int controlLightingInternal(double luminosity, bool motionDetected) {
   bool insufficientLight = isNight(luminosity, LUMINOSITY_INTERNAL_THRESHOLD);
+  int pwmValue = 0;
 
   if (insufficientLight && motionDetected) {
-    analogWrite(LED_INTERNAL_PIN, LED_INTERNAL_BRIGHTNESS);
+    pwmValue = LED_INTERNAL_BRIGHTNESS;
     Serial.println("Internal: Insufficient light, motion detected. Lights ON.");
   } else {
-    analogWrite(LED_INTERNAL_PIN, 0);
+    pwmValue = 0;
     Serial.println("Internal: Sufficient light or no motion. Lights OFF.");
   }
+
+  analogWrite(LED_INTERNAL_PIN, pwmValue);
+  return pwmValue;
+}
+
+// ---------------------- Cálculo de Potência dos LEDs  ---------------------- //
+
+const double SUPPLY_VOLTAGE = 5.0;          // Tensão de alimentação (V)
+const double RESISTOR_VALUE = 1000.0;      // Resistor em série (Ω)
+const double LED_FORWARD_VOLTAGE = 2.0; // Queda de tensão do LED típico (V)
+
+double computeLedPowerInKw(int pwmValue) {
+  double dutyCycle = pwmValue / 255.0;
+  double ledCurrent = ((SUPPLY_VOLTAGE - LED_FORWARD_VOLTAGE) / RESISTOR_VALUE) * dutyCycle;
+  double ledPower = LED_FORWARD_VOLTAGE * ledCurrent;
+
+  return ledPower / 1000.0;
+}
+
+// ---------------------- Log CSV ---------------------- //
+
+void loopLog() {
+  loopCount++;
+  if (loopCount % 10 == 0) {
+    Serial.println("CSV Log Atual:");
+    Serial.println(csvLog);
+    csvLog = "timestamp,consumo_potencia_kw,frequencia_atualizacao_s,dispositivo,status\n";
+  }
+}
+
+void logData(double powerKW, int frequency, String device, String status) {
+  unsigned long timestamp = millis();
+  csvLog += String(timestamp) + "," + String(powerKW, 10) + "," + String(frequency) + "," + device + "," + status + "\n";
 }
