@@ -1,0 +1,10 @@
+timestamp,consumo_potencia_kw,frequencia_atualizacao_s,dispositivo,status
+15614,0.0010,5,led_externo_1,ligado_min
+20640,0.0100,5,led_externo_1,ligado_max
+25665,0.0100,5,led_externo_1,ligado_max
+25678,0.0100,5,led_interno_1,ligado
+30691,0.0100,5,led_externo_1,ligado_max
+35716,0.0100,5,led_externo_1,ligado_max
+35729,0.0100,5,led_interno_1,ligado
+40742,0.0100,5,led_externo_1,ligado_max
+45767,0.0100,5,led_externo_1,ligado_max

@@ -87,15 +87,15 @@ O arquivo CSV com os dados simulados do AICSS (luminosidade, presença e status 
 
 ```csv
 timestamp,consumo_potencia_kw,frequencia_atualizacao_s,dispositivo,status
-10371,0.0010,5,led_externo_1,ligado_minimo
-15397,0.0100,5,led_externo_1,ligado_maximo
-20423,0.0100,5,led_externo_1,ligado_maximo
-25449,0.0100,5,led_externo_1,ligado_maximo
-30475,0.0100,5,led_externo_1,ligado_maximo
-35501,0.0100,5,led_externo_1,ligado_maximo
+10371,0.0010,5,led_externo_1,ligado_min
+15397,0.0100,5,led_externo_1,ligado_max
+20423,0.0100,5,led_externo_1,ligado_max
+25449,0.0100,5,led_externo_1,ligado_max
+30475,0.0100,5,led_externo_1,ligado_max
+35501,0.0100,5,led_externo_1,ligado_max
 35515,0.0100,5,led_interno_1,ligado
-40528,0.0100,5,led_externo_1,ligado_maximo
-45554,0.0100,5,led_externo_1,ligado_maximo
+40528,0.0100,5,led_externo_1,ligado_max
+45554,0.0100,5,led_externo_1,ligado_max
 ```
 
 ## Cálculo de Energia Consumida
