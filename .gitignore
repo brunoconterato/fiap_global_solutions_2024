@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 .pio/
+all_code.py
+all.txt
