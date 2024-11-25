@@ -102,7 +102,7 @@ void loopExternal() {
     double power = computeLedPowerInKw(externalPwm);
 
     // Log para monitoramento
-    logData(power, FREQUENCIA_ATUALIZACAO_S, "led_externo_1", externalPwm > 100 ? "ligado_maximo" : "ligado_minimo");
+    logData(power, FREQUENCIA_ATUALIZACAO_S, "led_externo_1", externalPwm > 100 ? "ligado_max" : "ligado_min");
   }
 
   Serial.println();
@@ -184,14 +184,6 @@ int controlLightingInternal(double luminosity, bool motionDetected) {
 
 // ---------------------- Cálculo de Potência dos LEDs  ---------------------- //
 
-// Cálculo de potência dos LEDs em watts
-// Objetivo: simular o consumo de energia das lâmpadas LED
-// Considerando que o LED externo consome 10W no máximo e 1W no mínimo
-// Considerando que o LED interno consome 10W quando ligado
-
-// Obs.: não considera o cálculo físico de consumo de energia dos LEDs
-// Trata-se de um cálculo simplificado para fins de simulação de lâmpadas LED
-
 const double LED_MAX_POWER = 10.0; // Potência máxima do LED em watts
 const double LED_MIN_POWER = 1.0; // Potência mínima do LED em watts
 
@@ -204,7 +196,7 @@ double computeLedPowerInKw(int pwmValue) {
   } else {
     ledPower = 0.0;
   }
-
+  
   return ledPower / 1000.0; // Convertendo para kilowatts
 }
 
