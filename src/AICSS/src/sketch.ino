@@ -184,16 +184,28 @@ int controlLightingInternal(double luminosity, bool motionDetected) {
 
 // ---------------------- Cálculo de Potência dos LEDs  ---------------------- //
 
-const double SUPPLY_VOLTAGE = 5.0;          // Tensão de alimentação (V)
-const double RESISTOR_VALUE = 1000.0;      // Resistor em série (Ω)
-const double LED_FORWARD_VOLTAGE = 2.0; // Queda de tensão do LED típico (V)
+// Cálculo de potência dos LEDs em watts
+// Objetivo: simular o consumo de energia das lâmpadas LED
+// Considerando que o LED externo consome 10W no máximo e 1W no mínimo
+// Considerando que o LED interno consome 10W quando ligado
+
+// Obs.: não considera o cálculo físico de consumo de energia dos LEDs
+// Trata-se de um cálculo simplificado para fins de simulação de lâmpadas LED
+
+const double LED_MAX_POWER = 10.0; // Potência máxima do LED em watts
+const double LED_MIN_POWER = 1.0; // Potência mínima do LED em watts
 
 double computeLedPowerInKw(int pwmValue) {
-  double dutyCycle = pwmValue / 255.0;
-  double ledCurrent = ((SUPPLY_VOLTAGE - LED_FORWARD_VOLTAGE) / RESISTOR_VALUE) * dutyCycle;
-  double ledPower = LED_FORWARD_VOLTAGE * ledCurrent;
+  double ledPower;
+  if (pwmValue > 100) {
+    ledPower = LED_MAX_POWER;
+  } else if(pwmValue > 0) {
+    ledPower = LED_MIN_POWER;
+  } else {
+    ledPower = 0.0;
+  }
 
-  return ledPower / 1000.0;
+  return ledPower / 1000.0; // Convertendo para kilowatts
 }
 
 // ---------------------- Log CSV ---------------------- //
@@ -209,5 +221,5 @@ void loopLog() {
 
 void logData(double powerKW, int frequency, String device, String status) {
   unsigned long timestamp = millis();
-  csvLog += String(timestamp) + "," + String(powerKW, 10) + "," + String(frequency) + "," + device + "," + status + "\n";
+  csvLog += String(timestamp) + "," + String(powerKW, 4) + "," + String(frequency) + "," + device + "," + status + "\n";
 }
