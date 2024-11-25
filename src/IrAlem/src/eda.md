@@ -446,7 +446,7 @@ Nesta subseção, analisamos a relação entre o consumo de energia e o tempo. A
 
 
 ```python
-# 9. Análise da relação entre consumo e tempo (utilize uma janela de tempo apropriada para melhor visualização)
+# 8. Análise da relação entre consumo e tempo (utilize uma janela de tempo apropriada para melhor visualização)
 df['hora'] = df['timestamp'].dt.hour
 df_agregado = df.groupby('hora')['energia_kwh'].mean().reset_index()
 
