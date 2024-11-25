@@ -17,10 +17,10 @@ class EnergyMonitorSystem:
         
         # Dados simulados
         self.devices = {
-            "Ar Condicionado": {"power": 1400, "status": "OFF"},
+            "Ar Condicionado": {"power": 1400, "status": "ON"},
             "Geladeira": {"power": 350, "status": "ON"},
-            "Chuveiro": {"power": 5500, "status": "OFF"},
-            "TV": {"power": 100, "status": "OFF"},
+            "Chuveiro": {"power": 5500, "status": "ON"},
+            "TV": {"power": 100, "status": "ON"},
             "Iluminação": {"power": 200, "status": "ON"}
         }
         
@@ -148,26 +148,27 @@ class EnergyMonitorSystem:
     
     def save_consumption_data(self):
         try:
-            self.cur.execute("BEGIN;") # inicia uma transação
+            self.cur.execute("BEGIN;")  # inicia uma transação
             for device, info in self.devices.items():
-                consumo_kw = info['power'] / 1000 if info['status'] == 'ON' else 0
-                try:
-                    self.cur.execute("""
-                        INSERT INTO CONSUMO_RESIDENCIAL (timestamp, consumo_potencia_kw, frequencia_atualizacao_s, dispositivo, status)
-                        VALUES (%s, %s, %s, %s, %s)
-                    """, (datetime.now(), consumo_kw, 10, device, info['status']))
-                except psycopg2.IntegrityError as e:  #captura erro de chave única
-                    if 'unique constraint' in str(e).lower():
-                        print(f"Aviso: Tentativa de inserção duplicada ignorada para {device}.")
-                    else:
-                        raise e #relança outras exceções
+                if info['status'] == 'ON':
+                    consumo_kw = info['power'] / 1000.0  # convertendo para kW
+                    try:
+                        self.cur.execute("""
+                            INSERT INTO CONSUMO_RESIDENCIAL (timestamp, consumo_potencia_kw, frequencia_atualizacao_s, dispositivo, status)
+                            VALUES (%s, %s, %s, %s, %s)
+                        """, (datetime.now(), consumo_kw, 10, device, info['status']))
+                    except psycopg2.IntegrityError as e:  # captura erro de chave única
+                        if 'unique constraint' in str(e).lower():
+                            print(f"Aviso: Tentativa de inserção duplicada ignorada para {device}.")
+                        else:
+                            raise e  # relança outras exceções
 
-            self.conn.commit() #commit da transação inteira, caso tudo tenha dado certo
+            self.conn.commit()  # commit da transação inteira, caso tudo tenha dado certo
             print("Dados de consumo salvos no banco de dados.")
 
         except psycopg2.Error as e:
             print(f"Erro ao salvar dados no banco de dados: {e}")
-            self.conn.rollback() #Rollback caso ocorra algum erro, mantendo a consistência
+            self.conn.rollback()  # Rollback caso ocorra algum erro, mantendo a consistência
         except Exception as e:
             self.conn.rollback()
             print(f"Erro genérico: {e}")
