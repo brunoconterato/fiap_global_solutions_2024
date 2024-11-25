@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "gs_energia_residencial",
+            "database": "gs_energia_residencial",
+            "username": "fiap_gs",
+            "password": "fiap_gs"
+        }
+    ]
+}
