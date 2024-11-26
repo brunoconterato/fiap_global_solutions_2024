@@ -9,7 +9,7 @@
 **I. Artificial Intelligence Challenges (AIC) - 10%**
 
 [x] Ler o artigo: <https://www.sciencedirect.com/science/article/pii/S2666546822000544>
-[ ] Desenvolver solução baseada em IA, IoT, Big Data para otimização de consumo de energia em residência (ou ambiente escolhido).
+[x] Desenvolver solução baseada em IA, IoT, Big Data para otimização de consumo de energia em residência (ou ambiente escolhido).
 [x] Escrever PDF com:
     [x] Introdução (contextualização, objetivos, desafios, barreiras)
     [x] Desenvolvimento (justificativa das tecnologias, diagrama, etc.)
@@ -24,11 +24,11 @@
     [x] Considerar restrições de segurança para iluminação externa (mínimo de luminosidade).
 [x] Simular solução no Wokwi.
 [x] Gravar vídeo demonstrativo (YouTube - modo "não listado").
-[ ] Escrever PDF com:
+[x] Escrever PDF com:
     [x] Introdução
     [x] Descrição da solução
-    [ ] Código-fonte
-    [ ] Link do vídeo YouTube
+    [x] Código-fonte
+    [x] Link do vídeo YouTube
     [x] Conclusão (impactos positivos e negativos)
 
 
@@ -69,10 +69,10 @@
 **VII. Entregável Final**
 
 [x] Criar logotipo do time (opcional).
-[ ] Incluir nomes dos integrantes na primeira página do PDF.
-[ ] Apresentar todas as soluções detalhadamente (arquiteturas, justificativas, circuitos, códigos).
-[ ] Organizar o PDF com seções claras (Introdução, Desenvolvimento, Resultados Esperados, Conclusões).
-[ ] Incluir link do vídeo (opcional, para concorrer ao prêmio).
+[x] Incluir nomes dos integrantes na primeira página do PDF.
+[x] Apresentar todas as soluções detalhadamente (arquiteturas, justificativas, circuitos, códigos).
+[x] Organizar o PDF com seções claras (Introdução, Desenvolvimento, Resultados Esperados, Conclusões).
+[x] Incluir link do vídeo (opcional, para concorrer ao prêmio).
 
 
 **Lembrete:**  A nota final considera todas as disciplinas do curso, mesmo que o peso do entregável seja distribuído conforme o checklist.  Boa sorte!
