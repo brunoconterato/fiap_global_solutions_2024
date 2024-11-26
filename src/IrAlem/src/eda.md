@@ -131,19 +131,19 @@ df
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
-      <td>2024-11-25 03:17:18.810850-03:00</td>
-      <td>0.00</td>
+      <th>186</th>
+      <td>2024-11-25 20:40:49.756216-03:00</td>
+      <td>1.400</td>
       <td>10</td>
       <td>Ar Condicionado</td>
-      <td>OFF</td>
-      <td>0.0000</td>
+      <td>ON</td>
+      <td>0.0039</td>
       <td>0.0028</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>2024-11-25 03:17:18.811532-03:00</td>
-      <td>0.35</td>
+      <th>187</th>
+      <td>2024-11-25 20:40:49.757580-03:00</td>
+      <td>0.350</td>
       <td>10</td>
       <td>Geladeira</td>
       <td>ON</td>
@@ -151,69 +151,9 @@ df
       <td>0.0028</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>2024-11-25 03:17:18.811635-03:00</td>
-      <td>0.00</td>
-      <td>10</td>
-      <td>Chuveiro</td>
-      <td>OFF</td>
-      <td>0.0000</td>
-      <td>0.0028</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2024-11-25 03:17:18.811703-03:00</td>
-      <td>0.00</td>
-      <td>10</td>
-      <td>TV</td>
-      <td>OFF</td>
-      <td>0.0000</td>
-      <td>0.0028</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2024-11-25 03:17:18.811755-03:00</td>
-      <td>0.20</td>
-      <td>10</td>
-      <td>Iluminação</td>
-      <td>ON</td>
-      <td>0.0006</td>
-      <td>0.0028</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>2024-11-25 04:50:29.376981-03:00</td>
-      <td>0.20</td>
-      <td>10</td>
-      <td>Iluminação</td>
-      <td>ON</td>
-      <td>0.0006</td>
-      <td>0.0028</td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>2024-11-25 04:50:39.422055-03:00</td>
-      <td>0.35</td>
-      <td>10</td>
-      <td>Geladeira</td>
-      <td>ON</td>
-      <td>0.0010</td>
-      <td>0.0028</td>
-    </tr>
-    <tr>
-      <th>97</th>
-      <td>2024-11-25 04:50:39.422300-03:00</td>
-      <td>5.50</td>
+      <th>188</th>
+      <td>2024-11-25 20:40:49.757946-03:00</td>
+      <td>5.500</td>
       <td>10</td>
       <td>Chuveiro</td>
       <td>ON</td>
@@ -221,9 +161,9 @@ df
       <td>0.0028</td>
     </tr>
     <tr>
-      <th>98</th>
-      <td>2024-11-25 04:50:39.422480-03:00</td>
-      <td>0.10</td>
+      <th>189</th>
+      <td>2024-11-25 20:40:49.759523-03:00</td>
+      <td>0.100</td>
       <td>10</td>
       <td>TV</td>
       <td>ON</td>
@@ -231,18 +171,567 @@ df
       <td>0.0028</td>
     </tr>
     <tr>
-      <th>99</th>
-      <td>2024-11-25 04:50:39.422620-03:00</td>
-      <td>0.20</td>
+      <th>190</th>
+      <td>2024-11-25 20:40:49.759729-03:00</td>
+      <td>0.200</td>
       <td>10</td>
       <td>Iluminação</td>
       <td>ON</td>
       <td>0.0006</td>
       <td>0.0028</td>
     </tr>
+    <tr>
+      <th>191</th>
+      <td>2024-11-25 20:40:59.897784-03:00</td>
+      <td>1.400</td>
+      <td>10</td>
+      <td>Ar Condicionado</td>
+      <td>ON</td>
+      <td>0.0039</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>192</th>
+      <td>2024-11-25 20:40:59.898101-03:00</td>
+      <td>0.350</td>
+      <td>10</td>
+      <td>Geladeira</td>
+      <td>ON</td>
+      <td>0.0010</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>193</th>
+      <td>2024-11-25 20:40:59.898247-03:00</td>
+      <td>5.500</td>
+      <td>10</td>
+      <td>Chuveiro</td>
+      <td>ON</td>
+      <td>0.0153</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>194</th>
+      <td>2024-11-25 20:40:59.898370-03:00</td>
+      <td>0.100</td>
+      <td>10</td>
+      <td>TV</td>
+      <td>ON</td>
+      <td>0.0003</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>2024-11-25 20:40:59.898494-03:00</td>
+      <td>0.200</td>
+      <td>10</td>
+      <td>Iluminação</td>
+      <td>ON</td>
+      <td>0.0006</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>2024-11-25 20:41:09.977491-03:00</td>
+      <td>1.400</td>
+      <td>10</td>
+      <td>Ar Condicionado</td>
+      <td>ON</td>
+      <td>0.0039</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>2024-11-25 20:41:09.977911-03:00</td>
+      <td>0.350</td>
+      <td>10</td>
+      <td>Geladeira</td>
+      <td>ON</td>
+      <td>0.0010</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>2024-11-25 20:41:09.978060-03:00</td>
+      <td>5.500</td>
+      <td>10</td>
+      <td>Chuveiro</td>
+      <td>ON</td>
+      <td>0.0153</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>2024-11-25 20:41:09.978167-03:00</td>
+      <td>0.100</td>
+      <td>10</td>
+      <td>TV</td>
+      <td>ON</td>
+      <td>0.0003</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>200</th>
+      <td>2024-11-25 20:41:09.978263-03:00</td>
+      <td>0.200</td>
+      <td>10</td>
+      <td>Iluminação</td>
+      <td>ON</td>
+      <td>0.0006</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>201</th>
+      <td>2024-11-25 20:41:20.095589-03:00</td>
+      <td>1.400</td>
+      <td>10</td>
+      <td>Ar Condicionado</td>
+      <td>ON</td>
+      <td>0.0039</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>202</th>
+      <td>2024-11-25 20:41:20.096144-03:00</td>
+      <td>0.350</td>
+      <td>10</td>
+      <td>Geladeira</td>
+      <td>ON</td>
+      <td>0.0010</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>203</th>
+      <td>2024-11-25 20:41:20.096367-03:00</td>
+      <td>5.500</td>
+      <td>10</td>
+      <td>Chuveiro</td>
+      <td>ON</td>
+      <td>0.0153</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>204</th>
+      <td>2024-11-25 20:41:20.096537-03:00</td>
+      <td>0.100</td>
+      <td>10</td>
+      <td>TV</td>
+      <td>ON</td>
+      <td>0.0003</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>205</th>
+      <td>2024-11-25 20:41:20.096713-03:00</td>
+      <td>0.200</td>
+      <td>10</td>
+      <td>Iluminação</td>
+      <td>ON</td>
+      <td>0.0006</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>206</th>
+      <td>2024-11-25 20:41:30.193252-03:00</td>
+      <td>1.400</td>
+      <td>10</td>
+      <td>Ar Condicionado</td>
+      <td>ON</td>
+      <td>0.0039</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>207</th>
+      <td>2024-11-25 20:41:30.193586-03:00</td>
+      <td>0.350</td>
+      <td>10</td>
+      <td>Geladeira</td>
+      <td>ON</td>
+      <td>0.0010</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>208</th>
+      <td>2024-11-25 20:41:30.193846-03:00</td>
+      <td>5.500</td>
+      <td>10</td>
+      <td>Chuveiro</td>
+      <td>ON</td>
+      <td>0.0153</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>209</th>
+      <td>2024-11-25 20:41:30.194025-03:00</td>
+      <td>0.100</td>
+      <td>10</td>
+      <td>TV</td>
+      <td>ON</td>
+      <td>0.0003</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>210</th>
+      <td>2024-11-25 20:41:30.194213-03:00</td>
+      <td>0.200</td>
+      <td>10</td>
+      <td>Iluminação</td>
+      <td>ON</td>
+      <td>0.0006</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>211</th>
+      <td>2024-11-25 20:41:40.310684-03:00</td>
+      <td>1.400</td>
+      <td>10</td>
+      <td>Ar Condicionado</td>
+      <td>ON</td>
+      <td>0.0039</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>212</th>
+      <td>2024-11-25 20:41:40.311025-03:00</td>
+      <td>0.350</td>
+      <td>10</td>
+      <td>Geladeira</td>
+      <td>ON</td>
+      <td>0.0010</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>213</th>
+      <td>2024-11-25 20:41:40.311177-03:00</td>
+      <td>5.500</td>
+      <td>10</td>
+      <td>Chuveiro</td>
+      <td>ON</td>
+      <td>0.0153</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>214</th>
+      <td>2024-11-25 20:41:40.311305-03:00</td>
+      <td>0.200</td>
+      <td>10</td>
+      <td>Iluminação</td>
+      <td>ON</td>
+      <td>0.0006</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>215</th>
+      <td>2024-11-25 20:41:50.396276-03:00</td>
+      <td>1.400</td>
+      <td>10</td>
+      <td>Ar Condicionado</td>
+      <td>ON</td>
+      <td>0.0039</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>216</th>
+      <td>2024-11-25 20:41:50.397400-03:00</td>
+      <td>0.350</td>
+      <td>10</td>
+      <td>Geladeira</td>
+      <td>ON</td>
+      <td>0.0010</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>217</th>
+      <td>2024-11-25 20:41:50.397713-03:00</td>
+      <td>5.500</td>
+      <td>10</td>
+      <td>Chuveiro</td>
+      <td>ON</td>
+      <td>0.0153</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>218</th>
+      <td>2024-11-25 20:41:50.397921-03:00</td>
+      <td>0.200</td>
+      <td>10</td>
+      <td>Iluminação</td>
+      <td>ON</td>
+      <td>0.0006</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>219</th>
+      <td>2024-11-25 20:42:00.492029-03:00</td>
+      <td>1.400</td>
+      <td>10</td>
+      <td>Ar Condicionado</td>
+      <td>ON</td>
+      <td>0.0039</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>220</th>
+      <td>2024-11-25 20:42:00.492382-03:00</td>
+      <td>0.350</td>
+      <td>10</td>
+      <td>Geladeira</td>
+      <td>ON</td>
+      <td>0.0010</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>221</th>
+      <td>2024-11-25 20:42:00.492591-03:00</td>
+      <td>5.500</td>
+      <td>10</td>
+      <td>Chuveiro</td>
+      <td>ON</td>
+      <td>0.0153</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>222</th>
+      <td>2024-11-25 20:42:00.492714-03:00</td>
+      <td>0.200</td>
+      <td>10</td>
+      <td>Iluminação</td>
+      <td>ON</td>
+      <td>0.0006</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>223</th>
+      <td>2024-11-25 20:42:10.591500-03:00</td>
+      <td>1.400</td>
+      <td>10</td>
+      <td>Ar Condicionado</td>
+      <td>ON</td>
+      <td>0.0039</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>224</th>
+      <td>2024-11-25 20:42:10.591755-03:00</td>
+      <td>0.350</td>
+      <td>10</td>
+      <td>Geladeira</td>
+      <td>ON</td>
+      <td>0.0010</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>225</th>
+      <td>2024-11-25 20:42:10.591852-03:00</td>
+      <td>5.500</td>
+      <td>10</td>
+      <td>Chuveiro</td>
+      <td>ON</td>
+      <td>0.0153</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>226</th>
+      <td>2024-11-25 20:42:10.592014-03:00</td>
+      <td>0.200</td>
+      <td>10</td>
+      <td>Iluminação</td>
+      <td>ON</td>
+      <td>0.0006</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>227</th>
+      <td>2024-11-25 20:42:20.696466-03:00</td>
+      <td>1.400</td>
+      <td>10</td>
+      <td>Ar Condicionado</td>
+      <td>ON</td>
+      <td>0.0039</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>228</th>
+      <td>2024-11-25 20:42:20.696780-03:00</td>
+      <td>0.350</td>
+      <td>10</td>
+      <td>Geladeira</td>
+      <td>ON</td>
+      <td>0.0010</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>229</th>
+      <td>2024-11-25 20:42:20.696962-03:00</td>
+      <td>5.500</td>
+      <td>10</td>
+      <td>Chuveiro</td>
+      <td>ON</td>
+      <td>0.0153</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>230</th>
+      <td>2024-11-25 20:42:20.697075-03:00</td>
+      <td>0.200</td>
+      <td>10</td>
+      <td>Iluminação</td>
+      <td>ON</td>
+      <td>0.0006</td>
+      <td>0.0028</td>
+    </tr>
+    <tr>
+      <th>231</th>
+      <td>1970-01-01 11:19:00-03:00</td>
+      <td>0.001</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_min</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>232</th>
+      <td>1970-01-01 12:42:45-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>233</th>
+      <td>1970-01-01 14:06:51-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>234</th>
+      <td>1970-01-01 14:07:05-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_interno_1</td>
+      <td>ligado</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>235</th>
+      <td>1970-01-01 15:30:37-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>236</th>
+      <td>1970-01-01 16:54:22-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>1970-01-01 18:18:07-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>238</th>
+      <td>1970-01-01 19:41:52-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>1970-01-01 21:05:37-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>1970-01-01 22:29:22-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>241</th>
+      <td>1970-01-01 22:29:36-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_interno_1</td>
+      <td>ligado</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>1970-01-01 23:53:08-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>1970-01-01 23:53:22-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_interno_1</td>
+      <td>ligado</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>244</th>
+      <td>1970-01-02 01:16:54-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
+    <tr>
+      <th>245</th>
+      <td>1970-01-02 02:40:39-03:00</td>
+      <td>0.010</td>
+      <td>5</td>
+      <td>led_externo_1</td>
+      <td>ligado_max</td>
+      <td>0.0000</td>
+      <td>0.0014</td>
+    </tr>
   </tbody>
 </table>
-<p>99 rows × 7 columns</p>
 </div>
 
 
@@ -276,13 +765,13 @@ print(df.describe())
 ```
 
            consumo_potencia_kw  frequencia_atualizacao_s  energia_kwh  tempo_uso_h
-    count            99.000000                 99.000000    99.000000    99.000000
-    mean              0.553343                  9.545455     0.001561     0.002673
-    std               1.193790                  1.444714     0.003316     0.000405
-    min               0.000000                  5.000000     0.000000     0.001400
-    25%               0.150000                 10.000000     0.000450     0.002800
-    50%               0.200000                 10.000000     0.000600     0.002800
-    75%               0.350000                 10.000000     0.001000     0.002800
+    count            60.000000                 60.000000    60.000000    60.000000
+    mean              1.252350                  8.750000     0.003492     0.002450
+    std               1.973011                  2.183334     0.005486     0.000611
+    min               0.001000                  5.000000     0.000000     0.001400
+    25%               0.077500                  8.750000     0.000225     0.002450
+    50%               0.275000                 10.000000     0.000800     0.002800
+    75%               1.400000                 10.000000     0.003900     0.002800
     max               5.500000                 10.000000     0.015300     0.002800
 
 
@@ -330,14 +819,10 @@ df["energia_kwh"] = df.groupby(["dispositivo", "status"])["energia_kwh"].apply(
 ).reset_index(level=[0, 1], drop=True)
 ```
 
-    Outliers removed for group ('Ar Condicionado', 'OFF'): 0
     Outliers removed for group ('Ar Condicionado', 'ON'): 0
-    Outliers removed for group ('Chuveiro', 'OFF'): 0
     Outliers removed for group ('Chuveiro', 'ON'): 0
-    Outliers removed for group ('Geladeira', 'OFF'): 0
     Outliers removed for group ('Geladeira', 'ON'): 0
     Outliers removed for group ('Iluminação', 'ON'): 0
-    Outliers removed for group ('TV', 'OFF'): 0
     Outliers removed for group ('TV', 'ON'): 0
     Outliers removed for group ('led_externo_1', 'ligado_max'): 0
     Outliers removed for group ('led_externo_1', 'ligado_min'): 0
